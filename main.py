@@ -16,7 +16,9 @@ from imgurpython import ImgurClient
 import nekos
 from cogs.images import *
 from cogs.music import *
+import pornhub
 
+client = pornhub.PornHub()
 """"-----------------------------------------------"""
 imgur = ImgurClient(imgurC, ImgurL)
 '''https://github.com/meew0/discord-bot-best-practices'''
@@ -340,6 +342,26 @@ async def shaxx(ctx):
         await ctx.send(str(r['data'][size]['link']))
 
 
+
+
+@client.command()
+async def phub_f(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr=object
+    except :
+        print("exception unhandled pp")
+    if ctx.channel_is_nsfw():
+        embed=discord.Embed(title="got dem ladies :flushed:",
+                            description='',
+                            colour=discord.Colour.magenta()
+                            )
+        phub_f(female)
+
+
+
 @client.command()
 async def feet(ctx):
     try:
@@ -472,6 +494,8 @@ async def nsfw_neko_gif(ctx):
             colour=discord.Colour.magenta()
         )
     nsfw_neko_gif = nekos.img("nsfw_neko_gif")
+    embed.set_image(url=nsfw_neko_gif)
+    await ctx.send(embed=embed)
 
 
 @client.command()
