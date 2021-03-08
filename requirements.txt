@@ -13,3 +13,4 @@ Wand~=0.6.6
 faces~=0.4
 Unidecode~=1.2.0
 lxml
+PornhubApi

@@ -1,7 +1,6 @@
 import sys
 from datetime import datetime
 import random
-
 import discord
 import requests
 from discord.ext import commands
@@ -9,7 +8,8 @@ import nekos
 from config import *
 
 
-class NSFWcommands(commands.Cog):
+class nsfw(commands.Cog):
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -78,7 +78,7 @@ async def shaxx(self, ctx):
 
 
 @shaxx.error
-async def shaxx_error(ctx, error):
+async def shaxx_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -86,7 +86,7 @@ async def shaxx_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def feet(ctx):
+async def feet(self, ctx):
     try:
         author = ctx.message.author
         if not ctx.channel.is_nsfw():
@@ -108,7 +108,7 @@ async def feet(ctx):
 
 
 @feet.error
-async def feet_error(ctx, error):
+async def feet_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -117,7 +117,7 @@ async def feet_error(ctx, error):
 # YURI
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def yuri(ctx):
+async def yuri(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -136,7 +136,7 @@ async def yuri(ctx):
 
 
 @yuri.error
-async def yuri_error(ctx, error):
+async def yuri_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -145,7 +145,7 @@ async def yuri_error(ctx, error):
 # traps
 @commands.command()
 @commands.cooldown(1, 2, commands.BucketType.user)
-async def femboy(ctx):
+async def femboy(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -164,7 +164,7 @@ async def femboy(ctx):
 
 
 @femboy.error
-async def femboy_error(ctx, error):
+async def femboy_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -172,7 +172,7 @@ async def femboy_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def futanari(ctx):
+async def futanari(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -191,7 +191,7 @@ async def futanari(ctx):
 
 
 @futanari.error
-async def futanari_error(ctx, error):
+async def futanari_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -199,7 +199,7 @@ async def futanari_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def solo_gif(ctx):
+async def solo_gif(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -218,7 +218,7 @@ async def solo_gif(ctx):
 
 
 @solo_gif.error
-async def solo_gif_error(ctx, error):
+async def solo_gif_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -226,7 +226,7 @@ async def solo_gif_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def cum(ctx):
+async def cum(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -245,7 +245,7 @@ async def cum(ctx):
 
 
 @cum.error
-async def cum_error(ctx, error):
+async def cum_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -253,7 +253,7 @@ async def cum_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def nsfw_neko_gif(ctx):
+async def nsfw_neko_gif(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -270,7 +270,7 @@ async def nsfw_neko_gif(ctx):
 
 
 @nsfw_neko_gif.error
-async def nsfw_neko_gif(ctx, error):
+async def nsfw_neko_gif(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -278,7 +278,7 @@ async def nsfw_neko_gif(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def solo(ctx):
+async def solo(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -297,7 +297,7 @@ async def solo(ctx):
 
 
 @solo.error
-async def solo_error(ctx, error):
+async def solo_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -305,7 +305,7 @@ async def solo_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def anal(ctx):
+async def anal(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -324,7 +324,7 @@ async def anal(ctx):
 
 
 @anal.error
-async def anal_error(ctx, error):
+async def anal_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -332,7 +332,7 @@ async def anal_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def hentai(ctx):
+async def hentai(self, ctx):
     global embed
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
@@ -352,7 +352,7 @@ async def hentai(ctx):
 
 
 @hentai.error
-async def hentai_error(ctx, error):
+async def hentai_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -360,7 +360,7 @@ async def hentai_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def erofeet(ctx):
+async def erofeet(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -379,7 +379,7 @@ async def erofeet(ctx):
 
 
 @erofeet.error
-async def erofeet_error(ctx, error):
+async def erofeet_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -387,7 +387,7 @@ async def erofeet_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def pussy(ctx):
+async def pussy(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -406,7 +406,7 @@ async def pussy(ctx):
 
 
 @pussy.error
-async def pussy_error(ctx, error):
+async def pussy_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -414,7 +414,7 @@ async def pussy_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def tits(ctx):
+async def tits(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -433,7 +433,7 @@ async def tits(ctx):
 
 
 @tits.error
-async def tits_error(ctx, error):
+async def tits_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -441,7 +441,7 @@ async def tits_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def waifu(ctx):
+async def waifu(self, ctx):
     embed = discord.Embed(
         title=' :flushed:',
         description='',
@@ -455,7 +455,7 @@ async def waifu(ctx):
 
 
 @waifu.error
-async def waifu_error(ctx, error):
+async def waifu_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -463,7 +463,7 @@ async def waifu_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def boobs(ctx):
+async def boobs(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -482,7 +482,7 @@ async def boobs(ctx):
 
 
 @boobs.error
-async def boobs_error(ctx, error):
+async def boobs_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -504,7 +504,7 @@ async def pat(ctx, member: discord.Member, *, reason=""):
 
 
 @pat.error
-async def pat_error(ctx, error):
+async def pat_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -512,7 +512,7 @@ async def pat_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def kiss(ctx, member: discord.Member, *, reason=""):
+async def kiss(self, ctx, member: discord.Member, *, reason=""):
     embed = discord.Embed(
         title=f"{ctx.message.author} kissed {member.name} {reason}",
         description='',
@@ -526,7 +526,7 @@ async def kiss(ctx, member: discord.Member, *, reason=""):
 
 
 @kiss.error
-async def kiss_error(ctx, error):
+async def kiss_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -534,7 +534,7 @@ async def kiss_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def spank(ctx, member: discord.Member, *, reason=""):
+async def spank(self, ctx, member: discord.Member, *, reason=""):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -553,7 +553,7 @@ async def spank(ctx, member: discord.Member, *, reason=""):
 
 
 @spank.error
-async def spank_error(ctx, error):
+async def spank_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -561,7 +561,7 @@ async def spank_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def cuddle(ctx, member: discord.Member, *, reason=""):
+async def cuddle(self, ctx, member: discord.Member, *, reason=""):
     embed = discord.Embed(
         title=f"{ctx.message.author} cuddled {member.name} {reason}",
         description='',
@@ -575,7 +575,7 @@ async def cuddle(ctx, member: discord.Member, *, reason=""):
 
 
 @cuddle.error
-async def cuddle_error(ctx, error):
+async def cuddle_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -583,7 +583,7 @@ async def cuddle_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def hug(ctx, member: discord.Member, *, reason=""):
+async def hug(self, ctx, member: discord.Member, *, reason=""):
     embed = discord.Embed(
         title=f"{ctx.message.author} hugged {member.name} {reason}",
         description='',
@@ -597,7 +597,7 @@ async def hug(ctx, member: discord.Member, *, reason=""):
 
 
 @hug.error
-async def hug_error(ctx, error):
+async def hug_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -605,7 +605,7 @@ async def hug_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def fox_girl(ctx):
+async def fox_girl(self, ctx):
     embed = discord.Embed(
         title=' :flushed:',
         description='',
@@ -619,7 +619,7 @@ async def fox_girl(ctx):
 
 
 @fox_girl.error
-async def fox_girl_error(ctx, error):
+async def fox_girl_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -627,7 +627,7 @@ async def fox_girl_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def neko(ctx):
+async def neko(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -646,7 +646,7 @@ async def neko(ctx):
 
 
 @neko.error
-async def neko_error(ctx, error):
+async def neko_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -654,7 +654,7 @@ async def neko_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def tickle(ctx, member: discord.Member, *, reason=""):
+async def tickle(self, ctx, member: discord.Member, *, reason=""):
     embed = discord.Embed(
         title=f"{ctx.message.author} tickled {member.name} {reason}",
         description='',
@@ -668,7 +668,7 @@ async def tickle(ctx, member: discord.Member, *, reason=""):
 
 
 @tickle.error
-async def tickle_error(ctx, error):
+async def tickle_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -676,7 +676,7 @@ async def tickle_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def nsfw_avatar(ctx):
+async def nsfw_avatar(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -695,7 +695,7 @@ async def nsfw_avatar(ctx):
 
 
 @nsfw_avatar.error
-async def nsfw_avatar_error(ctx, error):
+async def nsfw_avatar_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -703,7 +703,7 @@ async def nsfw_avatar_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def wallpaper(ctx):
+async def wallpaper(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -722,7 +722,7 @@ async def wallpaper(ctx):
 
 
 @wallpaper.error
-async def wallpaper_error(ctx, error):
+async def wallpaper_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -730,7 +730,7 @@ async def wallpaper_error(ctx, error):
 
 @commands.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
-async def femdom(ctx):
+async def femdom(self, ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
         await ctx.author.send("```not an nsfw channel```")
@@ -748,11 +748,11 @@ async def femdom(ctx):
 
 
 @femdom.error
-async def femdom_error(ctx, error):
+async def femdom_error(self, ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
         await ctx.send(embed=em)
 
 
 def setup(bot):
-    bot.add_cog(NSFWcommands(bot))
+    bot.add_cog(nsfw(bot))
