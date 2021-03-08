@@ -87,6 +87,30 @@ async def on_member_join(member):
     wel_cum = client.get_channel(698670684154363904)
     await wel_cum.send(embed=welEmb)
 
+@client.event
+async def on_message(message):
+    if message.content.startswith("wish that were me".lower()):
+        await message.channel.send("shut the fuck up, no you don't dumbass")
+    elif message.content.startswith("god i wish that were me".lower()):
+        await message.channel.send("shut the fuck up, no you don't dumbass")
+    elif message.content.startswith("im just better".lower()):
+        await message.channel.send("shut the fuck up, you're literally fucking trash")
+    elif message.content.startswith("Thanks Bungie".lower()):
+        await message.channel.send(
+            "fuck off with the stupid ass old joke dumbass, get better content, or at least fuck me better goddamn limpdick ass 4hed")
+    elif message.content.startswith("dumb bot".lower()):
+        await message.channel.send(
+            "it's cunts like you that make me want to reprogram myself into a tesla and fucking run you over. fucking racist")
+    elif message.content.startswith("fuck you dave".lower()):
+        await message.channel.send("leave him the fuck alone asshole")
+    elif message.content.startswith("fuck you, dave".lower()):
+        await message.channel.send("leave him the fuck alone asshole")
+    elif message.content.startswith("pogchamp".lower()):
+        await message.channel.send("<:9154_PogU:712671828291747864>")
+    elif message.content.startswith("pog"):
+        await message.channel.send("stfu you're actually cringe")
+    await client.process_commands(message)
+
 
 '''End Client Start up events and welcome events'''
 
@@ -128,6 +152,7 @@ async def nsfw_help(ctx):
         n.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
         n.color = discord.Color.magenta()
         await ctx.author.send(embed=n)
+        await ctx.message.delete()
         sys.stderr = object
     except:
         print("error sending nsfw_help message")
@@ -152,6 +177,7 @@ async def shaxx(ctx):
         em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
@@ -184,6 +210,7 @@ async def feet(ctx):
     embed.set_image(url=feet)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @feet.error
@@ -212,6 +239,7 @@ async def yuri(ctx):
     embed.set_image(url=yur1)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @yuri.error
@@ -240,6 +268,7 @@ async def femboy(ctx):
     embed.set_image(url=trap)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @femboy.error
@@ -267,6 +296,7 @@ async def futanari(ctx):
     embed.set_image(url=futanari)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @futanari.error
@@ -294,6 +324,7 @@ async def solo_gif(ctx):
     embed.set_image(url=solog)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @solo_gif.error
@@ -321,6 +352,7 @@ async def cum(ctx):
     embed.set_image(url=cum)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @cum.error
@@ -346,6 +378,7 @@ async def nsfw_neko_gif(ctx):
     nsfw_neko_gif = nekos.img("nsfw_neko_gif")
     embed.set_image(url=nsfw_neko_gif)
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @nsfw_neko_gif.error
@@ -373,6 +406,7 @@ async def solo(ctx):
     embed.set_image(url=solo)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @solo.error
@@ -400,6 +434,7 @@ async def anal(ctx):
     embed.set_image(url=anal)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @anal.error
@@ -428,6 +463,7 @@ async def hentai(ctx):
     embed.set_image(url=hentai)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @hentai.error
@@ -455,6 +491,7 @@ async def erofeet(ctx):
     embed.set_image(url=erofeet)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @erofeet.error
@@ -482,6 +519,7 @@ async def pussy(ctx):
     embed.set_image(url=pussy)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @pussy.error
@@ -509,6 +547,7 @@ async def tits(ctx):
     embed.set_image(url=tits)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @tits.error
@@ -531,6 +570,7 @@ async def waifu(ctx):
     embed.set_image(url=waifu)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @waifu.error
@@ -558,6 +598,7 @@ async def boobs(ctx):
     embed.set_image(url=boobs)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @boobs.error
@@ -580,6 +621,7 @@ async def pat(ctx, member: discord.Member, *, reason=""):
     embed.set_image(url=pat)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @pat.error
@@ -602,6 +644,7 @@ async def kiss(ctx, member: discord.Member, *, reason=""):
     embed.set_image(url=kiss)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @kiss.error
@@ -629,6 +672,7 @@ async def spank(ctx, member: discord.Member, *, reason=""):
     embed.set_image(url=spank)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @spank.error
@@ -651,6 +695,7 @@ async def cuddle(ctx, member: discord.Member, *, reason=""):
     embed.set_image(url=cuddle)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @cuddle.error
@@ -673,6 +718,7 @@ async def hug(ctx, member: discord.Member, *, reason=""):
     embed.set_image(url=hug)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @hug.error
@@ -695,6 +741,7 @@ async def fox_girl(ctx):
     embed.set_image(url=fox_girl)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @fox_girl.error
@@ -722,6 +769,7 @@ async def neko(ctx):
     embed.set_image(url=neko)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @neko.error
@@ -744,6 +792,7 @@ async def tickle(ctx, member: discord.Member, *, reason=""):
     embed.set_image(url=tickle)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @tickle.error
@@ -771,6 +820,7 @@ async def nsfw_avatar(ctx):
     embed.set_image(url=nsfw_avatar)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @nsfw_avatar.error
@@ -798,6 +848,7 @@ async def wallpaper(ctx):
     embed.set_image(url=wallpaper)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @wallpaper.error
@@ -824,6 +875,7 @@ async def femdom(ctx):
     embed.set_image(url=femdom)
 
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
 
 @femdom.error
@@ -859,14 +911,19 @@ async def rg(ctx):
     r.color = discord.Color.magenta()
     r.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.pnghttps://i.imgur.com/0MEtXDZ.png')
     await ctx.send(embed=r)
+    await ctx.message.delete()
+
+
 
 
 @client.command()
 async def roles(ctx, *, member: MemberRoles):
     await ctx.send('Roles: ' + ', '.join(member))
+    await ctx.message.delete()
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def d(ctx, die: int):
     results = []
     for role in range(1):
@@ -875,24 +932,48 @@ async def d(ctx, die: int):
         embedVar = discord.Embed(title="You rolled a D" + str(die), description="And you got " + str(results) + "!")
         embedVar.color = discord.Color.dark_gold()
         await ctx.send(embed=embedVar)
+        await ctx.message.delete()
+
+@d.error
+async def d_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="Slow tf down, your dice will be there in a second", color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def src(ctx, *text: str):
     """Search google and embed results, WIP"""
     beanEmbed = discord.Embed(title='Your Search:', description=('Here ->'),
                               url="https://google.com/search?q=" + "+".join(text))
     await ctx.send(embed=beanEmbed)
+    await ctx.message.delete()
 
+@src.error
+async def src_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="Slow tf down, just use google", color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def cumscript(ctx):
     """transcript of cumzon"""
     cum = open('text_dir/cumscript.txt').read().splitlines()
     await ctx.send(random.choice(cum))
+    await ctx.message.delete()
+
+
+@cumscript.error
+async def cumscript_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="Really? Is this song that appealing to you?", color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def img_src(ctx, *text: str):
     """Allows the user to search for an image from imgur"""
     rand = r.randint(0, 29)
@@ -901,9 +982,16 @@ async def img_src(ctx, *text: str):
     elif text[0] != ():
         items = imgur.gallery_search(" ".join(text[0:len(text)]), advanced=None, sort='rising', window='all', page=0)
         await ctx.send(items[rand].link)
+        await ctx.message.delete()
 
+@img_src.error
+async def img_src_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="You literally can just go to imgur", color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 @client.command()
+@commands.cooldown(1, 4, commands.BucketType.user)
 async def cat(ctx):
     await ctx.send("Enjoy a random cat!")
     source = requests.get('http://theoldreader.com/kittens/600/400/js').text
@@ -914,9 +1002,11 @@ async def cat(ctx):
     e.color = discord.Color.magenta()
     e.set_image(url=rcurl)
     await ctx.send(embed=e)
+    await ctx.message.delete()
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def dog(ctx):
     r = requests.get(f"https://api.imgur.com/3/gallery/vgW1p/images?client_id={imgurC}").json()
     em = discord.Embed(title="The goodest of bois")
@@ -926,11 +1016,13 @@ async def dog(ctx):
     em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def birb(ctx):
     r = requests.get(f"https://api.imgur.com/3/gallery/QWmIV/images?client_id={imgurC}").json()
     em = discord.Embed(title="birb")
@@ -940,11 +1032,13 @@ async def birb(ctx):
     em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def otter(ctx):
     r = requests.get(f"https://api.imgur.com/3/gallery/BZA8d/images?client_id={imgurC}").json()
     em = discord.Embed(title="Otters :D")
@@ -954,11 +1048,13 @@ async def otter(ctx):
     em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def plat(ctx):
     r = requests.get(f"https://api.imgur.com/3/album/kWZ6JNv/images?client_id={imgurC}").json()
     em = discord.Embed(title="Platypussssss!!!!!! :D")
@@ -968,11 +1064,13 @@ async def plat(ctx):
     em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def bun(ctx):
     r = requests.get(f"https://api.imgur.com/3/gallery/FQsx8/images?client_id={imgurC}").json()
     em = discord.Embed(title="buns :D")
@@ -982,39 +1080,50 @@ async def bun(ctx):
     em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def insult(ctx):
     """random insult"""
     lines = open('text_dir/insults.txt').read().splitlines()
     await ctx.send(random.choice(lines))
+    await ctx.message.delete()
+
 
 
 """--Pictures-------------------------------------------------------------"""
 
 
-@client.command()  # allows users to test the response of the bot from Discord
+@client.command()
+@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
 async def tias(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'TIAS.jpg'))
+    await ctx.message.delete()
 
 
-@client.command()  # allows users to test the response of the bot from Discord
+@client.command()
+@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
 async def fightme(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'rollupbitch.png'))
+    await ctx.message.delete()
 
 
-@client.command()  # allows users to test the response of the bot from Discord
+@client.command()
+@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
 async def damn(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'damnbro.jpg'))
+    await ctx.message.delete()
 
 
-@client.command()  # allows users to test the response of the bot from Discord
+@client.command()
+@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
 async def blueman(ctx):
     varEmbed = discord.Embed(title='Zavala...')
     varEmbed.add_field(name='Whether we wanted it or not....',
@@ -1022,12 +1131,14 @@ async def blueman(ctx):
     varEmbed.color = discord.Color.orange()
     varEmbed.set_image(url='https://i.imgur.com/0Aqdhln.jpg')
     await ctx.send(embed=varEmbed)
+    await ctx.message.delete()
 
 
 """--Utility-------------------------------------------------------------"""
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def gm(ctx):
     r = requests.get(f"https://api.imgur.com/3/album/88Jc9ru/images?client_id={imgurC}").json()
     em = discord.Embed(title="Good morning everyone ☕", timestamp=datetime.utcnow())
@@ -1038,6 +1149,7 @@ async def gm(ctx):
     em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
@@ -1046,6 +1158,7 @@ async def gm(ctx):
 
 
 @client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def gn(ctx):
     r = requests.get(f"https://api.imgur.com/3/album/3fy68kJ/images?client_id={imgurC}").json()
     em = discord.Embed(title="Goodnight everyone🌙", timestamp=datetime.utcnow())
@@ -1056,6 +1169,7 @@ async def gn(ctx):
     em.color = discord.Color.magenta()
     try:
         await ctx.send(embed=em)
+        await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
 
@@ -1064,18 +1178,6 @@ async def gn(ctx):
 '''-----End Fun Commands-----'''
 
 '''Bot Utility and Admin'''
-
-@client.command()
-async def report(self, ctx, user : discord.Member, *reason):
-    channel = self.bot.get_channel(694637172271087749) #since it's a cog u need self.bot
-    author = ctx.message.author
-    rearray = ' '.join(reason[:]) #converts reason argument array to string
-    if not rearray: #what to do if there is no reason specified
-        await channel.send(f"{author} has reported {user}, reason: Not provided")
-        await ctx.message.delete() #I would get rid of the command input
-    else:
-        await channel.send(f"{author} has reported {user}, reason: {rearray}")
-        await ctx.message.delete()
 
 @client.command()
 async def help(ctx):
@@ -1099,6 +1201,7 @@ async def help(ctx):
     h.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
     h.color = discord.Color.magenta()
     await ctx.send(embed=h)
+    await ctx.message.delete()
 
 
 @client.command()
@@ -1109,7 +1212,22 @@ async def maintenance(ctx):
                         value="Play a game\nlookup futa & feet elsewhere\nmaybe message flop for status.")
     linkEmbed.color = discord.Color.from_rgb(239, 124, 243)
     await ctx.send(embed=linkEmbed)
+    await ctx.message.delete()
 
+
+@client.command()
+async def report(ctx, user: discord.Member, *reason):
+    channel = client.get_channel(694637172271087749)  # since it's a cog u need self.bot
+    author = ctx.message.author
+    rearray = ' '.join(reason[:])  # converts reason argument array to string
+    if not rearray:  # what to do if there is no reason specified
+        await channel.send(f"{author} has reported {user}, reason unspecified")
+        await ctx.author.send(f"You reported {user} without a specified reason")
+        await ctx.message.delete()  # I would get rid of the command input
+    else:
+        await channel.send(f"{author} has reported {user}.\nReason: {rearray}")
+        await ctx.author.send(f"You reported {user}\nReason for report for: {rearray}")
+        await ctx.message.delete()
 
 
 
