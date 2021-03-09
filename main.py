@@ -4,6 +4,8 @@ from datetime import datetime
 import random
 import random as r
 import sys
+
+import praw
 import requests
 from imgurpython import ImgurClient
 from bs4 import BeautifulSoup
@@ -25,11 +27,14 @@ https://github.com/meew0/discord-bot-best-practices
 Helpful:
 https://github.com/Rapptz/discord.py
 """
+reddit = praw.Reddit(client_id=redditC,
+                     client_secret=redditCS,
+                     user_agent=redditU_A)
 
 load_dotenv()
-intents = discord.Intents.all()
+intents = discord.Intents.default()
 intents.members = True
-client = commands.Bot(command_prefix='^', intent=intents)
+client = commands.Bot(command_prefix=prefix, intents=intents)
 client.remove_command("help")
 
 '''Client Startup and welcome events'''
@@ -73,8 +78,8 @@ async def on_ready():
 async def on_member_join(member):
     print("\n--------------\n")
     print(time.strftime("Joined at:\n" + "%H:%M:%S\n"))
-    welEmb = discord.Embed(title=f'{member.mention} just joined!', description="Welcome to The Fragment."
-                                                                               "We're happy to add you to this insanity."
+    welEmb = discord.Embed(title='A new Homie just arrived!', description=f"Welcome to The Fragment, {member.mention} "
+                                                                          "We're happy to add you to this insanity."
                            , timestamp=datetime.utcnow())
     welEmb.add_field(name="Your first step: ", value="Read our rules found at: <#694715714724167731>\n"
                                                      "Then get some roles from <#694715780583129108>\n"
@@ -84,7 +89,7 @@ async def on_member_join(member):
     welEmb.add_field(name='Finally....', value='Be sure to tag <@&694709812528677008>', inline=False)
     welEmb.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.png')
     welEmb.color = discord.Color.from_rgb(239, 124, 243)
-    wel_cum = client.get_channel(698670684154363904)
+    wel_cum = client.get_channel(818544838047825970)
     await wel_cum.send(embed=welEmb)
 
 
@@ -119,6 +124,426 @@ async def on_message(message):
 
 '''End Client Start up events and welcome events'''
 
+'''------All NSFW Reddit Commands------'''
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def d34(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('rule34destiny').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@d34.error
+async def d34_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="jesus fuck elsi bray will be here in a sec", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def r34(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('rule34').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@r34.error
+async def r34_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="your cartoons will arrive soon just relax", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def gw(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('gonewild').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@gw.error
+async def gw_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="jeez hold on", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def rfemboys(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('FemBoys').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@rfemboys.error
+async def rfemboys_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="the pretty boys are coming to the yard, milkshakes in tow - be patient",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def shefuckshim(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('shefuckshim').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@shefuckshim.error
+async def shefuckshim_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="okay you need to honestly just chill", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def r_femboys(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('FemBoys').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@rfemboys.error
+async def r_femboys_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="the pretty boys are coming to the yard, milkshakes in tow - be patient",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def cock(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('massivecock').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@cock.error
+async def cock_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="cocks are falling out of the air, but it'll be a moment before they're here",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def red(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('redheads').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@red.error
+async def red_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="the fiery reds are on their way", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+# porninfifteenseconds
+
+@client.command()
+@commands.cooldown(1, 10, commands.BucketType.user)
+async def p15(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('porninfifteenseconds').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@p15.error
+async def p15_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="honestly if you're not satisfied you need to fuck off", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def cum_sluts(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('cumsluts').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@cum_sluts.error
+async def cum_sluts_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="i hope you lick it off their face for them", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def bdsm(ctx):
+    try:
+        author = ctx.message.author
+        if not ctx.channel.is_nsfw():
+            await ctx.author.send("```not an nsfw channel```")
+            sys.stderr = object
+    except:
+        print('exception unhandled')
+    if ctx.channel.is_nsfw():
+        submissions = reddit.subreddit('bdsm').hot()
+        post_to_pick = random.randint(1, 20)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+    await ctx.message.delete()
+
+
+@bdsm.error
+async def bdsm_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="how about I don't ask?", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+'''------End NSFW Reddit Commands------'''
+
+'''Reddit Commands'''
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def meme(ctx):
+    submissions = reddit.subreddit('memes').hot()
+    post_to_pick = random.randint(1, 20)
+    for i in range(0, post_to_pick):
+        submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+
+
+@meme.error
+async def meme_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="chill tf out with your shit memes", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def gaming(ctx):
+    submissions = reddit.subreddit('gaming').hot()
+    post_to_pick = random.randint(1, 20)
+    for i in range(0, post_to_pick):
+        submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+
+
+@gaming.error
+async def gaming_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="chill tf out", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def halo(ctx):
+    submissions = reddit.subreddit('halo').hot()
+    post_to_pick = random.randint(1, 20)
+    for i in range(0, post_to_pick):
+        submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+
+
+@halo.error
+async def halo_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="were you blinded by it's majesty? dumbstruck?", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def dmemes(ctx):
+    submissions = reddit.subreddit('destinymemes').hot()
+    post_to_pick = random.randint(1, 20)
+    for i in range(0, post_to_pick):
+        submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+
+
+@dmemes.error
+async def dmemes_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="shitty destiny memes can wait, dude", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def yell_cat(ctx):
+    submissions = reddit.subreddit('catswhoyell').hot()
+    post_to_pick = random.randint(1, 20)
+    for i in range(0, post_to_pick):
+        submission = next(x for x in submissions if not x.stickied)
+
+    await ctx.send(submission.url)
+
+
+@yell_cat.error
+async def yell_cat_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="screeeee- hold on", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command()
+async def help_reddit(ctx):
+    h = discord.Embed(title='I live to be horny.',
+                      description="All commands use the up-carrot: **'^'** as a prefix\n", timestamp=datetime.utcnow())
+    h.add_field(name="dmemes", value="r/destinymemes")
+    h.add_field(name="meme", value="r/memes")
+    h.add_field(name="halo", value="r/halo")
+    h.add_field(name="gaming", value="r/gaming")
+    h.add_field(name="yell_cat", value="r/catswhoyell")
+    h.add_field(name="help", value="*Regular Help list*")
+    h.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+    h.color = discord.Color.magenta()
+    h.set_footer(
+        text="Due to laziness, the Dev has opted to use Reddit cmds in a non-Async environment - errors may occur.")
+    await ctx.send(embed=h)
+    await ctx.message.delete()
+
+
+'''End Reddit Commands'''
+
 '''------All NSFW Commands------'''
 
 
@@ -126,6 +551,7 @@ async def on_message(message):
 async def nsfw_help(ctx):
     try:
         author = ctx.message.author
+
         n = discord.Embed(title='*I live to be horny....*',
                           description="**Just enter '^whateverHornyCommand' to complete it.\nSome commands require you to tag a user as well.**\n\n***Commands:***",
                           timestamp=datetime.utcnow())
@@ -155,6 +581,34 @@ async def nsfw_help(ctx):
         n.add_field(name="hug(user)", value="hug your homies")
         n.add_field(name="cuddle(user)", value="homies need to be warm too")
         n.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+        n.color = discord.Color.magenta()
+        await ctx.author.send(embed=n)
+        await ctx.message.delete()
+        sys.stderr = object
+    except:
+        print("error sending nsfw_help message")
+
+
+@client.command()
+async def nsfw_help_2(ctx):
+    try:
+        author = ctx.message.author
+
+        n = discord.Embed(title='*I live to be horny....*',
+                          description="**Just enter '^whateverHornyCommand' to complete it.\nSome commands require you to tag a user as well.**\n\n***Commands:***",
+                          timestamp=datetime.utcnow())
+        n.add_field(name="bdsm", value="pulls a top/hot post from r/bdsm")
+        n.add_field(name="cum_sluts", value="pulls a top/hot post from r/cumsluts")
+        n.add_field(name="p15", value="pulls a top/hot post from r/porninfifteenseconds")
+        n.add_field(name="d34", value="pulls a top/hot post from r/rule34destiny")
+        n.add_field(name="gw", value="pulls a top/hot post from r/gonewild")
+        n.add_field(name="rfemboys", value="pulls a top/hot post from r/femboys")
+        n.add_field(name="shefuckshim", value="pulls a top/hot post from r/shefuckshim")
+        n.add_field(name="cock", value="this is literally just a massive cock")
+        n.add_field(name="red", value="pulls a top/hot post from r/redheads")
+        n.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+        n.set_footer(
+            text="Due to laziness, the Dev has opted to use Reddit cmds in a non-Async environment - errors may occur.")
         n.color = discord.Color.magenta()
         await ctx.author.send(embed=n)
         await ctx.message.delete()
@@ -1206,6 +1660,8 @@ async def help(ctx):
                                              "**- blueman** -> the blue\n"
                                              "**- damn** -> damn bro\n")
     h.add_field(name="nsfw_help", value="*Returns a list of NSFW related commands*")
+    h.add_field(name="nsfw_help_2", value="*This is a list of our Reddit NSFW commands*")
+    h.add_field(name="help_reddit", value="*List of our Reddit SFW commands*")
     h.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
     h.color = discord.Color.magenta()
     await ctx.send(embed=h)
