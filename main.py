@@ -72,23 +72,25 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     print("\n--------------\n")
-    print(time.strftime("Joined at:\n" + "%H:%M:%S\n" +
-                        "%m/%d/%Y\n"))
-    print(f'{member} just joined at ')
-    welEmb = discord.Embed(title=f'{member} just joined!',
-                           description=f'Thanks for joining The Fragment, {member}!', timestamp=datetime.utcnow())
-    welEmb.add_field(name='What we need you to do:', value='Make sure you read the <#694715714724167731>\n'
-                                                           'Make sure you get some roles from <#694715780583129108>'
-                                                           '\nIf you play Destiny be sure to pick up the Destiny Role.',
-                     inline=True)
+    print(time.strftime("Joined at:\n" + "%H:%M:%S\n"))
+    welEmb = discord.Embed(title=f'{member.mention} just joined!', description="Welcome to The Fragment."
+                                                                               "We're happy to add you to this insanity."
+                           , timestamp=datetime.utcnow())
+    welEmb.add_field(name="Your first step: ", value="Read our rules found at: <#694715714724167731>\n"
+                                                     "Then get some roles from <#694715780583129108>\n"
+                                                     "*if you're a D2 player, it's very important to pick"
+                                                     "up the Destiny Role.*")
+
     welEmb.add_field(name='Finally....', value='Be sure to tag <@&694709812528677008>', inline=False)
     welEmb.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.png')
     welEmb.color = discord.Color.from_rgb(239, 124, 243)
     wel_cum = client.get_channel(698670684154363904)
     await wel_cum.send(embed=welEmb)
 
+
 @client.event
 async def on_message(message):
+    author = message.author
     if message.content.startswith("wish that were me".lower()):
         await message.channel.send("shut the fuck up, no you don't dumbass")
     elif message.content.startswith("god i wish that were me".lower()):
@@ -109,6 +111,9 @@ async def on_message(message):
         await message.channel.send("<:9154_PogU:712671828291747864>")
     elif message.content.startswith("pog"):
         await message.channel.send("stfu you're actually cringe")
+    elif message.content.startswith("fuck you fembot"):
+        await message.channel.send(f"fuck you {author.mention} give your balls a tug.\n"
+                                   f"your life is so pathetic I get a charity tax break just by hanging around you.")
     await client.process_commands(message)
 
 
@@ -914,8 +919,6 @@ async def rg(ctx):
     await ctx.message.delete()
 
 
-
-
 @client.command()
 async def roles(ctx, *, member: MemberRoles):
     await ctx.send('Roles: ' + ', '.join(member))
@@ -934,6 +937,7 @@ async def d(ctx, die: int):
         await ctx.send(embed=embedVar)
         await ctx.message.delete()
 
+
 @d.error
 async def d_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
@@ -950,11 +954,13 @@ async def src(ctx, *text: str):
     await ctx.send(embed=beanEmbed)
     await ctx.message.delete()
 
+
 @src.error
 async def src_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, just use google", color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -984,11 +990,13 @@ async def img_src(ctx, *text: str):
         await ctx.send(items[rand].link)
         await ctx.message.delete()
 
+
 @img_src.error
 async def img_src_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="You literally can just go to imgur", color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 4, commands.BucketType.user)
@@ -1094,12 +1102,11 @@ async def insult(ctx):
     await ctx.message.delete()
 
 
-
 """--Pictures-------------------------------------------------------------"""
 
 
 @client.command()
-@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
+@commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
 async def tias(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'TIAS.jpg'))
@@ -1107,7 +1114,7 @@ async def tias(ctx):
 
 
 @client.command()
-@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
+@commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
 async def fightme(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'rollupbitch.png'))
@@ -1115,7 +1122,7 @@ async def fightme(ctx):
 
 
 @client.command()
-@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
+@commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
 async def damn(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'damnbro.jpg'))
@@ -1123,7 +1130,7 @@ async def damn(ctx):
 
 
 @client.command()
-@commands.cooldown(1, 4, commands.BucketType.user)# allows users to test the response of the bot from Discord
+@commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
 async def blueman(ctx):
     varEmbed = discord.Embed(title='Zavala...')
     varEmbed.add_field(name='Whether we wanted it or not....',
@@ -1179,6 +1186,7 @@ async def gn(ctx):
 
 '''Bot Utility and Admin'''
 
+
 @client.command()
 async def help(ctx):
     h = discord.Embed(title='I live to be horny.',
@@ -1228,8 +1236,6 @@ async def report(ctx, user: discord.Member, *reason):
         await channel.send(f"{author} has reported {user}.\nReason: {rearray}")
         await ctx.author.send(f"You reported {user}\nReason for report for: {rearray}")
         await ctx.message.delete()
-
-
 
 
 '''End Bot Utility and Admin'''
