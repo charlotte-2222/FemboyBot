@@ -5,6 +5,7 @@ import random
 import random as r
 import sys
 
+import aiohttp
 import praw
 import requests
 from imgurpython import ImgurClient
@@ -89,13 +90,15 @@ async def on_member_join(member):
     welEmb.add_field(name='Finally....', value='Be sure to tag <@&694709812528677008>', inline=False)
     welEmb.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.png')
     welEmb.color = discord.Color.from_rgb(239, 124, 243)
-    wel_cum = client.get_channel(818544838047825970)
+    wel_cum = client.get_channel(698670684154363904)
     await wel_cum.send(embed=welEmb)
 
 
 @client.event
 async def on_message(message):
     author = message.author
+    vid = "https://imgur.com/a/LjhtuOJ"
+
     if message.content.startswith("wish that were me".lower()):
         await message.channel.send("shut the fuck up, no you don't dumbass")
     elif message.content.startswith("god i wish that were me".lower()):
@@ -119,6 +122,10 @@ async def on_message(message):
     elif message.content.startswith("fuck you fembot"):
         await message.channel.send(f"fuck you {author.mention} give your balls a tug.\n"
                                    f"your life is so pathetic I get a charity tax break just by hanging around you.")
+    if message.content.startswith("cringe".lower()):
+        await message.channel.send(vid + f"\nKinda cringe, aren't ya {author.mention}?\n"
+                                         f"I dunno how to describe you tbh. Cringe. Toxic.\n"
+                                         f"Awkward?")
     await client.process_commands(message)
 
 
@@ -1636,6 +1643,27 @@ async def gn(ctx):
 
 
 # https://imgur.com/a/3fy68kJ
+
+
+
+@client.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def daddy(ctx):
+    author = ctx.author
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://dadjoke-api.herokuapp.com/api/v1/dadjoke") as r:
+            data = await r.json()
+            d = discord.Embed(title=f":milk: Hey, I found the milk", description=data['joke'],
+                              color=discord.Color.magenta()
+                              ,timestamp=datetime.utcnow())
+            await ctx.send(embed=d)
+
+
+@daddy.error
+async def daddy_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="Dad jokes are temporary, just like your actual dad", color=discord.Color.magenta())
+        await ctx.send(embed=em)
 '''-----End Fun Commands-----'''
 
 '''Bot Utility and Admin'''
