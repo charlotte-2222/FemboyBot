@@ -1414,6 +1414,14 @@ async def src(ctx, *text: str):
                               url="https://google.com/search?q=" + "+".join(text))
     await ctx.send(embed=beanEmbed)
     await ctx.message.delete()
+@src.error
+async def src_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           description="make sure your searches follow this pattern:"
+                                       "\n`^src destiny-2-god-rolls-excel`",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 
 @src.error
@@ -1473,6 +1481,13 @@ async def cat(ctx):
     await ctx.send(embed=e)
     await ctx.message.delete()
 
+@cat.error
+async def cat_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1488,7 +1503,12 @@ async def dog(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
-
+@dog.error
+async def dog_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1505,6 +1525,12 @@ async def birb(ctx):
     except:
         await ctx.send(str(r['data'][size]['link']))
 
+@birb.error
+async def birb_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1520,7 +1546,12 @@ async def otter(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
-
+@otter.error
+async def otter_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1536,7 +1567,12 @@ async def plat(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
-
+@plat.error
+async def plat_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1552,7 +1588,12 @@ async def bun(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
-
+@bun.error
+async def bun_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1561,6 +1602,13 @@ async def insult(ctx):
     lines = open('text_dir/insults.txt').read().splitlines()
     await ctx.send(random.choice(lines))
     await ctx.message.delete()
+
+@insult.error
+async def insult_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 
 """--Pictures-------------------------------------------------------------"""
@@ -1573,6 +1621,13 @@ async def tias(ctx):
     await ctx.send(file=discord.File(st + 'TIAS.jpg'))
     await ctx.message.delete()
 
+@tias.error
+async def tias_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
@@ -1581,6 +1636,13 @@ async def fightme(ctx):
     await ctx.send(file=discord.File(st + 'rollupbitch.png'))
     await ctx.message.delete()
 
+@fightme.error
+async def fightme_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
@@ -1588,6 +1650,13 @@ async def damn(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'damnbro.jpg'))
     await ctx.message.delete()
+
+@damn.error
+async def damn_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 
 @client.command()
@@ -1600,6 +1669,13 @@ async def blueman(ctx):
     varEmbed.set_image(url='https://i.imgur.com/0Aqdhln.jpg')
     await ctx.send(embed=varEmbed)
     await ctx.message.delete()
+
+@blueman.error
+async def blueman_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
 
 
 """--Utility-------------------------------------------------------------"""
@@ -1621,6 +1697,13 @@ async def gm(ctx):
     except:
         await ctx.send(str(r['data'][size]['link']))
 
+@gm.error
+async def gm_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
 
 # https://imgur.com/a/88Jc9ru
 
@@ -1641,6 +1724,13 @@ async def gn(ctx):
     except:
         await ctx.send(str(r['data'][size]['link']))
 
+@gn.error
+async def gn_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
+                           color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
 
 # https://imgur.com/a/3fy68kJ
 
@@ -1655,7 +1745,7 @@ async def daddy(ctx):
             data = await r.json()
             d = discord.Embed(title=f":milk: Hey, I found the milk", description=data['joke'],
                               color=discord.Color.magenta()
-                              ,timestamp=datetime.utcnow())
+                              , timestamp=datetime.utcnow())
             await ctx.send(embed=d)
 
 
@@ -1664,6 +1754,7 @@ async def daddy_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Dad jokes are temporary, just like your actual dad", color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 '''-----End Fun Commands-----'''
 
 '''Bot Utility and Admin'''
