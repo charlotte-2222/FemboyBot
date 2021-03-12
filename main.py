@@ -56,27 +56,31 @@ async def on_ready():
     await channel.send(embed=e)
 
     while True:
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await client.change_presence(
+            activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
         await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.online, activity=discord.Game('with The Fragment'))
         await asyncio.sleep(20)
         await client.change_presence(
             activity=discord.Activity(type=discord.ActivityType.streaming, name="Futa Fix 2"))
         await asyncio.sleep(20)
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await client.change_presence(
+            activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
         await asyncio.sleep(20)
         await client.change_presence(
             activity=discord.Activity(type=discord.ActivityType.listening, name='heavy moans'))
         await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Destiny 2 (Naked)'))
         await asyncio.sleep(20)
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await client.change_presence(
+            activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
         await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.idle, activity=discord.Game('Halo 3'))
         await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.dnd, activity=discord.Game('with all the Homies'))
         await asyncio.sleep(20)
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await client.change_presence(
+            activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
         await asyncio.sleep(20)
 
 
@@ -1368,29 +1372,28 @@ async def roles(ctx, *, member: MemberRoles):
 @client.command()
 async def roll(ctx, rolls: str):
     resultString, results, numDice = r(rolls)
-    e1 = discord.Embed(title=roll_str(rolls)+f" for %s" % ctx.message.author.name, color=discord.Color.dark_teal())
+    e1 = discord.Embed(title=roll_str(rolls) + f" for %s" % ctx.message.author.name, color=discord.Color.dark_teal())
     await ctx.send(embed=e1)
     if resultString == '20':
         e3 = discord.Embed(title=f":tada:" % + ctx.message.author.mention + f":tada:\n"
-                                                                  f"***Critical Success!***\n"
-                                                                  f"" + resultString)
+                                                                            f"***Critical Success!***\n"
+                                                                            f"" + resultString)
         await ctx.send(embed=e3)
     elif resultString == '1':
         e4 = discord.Embed(title=f":roll_of_paper:" % + ctx.message.author.mention + f":roll_of_paper:\n"
-                                                                  f"***Critical Failure!***\n"
-                                                                  f"" + resultString)
+                                                                                     f"***Critical Failure!***\n"
+                                                                                     f"" + resultString)
         await ctx.send(embed=e4)
     elif numDice == '1':
         await ctx.send(ctx.author.mention + "  :game_die:\n**Result:** " + resultString)
     else:
         e2 = discord.Embed(title=":game_die: Results!",
                            timestamp=datetime.utcnow(),
-                           color=discord.Color.magenta(),description=f"Here "+ ctx.author.mention +
-                                                                     "\n__***All them dice***___\n\n**Result:** "
-                                                                     + resultString + "\n**Total:** " + str(results))
+                           color=discord.Color.magenta(), description=f"Here " + ctx.author.mention +
+                                                                      "\n__***All them dice***___\n\n**Result:** "
+                                                                      + resultString + "\n**Total:** " + str(results))
         e2.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
         await ctx.send(embed=e2)
-
 
 
 @roll.error
@@ -1819,9 +1822,12 @@ async def tags(ctx):
     author = ctx.message.author
     t = discord.Embed(title='Tags for the dull.',
                       description="Don't feel like explaining? I did it for you.")
-    t.add_field(name="tReddit", value="`^tReddit`: explains why you can't use your horny Subreddit commands.")
-    t.add_field(name="tClan", value="`^tClan` clan invites for those who are unwilling to work")
-    t.add_field(name="tdev", value="`tdev` tags profile")
+    t.add_field(name="`tReddit`", value="`^tReddit`: explains why you can't use your horny Subreddit commands.")
+    t.add_field(name="`tClan`", value="`^tClan` clan invites for those who are unwilling to work")
+    t.add_field(name="`tdev`", value="`tdev` tags profile")
+    t.add_field(name="`t45`",value="we all know what this is")
+    t.add_field(name='`tias`', value="try it and see.")
+
     t.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
     t.color = discord.Color.magenta()
     await ctx.author.send(embed=t)
@@ -1852,6 +1858,36 @@ async def report(ctx, user: discord.Member, *reason):
         await channel.send(f"{author} has reported {user}.\nReason: {rearray}")
         await ctx.author.send(f"You reported {user}\nReason for report for: {rearray}")
         await ctx.message.delete()
+
+
+@client.command()
+@commands.is_owner()
+async def stop(ctx):
+    await client.logout()
+
+
+@client.command()
+@commands.has_guild_permissions(administrator=True)
+async def purge(ctx, limit: int):
+    await ctx.channel.purge(limit=limit + 1)
+    await asyncio.sleep(2)
+    await ctx.send('Cleared by this guy: {}'.format(ctx.author.mention))
+
+
+##^Just purges stuff pretty much
+@purge.error  ##Simple error checking
+async def purge_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send("Ha! You're not worthy!")
+
+
+@client.command()
+@commands.is_owner()
+async def kick(ctx, member: discord.Member, *, reason=None):
+    await member.kick(reason=reason)
+    timestamp = ctx.message.created_at.__format__('%A | %B %d, %I:%M %p UTC')
+    embed = discord.Embed(
+        color=0xff0000)
 
 
 '''End Bot Utility and Admin'''
@@ -1897,11 +1933,12 @@ async def tClan(ctx):
     t.color = discord.Color.magenta()
     await ctx.send(embed=t)
     await ctx.message.delete()
-    
+
+
 @client.command()
 async def tdev(ctx):
-    t=discord.Embed(title="Who made me?", description="Developer(s):",
-                    timestamp=datetime.utcnow())
+    t = discord.Embed(title="Who made me?", description="Developer(s):",
+                      timestamp=datetime.utcnow())
     t.add_field(name="flop#8986", value="GitHub: /im-zach\n\nflop is developing me in his freetime while doing loads of"
                                         "other stuff. He's happy to make bots for any purpose.")
 
@@ -1911,6 +1948,50 @@ async def tdev(ctx):
     await ctx.send(embed=t)
     await ctx.message.delete()
 
+
+@client.command()
+@commands.is_owner()
+async def t45(ctx):
+    await ctx.send(f"```"
+                   "45 minutes (45') converts to 0.75 degrees (0.75°)\n"
+                   "How?\n"
+                   "Examples:\n"
+                   "1' = 0.0166666667° / 1° = 60'\n"
+                   "15' = 15 × 0.0166666667° = 0.25°\n"
+                   "```"
+                   f"***Now that <@!{181909185733066752}> wants to be a dumbass and be critical,***\n"
+                   "*based on the above equation we calculate that:*"
+                   "```"
+                   "For 45':\n"
+                   "45' = 0.750 000 000 01(°)\n"
+                   "For 0.75°:\n"
+                   "to convert to celsius:\n"
+                   "If (standard conversion == 0 °F = -17.77778 °C)\n"
+                   "T(°C) = (0.75°F - 32) × 5/9\n"
+                   "Leaving you with:\n"
+                   "0.75 °F = -17.361 °C\n"
+                   "```")
+
+
+@client.command()
+async def guess_game(ctx):
+    num = random.randint(0, 100)
+    for i in range(0, 5):
+        await ctx.send('guess')
+        response = await client.wait_for('message')
+        guess = int(response.content)
+        if guess > num:
+            await ctx.send('bigger')
+        elif guess < num:
+            await ctx.send('smaller')
+        else:
+            await ctx.send('you got it!')
+
+
+@client.command()
+async def choose(ctx, *choices: str):
+    """Chooses between multiple choices."""
+    await ctx.send(random.choice(choices))
 
 
 '''---------'''
