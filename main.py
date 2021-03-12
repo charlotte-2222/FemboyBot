@@ -16,6 +16,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 from config import token
+from utilityFunction.CommandFunc import *
 
 """"-----------------------------------------------"""
 '''https://github.com/meew0/discord-bot-best-practices'''
@@ -55,24 +56,28 @@ async def on_ready():
     await channel.send(embed=e)
 
     while True:
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.online, activity=discord.Game('with The Fragment'))
-        await asyncio.sleep(45)
-        await client.change_presence(status=discord.Status.dnd, activity=discord.Game('with Jays mom'))
-        await asyncio.sleep(45)
+        await asyncio.sleep(20)
         await client.change_presence(
             activity=discord.Activity(type=discord.ActivityType.streaming, name="Futa Fix 2"))
-        await asyncio.sleep(45)
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^"))
-        await asyncio.sleep(45)
+        await asyncio.sleep(20)
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await asyncio.sleep(20)
         await client.change_presence(
             activity=discord.Activity(type=discord.ActivityType.listening, name='heavy moans'))
-        await asyncio.sleep(45)
+        await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.dnd, activity=discord.Game('Destiny 2 (Naked)'))
-        await asyncio.sleep(45)
+        await asyncio.sleep(20)
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.idle, activity=discord.Game('Halo 3'))
-        await asyncio.sleep(45)
+        await asyncio.sleep(20)
         await client.change_presence(status=discord.Status.dnd, activity=discord.Game('with all the Homies'))
-        await asyncio.sleep(45)
+        await asyncio.sleep(20)
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
+        await asyncio.sleep(20)
 
 
 @client.event
@@ -135,8 +140,8 @@ async def on_message(message):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def d34(ctx):
+@commands.cooldown(1, 30, commands.BucketType.user)
+async def destiny34(ctx):
     try:
         author = ctx.message.author
         if not ctx.channel.is_nsfw():
@@ -154,15 +159,15 @@ async def d34(ctx):
     await ctx.message.delete()
 
 
-@d34.error
-async def d34_error(ctx, error):
+@destiny34.error
+async def destiny34_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="jesus fuck elsi bray will be here in a sec", color=discord.Color.magenta())
         await ctx.send(embed=em)
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def r34(ctx):
     try:
         author = ctx.message.author
@@ -189,7 +194,7 @@ async def r34_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def gw(ctx):
     try:
         author = ctx.message.author
@@ -216,35 +221,7 @@ async def gw_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def rfemboys(ctx):
-    try:
-        author = ctx.message.author
-        if not ctx.channel.is_nsfw():
-            await ctx.author.send("```not an nsfw channel```")
-            sys.stderr = object
-    except:
-        print('exception unhandled')
-    if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('FemBoys').hot()
-        post_to_pick = random.randint(1, 20)
-        for i in range(0, post_to_pick):
-            submission = next(x for x in submissions if not x.stickied)
-
-    await ctx.send(submission.url)
-    await ctx.message.delete()
-
-
-@rfemboys.error
-async def rfemboys_error(ctx, error):
-    if isinstance(error, commands.CommandOnCooldown):
-        em = discord.Embed(title="the pretty boys are coming to the yard, milkshakes in tow - be patient",
-                           color=discord.Color.magenta())
-        await ctx.send(embed=em)
-
-
-@client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def shefuckshim(ctx):
     try:
         author = ctx.message.author
@@ -271,8 +248,8 @@ async def shefuckshim_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def r_femboys(ctx):
+@commands.cooldown(1, 30, commands.BucketType.user)
+async def rfem(ctx):
     try:
         author = ctx.message.author
         if not ctx.channel.is_nsfw():
@@ -290,8 +267,8 @@ async def r_femboys(ctx):
     await ctx.message.delete()
 
 
-@rfemboys.error
-async def r_femboys_error(ctx, error):
+@rfem.error
+async def rfem_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="the pretty boys are coming to the yard, milkshakes in tow - be patient",
                            color=discord.Color.magenta())
@@ -299,7 +276,7 @@ async def r_femboys_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def cock(ctx):
     try:
         author = ctx.message.author
@@ -327,7 +304,7 @@ async def cock_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def red(ctx):
     try:
         author = ctx.message.author
@@ -356,7 +333,7 @@ async def red_error(ctx, error):
 # porninfifteenseconds
 
 @client.command()
-@commands.cooldown(1, 10, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def p15(ctx):
     try:
         author = ctx.message.author
@@ -383,7 +360,7 @@ async def p15_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def cum_sluts(ctx):
     try:
         author = ctx.message.author
@@ -410,7 +387,7 @@ async def cum_sluts_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def bdsm(ctx):
     try:
         author = ctx.message.author
@@ -442,7 +419,7 @@ async def bdsm_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def meme(ctx):
     submissions = reddit.subreddit('memes').hot()
     post_to_pick = random.randint(1, 20)
@@ -460,7 +437,7 @@ async def meme_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def gaming(ctx):
     submissions = reddit.subreddit('gaming').hot()
     post_to_pick = random.randint(1, 20)
@@ -478,7 +455,7 @@ async def gaming_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def halo(ctx):
     submissions = reddit.subreddit('halo').hot()
     post_to_pick = random.randint(1, 20)
@@ -496,7 +473,7 @@ async def halo_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def dmemes(ctx):
     submissions = reddit.subreddit('destinymemes').hot()
     post_to_pick = random.randint(1, 20)
@@ -514,7 +491,7 @@ async def dmemes_error(ctx, error):
 
 
 @client.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
+@commands.cooldown(1, 30, commands.BucketType.user)
 async def yell_cat(ctx):
     submissions = reddit.subreddit('catswhoyell').hot()
     post_to_pick = random.randint(1, 20)
@@ -534,7 +511,7 @@ async def yell_cat_error(ctx, error):
 @client.command()
 async def help_reddit(ctx):
     h = discord.Embed(title='I live to be horny.',
-                      description="All commands use the up-carrot: **'^'** as a prefix\n", timestamp=datetime.utcnow())
+                      description="All commands use the up-carrot: `^` as a prefix\n", timestamp=datetime.utcnow())
     h.add_field(name="dmemes", value="r/destinymemes")
     h.add_field(name="meme", value="r/memes")
     h.add_field(name="halo", value="r/halo")
@@ -560,7 +537,7 @@ async def nsfw_help(ctx):
         author = ctx.message.author
 
         n = discord.Embed(title='*I live to be horny....*',
-                          description="**Just enter '^whateverHornyCommand' to complete it.\nSome commands require you to tag a user as well.**\n\n***Commands:***",
+                          description="**Just enter `^whateverHornyCommand` to complete it.\nSome commands require you to tag a user as well.**\n\n***Commands:***",
                           timestamp=datetime.utcnow())
         n.add_field(name='Yuri', value='returns a Yuri pic (NSFW)', inline=True)
         n.add_field(name='futanari', value='returns an sexy futa (NSFW)', inline=True)
@@ -602,17 +579,19 @@ async def nsfw_help_2(ctx):
         author = ctx.message.author
 
         n = discord.Embed(title='*I live to be horny....*',
-                          description="**Just enter '^whateverHornyCommand' to complete it.\nSome commands require you to tag a user as well.**\n\n***Commands:***",
+                          description="**Just enter `^whateverHornyCommand` to complete it.\n***Commands:***",
                           timestamp=datetime.utcnow())
-        n.add_field(name="bdsm", value="pulls a top/hot post from r/bdsm")
-        n.add_field(name="cum_sluts", value="pulls a top/hot post from r/cumsluts")
-        n.add_field(name="p15", value="pulls a top/hot post from r/porninfifteenseconds")
-        n.add_field(name="d34", value="pulls a top/hot post from r/rule34destiny")
-        n.add_field(name="gw", value="pulls a top/hot post from r/gonewild")
-        n.add_field(name="rfemboys", value="pulls a top/hot post from r/femboys")
-        n.add_field(name="shefuckshim", value="pulls a top/hot post from r/shefuckshim")
-        n.add_field(name="cock", value="this is literally just a massive cock")
-        n.add_field(name="red", value="pulls a top/hot post from r/redheads")
+        n.add_field(name="`^bdsm`", value="pulls a top/hot post from r/bdsm")
+        n.add_field(name="`^cum_sluts`", value="pulls a top/hot post from r/cumsluts")
+        n.add_field(name="`^p15`", value="pulls a top/hot post from r/porninfifteenseconds")
+        n.add_field(name="`^destiny34`", value="pulls a top/hot post from r/rule34destiny")
+        n.add_field(name="`^gw`", value="pulls a top/hot post from r/gonewild")
+        n.add_field(name="`^rfem`", value="pulls a top/hot post from r/femboys")
+        n.add_field(name="`^shefuckshim`", value="pulls a top/hot post from r/shefuckshim")
+        n.add_field(name="`^cock`", value="this is literally just a massive cock")
+        n.add_field(name="`^red`", value="pulls a top/hot post from r/redheads")
+        n.add_field(name="*CAUTION:*", value="Overuse of any reddit request can lead to the requests being cutoff "
+                                             "entirely.")
         n.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
         n.set_footer(
             text="Due to laziness, the Dev has opted to use Reddit cmds in a non-Async environment - errors may occur.")
@@ -1387,20 +1366,42 @@ async def roles(ctx, *, member: MemberRoles):
 
 
 @client.command()
-@commands.cooldown(1, 3, commands.BucketType.user)
-async def d(ctx, die: int):
-    results = []
-    for role in range(1):
-        x = random.randint(1, die)
-        results.append(x)
-        embedVar = discord.Embed(title="You rolled a D" + str(die), description="And you got " + str(results) + "!")
-        embedVar.color = discord.Color.dark_gold()
-        await ctx.send(embed=embedVar)
-        await ctx.message.delete()
+async def roll(ctx, rolls: str):
+    resultString, results, numDice = r(rolls)
+    e1 = discord.Embed(title=roll_str(rolls)+f" for %s" % ctx.message.author.name, color=discord.Color.dark_teal())
+    await ctx.send(embed=e1)
+    if resultString == '20':
+        e3 = discord.Embed(title=f":tada:" % + ctx.message.author.mention + f":tada:\n"
+                                                                  f"***Critical Success!***\n"
+                                                                  f"" + resultString)
+        await ctx.send(embed=e3)
+    elif resultString == '1':
+        e4 = discord.Embed(title=f":roll_of_paper:" % + ctx.message.author.mention + f":roll_of_paper:\n"
+                                                                  f"***Critical Failure!***\n"
+                                                                  f"" + resultString)
+        await ctx.send(embed=e4)
+    elif numDice == '1':
+        await ctx.send(ctx.author.mention + "  :game_die:\n**Result:** " + resultString)
+    else:
+        e2 = discord.Embed(title=":game_die: Results!",
+                           timestamp=datetime.utcnow(),
+                           color=discord.Color.magenta(),description=f"Here "+ ctx.author.mention +
+                                                                     "\n__***All them dice***___\n\n**Result:** "
+                                                                     + resultString + "\n**Total:** " + str(results))
+        e2.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+        await ctx.send(embed=e2)
 
 
-@d.error
-async def d_error(ctx, error):
+
+@roll.error
+async def roll_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="Slow tf down, your dice will be there in a second", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@roll.error
+async def roll_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="Slow tf down, your dice will be there in a second", color=discord.Color.magenta())
         await ctx.send(embed=em)
@@ -1414,6 +1415,8 @@ async def src(ctx, *text: str):
                               url="https://google.com/search?q=" + "+".join(text))
     await ctx.send(embed=beanEmbed)
     await ctx.message.delete()
+
+
 @src.error
 async def src_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
@@ -1481,6 +1484,7 @@ async def cat(ctx):
     await ctx.send(embed=e)
     await ctx.message.delete()
 
+
 @cat.error
 async def cat_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
@@ -1503,12 +1507,15 @@ async def dog(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
+
+
 @dog.error
 async def dog_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
                            color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1525,12 +1532,14 @@ async def birb(ctx):
     except:
         await ctx.send(str(r['data'][size]['link']))
 
+
 @birb.error
 async def birb_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
                            color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1546,12 +1555,15 @@ async def otter(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
+
+
 @otter.error
 async def otter_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
                            color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1567,12 +1579,15 @@ async def plat(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
+
+
 @plat.error
 async def plat_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
                            color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1588,12 +1603,15 @@ async def bun(ctx):
         await ctx.message.delete()
     except:
         await ctx.send(str(r['data'][size]['link']))
+
+
 @bun.error
 async def bun_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
                            color=discord.Color.magenta())
         await ctx.send(embed=em)
+
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
@@ -1602,6 +1620,7 @@ async def insult(ctx):
     lines = open('text_dir/insults.txt').read().splitlines()
     await ctx.send(random.choice(lines))
     await ctx.message.delete()
+
 
 @insult.error
 async def insult_error(ctx, error):
@@ -1621,6 +1640,7 @@ async def tias(ctx):
     await ctx.send(file=discord.File(st + 'TIAS.jpg'))
     await ctx.message.delete()
 
+
 @tias.error
 async def tias_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
@@ -1636,6 +1656,7 @@ async def fightme(ctx):
     await ctx.send(file=discord.File(st + 'rollupbitch.png'))
     await ctx.message.delete()
 
+
 @fightme.error
 async def fightme_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
@@ -1650,6 +1671,7 @@ async def damn(ctx):
     st = 'images/'
     await ctx.send(file=discord.File(st + 'damnbro.jpg'))
     await ctx.message.delete()
+
 
 @damn.error
 async def damn_error(ctx, error):
@@ -1669,6 +1691,7 @@ async def blueman(ctx):
     varEmbed.set_image(url='https://i.imgur.com/0Aqdhln.jpg')
     await ctx.send(embed=varEmbed)
     await ctx.message.delete()
+
 
 @blueman.error
 async def blueman_error(ctx, error):
@@ -1697,6 +1720,7 @@ async def gm(ctx):
     except:
         await ctx.send(str(r['data'][size]['link']))
 
+
 @gm.error
 async def gm_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
@@ -1724,6 +1748,7 @@ async def gn(ctx):
     except:
         await ctx.send(str(r['data'][size]['link']))
 
+
 @gn.error
 async def gn_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
@@ -1733,7 +1758,6 @@ async def gn_error(ctx, error):
 
 
 # https://imgur.com/a/3fy68kJ
-
 
 
 @client.command()
@@ -1755,6 +1779,7 @@ async def daddy_error(ctx, error):
         em = discord.Embed(title="Dad jokes are temporary, just like your actual dad", color=discord.Color.magenta())
         await ctx.send(embed=em)
 
+
 '''-----End Fun Commands-----'''
 
 '''Bot Utility and Admin'''
@@ -1762,28 +1787,44 @@ async def daddy_error(ctx, error):
 
 @client.command()
 async def help(ctx):
-    h = discord.Embed(title='I live to be horny.',
-                      description="All commands use the up-carrot: **'^'** as a prefix\n", timestamp=datetime.utcnow())
-    h.add_field(name="Animal commands", value="**- Cat** -> scraps a cat\n"
-                                              "**- Otter** -> scraps an otter\n"
-                                              "**- Dog** -> scraps a dog\n"
-                                              "**- Plat** -> scraps the best of agents\n"
-                                              "**- birb** -> squak squak\n"
-                                              "**- bun** -> the bunnies\n")
-    h.add_field(name="Fun commands", value="**- d** -> Will roll a Die **(^d20)**\n"
-                                           "**- src** -> allows you to create a google search. Format: '^i-cant-have-spaces\n"
-                                           "**- cumscript** -> run it, see\n"
-                                           "**- insult** -> GET FUCKED\n")
-    h.add_field(name="Image commands", value="**- tias** -> Try it and see\n"
-                                             "**- fightme** -> let's fockin' GO\n"
-                                             "**- blueman** -> the blue\n"
-                                             "**- damn** -> damn bro\n")
+    h = discord.Embed(title='<:6291_Anna_lewd:708017347201597501> Your favorite horny bot',
+                      description="All commands use the `up-carrot: ^` as a prefix\n", timestamp=datetime.utcnow())
+    h.add_field(name="Animal commands", value="`^Cat` scraps a cat\n"
+                                              "`^Otter` scraps an otter\n"
+                                              "`^Dog` scraps a dog\n"
+                                              "`^Plat` scraps the best of agents\n"
+                                              "`^birb` squak squak\n"
+                                              "`^bun` the bunnies\n")
+    h.add_field(name="Fun commands", value="`^roll` Will roll a Die `^d 20`\n"
+                                           "`^src` allows you to create a google search. `Format: '^i-cant-have-spaces`\n"
+                                           "`^cumscript` run it, see\n"
+                                           "`^insult` Insult a friend/fiend\n"
+                                           "`^daddy` dad jokes")
+    h.add_field(name="Image commands", value="`^tias` Try it and see\n"
+                                             "`^fightme` let's fockin' GO\n"
+                                             "`^blueman` the blue\n"
+                                             "`^damn` damn bro\n")
     h.add_field(name="nsfw_help", value="*Returns a list of NSFW related commands*")
     h.add_field(name="nsfw_help_2", value="*This is a list of our Reddit NSFW commands*")
     h.add_field(name="help_reddit", value="*List of our Reddit SFW commands*")
     h.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+    h.set_footer(text="try `^tags`....")
     h.color = discord.Color.magenta()
     await ctx.send(embed=h)
+    await ctx.message.delete()
+
+
+@client.command()
+async def tags(ctx):
+    author = ctx.message.author
+    t = discord.Embed(title='Tags for the dull.',
+                      description="Don't feel like explaining? I did it for you.")
+    t.add_field(name="tReddit", value="`^tReddit`: explains why you can't use your horny Subreddit commands.")
+    t.add_field(name="tClan", value="`^tClan` clan invites for those who are unwilling to work")
+    t.add_field(name="tdev", value="`tdev` tags profile")
+    t.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+    t.color = discord.Color.magenta()
+    await ctx.author.send(embed=t)
     await ctx.message.delete()
 
 
@@ -1814,5 +1855,64 @@ async def report(ctx, user: discord.Member, *reason):
 
 
 '''End Bot Utility and Admin'''
+
+'''Tags------------'''
+
+
+@client.command()
+async def tReddit(ctx):
+    author = ctx.message.author
+    t = discord.Embed(title='Reddit API.',
+                      description=f"{author.mention} didn't feel like explaining - again. So here.",
+                      timestamp=datetime.utcnow())
+    t.add_field(name="So why can't you post sexy redheads?", value="***Rate limits***\n"
+                                                                   "Reddit places a limit on requests "
+                                                                   "as to not fuck their servers.\n"
+                                                                   "Feasibly, we shouldn't hit that limit - it's 60 requests a minute.")
+    t.add_field(name="However:",
+                value="*Currently*, PRAW also limits Reddit requests.\nWhile there is an AsyncPraw, this bot"
+                      "has bot been written in it yet, flop has encountered issues when doing so.")
+    t.add_field(name="Reading material:",
+                value="https://www.reddit.com/r/redditdev/comments/5wjbkz/ratelimit/  <-Reddit admin talking about shit\n"
+                      "https://asyncpraw.readthedocs.io/en/latest/package_info/references.html    <- Read the docs\n"
+                      "https://praw.readthedocs.io/en/latest/index.html       <- ...docs?\n"
+                      "")
+    t.add_field(name="Summary",
+                value="It's likely that when we toss out an assload of requests, we suddenly go over the limit"
+                      "...and I dunno what the cooldown is.")
+    t.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+    t.set_footer(text="How about we just don't spam dicks 'n tits from reddit")
+    t.color = discord.Color.magenta()
+    await ctx.send(embed=t)
+    await ctx.message.delete()
+
+
+@client.command()
+async def tClan(ctx):
+    author = ctx.message.author
+    t = discord.Embed(title='ugh....',
+                      description=f"fine {author.mention}..... i guess you are my little homie-champ",
+                      timestamp=datetime.utcnow(), url="https://www.bungie.net/en/ClanV2?groupid=4179219")
+    t.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+    t.color = discord.Color.magenta()
+    await ctx.send(embed=t)
+    await ctx.message.delete()
+    
+@client.command()
+async def tdev(ctx):
+    t=discord.Embed(title="Who made me?", description="Developer(s):",
+                    timestamp=datetime.utcnow())
+    t.add_field(name="flop#8986", value="GitHub: /im-zach\n\nflop is developing me in his freetime while doing loads of"
+                                        "other stuff. He's happy to make bots for any purpose.")
+
+    t.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
+    t.footer(text="Special Thanks: Google, StackOverflow")
+    t.color = discord.Color.magenta()
+    await ctx.send(embed=t)
+    await ctx.message.delete()
+
+
+
+'''---------'''
 
 client.run(token, bot=True, reconnect=True)
