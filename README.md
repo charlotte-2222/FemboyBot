@@ -1,2 +1,15 @@
 # FemboyBot
-## Yes this is an odd project, but when your client asks you to do shit for them you do it; and you goddamn better do it to the best of your ability.
+## Client Requested Server bot
+
+### Features(Still in Beta):
+
+- Minor Admin
+- Easter egg message events
+- Various animals can be webscraped
+- Welcomes new members
+
+#### Porn. Lots and lots of porn. 
+- Neko API
+- PRAW scrapping Reddit
+- PornHub(?)
+- Imgur
