@@ -27,7 +27,7 @@ with Bot command calls. Simply using:
 https://github.com/meew0/discord-bot-best-practices
 ---
 Helpful:
-https://github.com/Rapptz/discord.py
+https: //github.com/Rappt nz/discord.py
 """
 reddit = praw.Reddit(client_id=redditC,
                      client_secret=redditCS,
@@ -103,7 +103,7 @@ async def on_member_join(member):
     await wel_cum.send(embed=welEmb)
 
 
-@client.event
+
 async def on_message(message):
     author = message.author
     vid = "https://imgur.com/a/LjhtuOJ"
@@ -1798,7 +1798,7 @@ async def help(ctx):
                                               "`^Plat` scraps the best of agents\n"
                                               "`^birb` squak squak\n"
                                               "`^bun` the bunnies\n")
-    h.add_field(name="Fun commands", value="`^roll` Will roll a Die `^d 20`\n"
+    h.add_field(name="Fun commands", value="`^roll` Will roll a Die `^roll 1d20`\n"
                                            "`^src` allows you to create a google search. `Format: '^i-cant-have-spaces`\n"
                                            "`^cumscript` run it, see\n"
                                            "`^insult` Insult a friend/fiend\n"
@@ -1941,9 +1941,13 @@ async def tdev(ctx):
                       timestamp=datetime.utcnow())
     t.add_field(name="flop#8986", value="GitHub: /im-zach\n\nflop is developing me in his freetime while doing loads of"
                                         "other stuff. He's happy to make bots for any purpose.")
+    t.add_field(name="Website", value="https://im-zach.github.io")
 
     t.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
-    t.footer(text="Special Thanks: Google, StackOverflow")
+    t.add_field(name="Special Thanks:", value="Google\n"
+                                              "StackOverflow\n"
+                                              "GitHub\n"
+                                              "Discord.py (Docs + Discord Server)")
     t.color = discord.Color.magenta()
     await ctx.send(embed=t)
     await ctx.message.delete()
@@ -1974,7 +1978,7 @@ async def t45(ctx):
 
 
 @client.command()
-async def guess_game(ctx):
+async def guess(ctx):
     num = random.randint(0, 100)
     for i in range(0, 5):
         await ctx.send('guess')
