@@ -103,7 +103,7 @@ async def on_member_join(member):
     await wel_cum.send(embed=welEmb)
 
 
-
+@client.event
 async def on_message(message):
     author = message.author
     vid = "https://imgur.com/a/LjhtuOJ"
@@ -126,7 +126,7 @@ async def on_message(message):
         await message.channel.send("leave him the fuck alone asshole")
     elif message.content.startswith("pogchamp".lower()):
         await message.channel.send("<:9154_PogU:712671828291747864>")
-    elif message.content.startswith("pog.".lower):
+    elif message.content.startswith("pog".lower()):
         await message.channel.send("stfu you're actually cringe")
     elif message.content.startswith("fuck you fembot".lower()):
         await message.channel.send(f"fuck you {author.mention} give your balls a tug.\n"
