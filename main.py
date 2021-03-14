@@ -10,6 +10,8 @@ import praw
 import requests
 from imgurpython import ImgurClient
 from bs4 import BeautifulSoup
+from utilityFunction import lists
+
 import nekos
 from config import *
 import discord
@@ -1633,6 +1635,13 @@ async def insult_error(ctx, error):
         await ctx.send(embed=em)
 
 
+@client.command()
+async def eightball(ctx, *, question: commands.clean_content):
+    """ Consult 8ball to receive an answer """
+    answer = random.choice(lists.ballresponse)
+    await ctx.send(f"🎱 **Question:** {question}\n**Answer:** {answer}")
+
+
 """--Pictures-------------------------------------------------------------"""
 
 
@@ -1825,7 +1834,7 @@ async def tags(ctx):
     t.add_field(name="`tReddit`", value="`^tReddit`: explains why you can't use your horny Subreddit commands.")
     t.add_field(name="`tClan`", value="`^tClan` clan invites for those who are unwilling to work")
     t.add_field(name="`tdev`", value="`tdev` tags profile")
-    t.add_field(name="`t45`",value="we all know what this is")
+    t.add_field(name="`t45`", value="we all know what this is")
     t.add_field(name='`tias`', value="try it and see.")
 
     t.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
