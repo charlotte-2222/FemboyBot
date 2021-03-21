@@ -159,8 +159,8 @@ async def destiny34(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('rule34destiny').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('rule34destiny').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -186,8 +186,8 @@ async def r34(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('rule34').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('rule34').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -213,8 +213,8 @@ async def gw(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('gonewild').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('gonewild').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -240,8 +240,8 @@ async def shefuckshim(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('shefuckshim').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('shefuckshim').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -267,8 +267,8 @@ async def rfem(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('FemBoys').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('FemBoys').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -295,8 +295,8 @@ async def cock(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('massivecock').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('massivecock').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -323,8 +323,8 @@ async def red(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('redheads').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('redheads').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -352,8 +352,8 @@ async def p15(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('porninfifteenseconds').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('porninfifteenseconds').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -379,8 +379,8 @@ async def cum_sluts(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('cumsluts').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('cumsluts').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -406,8 +406,8 @@ async def bdsm(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('bdsm').random()
-        post_to_pick = random.randint(1, 45)
+        submissions = reddit.subreddit('bdsm').new()
+        post_to_pick = random.randint(1, 50)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -1404,6 +1404,12 @@ async def rg(ctx):
                 value='-18+ -> Allows you to view NSFW content\n-Weeb -> Allows you to view our anime channel\n-Funny Memes -> Allows you to view our meme channels\n-Clan News -> Receive pings/Clan updates')
     r.add_field(name='Dinner Games:',
                 value='This is a category for other games that are not destiny related (Minecraft, Halo, CoD - etc.)')
+    r.add_field(name="Regions: ", value="Select your region, you can only have one.")
+    r.add_field(name="Bot Category: ", value="To view bot info, react to the specified role.\n\n"
+                                             "You will see updates on YAG, Dyno, Fembot, and "
+                                             "be allowed to spam commands in a safe environment.\n"
+                                             "Additionally, should you have suggestions for FemBot, you can"
+                                             " post them in a specified channel.")
     r.color = discord.Color.magenta()
     r.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.pnghttps://i.imgur.com/0MEtXDZ.png')
     await ctx.send(embed=r)
@@ -2056,12 +2062,12 @@ async def choose(ctx, *choices: str):
 @client.command(aliases=["gift", "giveaway", "gcreate", "gcr", "giftcr"])
 @commands.has_guild_permissions(manage_roles=True)
 async def create_giveaway(ctx):
-    embed = discord.Embed(title="Giveaway Time!!✨",
+    embed = discord.Embed(title="Giveaway! <:9154_PogU:712671828291747864>",
                   description="Time for a new Giveaway. Answer the following questions in 25 seconds each for the Giveaway",
                   color=discord.Color.magenta())
     await ctx.send(embed=embed)
     questions = ["What channel would you like to hows the giveaway?",
-                 "How long will the giveaway last?\nType a number followed by the time (s|m|h|d)\n"
+                 "How long will the giveaway last?\nType a number followed by the time\n `(s | m | h | d )`\n\n"
                  "`15m` = fifteen minutes",
                  "What is the Prize?"]
     answers = []
@@ -2101,7 +2107,7 @@ async def create_giveaway(ctx):
 
     await ctx.send(f"Your giveaway will be hosted in {channel.mention} and will last for {answers[1]}")
     embed = Embed(title="Come one, come all!!!",
-                  description=f"Win a {prize} today",
+                  description=f"You could win: {prize}",
                   colour=discord.Color.magenta())
     embed.add_field(name="Hosted By: ", value=ctx.author.mention)
     embed.set_footer(text=f"Giveway ends in {answers[1]} from now")
@@ -2118,7 +2124,7 @@ async def create_giveaway(ctx):
         # Check if User list is not empty
         if len(users) <= 0:
             emptyEmbed = Embed(title="wait.... what?",
-                               description=f"Win a {prize} today", colour=discord.Colour.magenta())
+                               description=f"You coulda won: {prize}", colour=discord.Colour.magenta())
             emptyEmbed.add_field(name="Hosted By:", value=ctx.author.mention)
             emptyEmbed.set_footer(text="No one won the Giveaway....")
             await myMsg.edit(embed=emptyEmbed)
@@ -2126,9 +2132,10 @@ async def create_giveaway(ctx):
         if len(users) > 0:
             winner = random.choice(users)
             winnerEmbed = Embed(title="Woooo hooo!",
-                                description=f"Win a {prize} today",
-                                colour=discord.Color.magenta())
-            winnerEmbed.add_field(name=f"Congratulations On Winning {prize}", value=winner.mention)
+                                colour=discord.Color.magenta(),
+                                timestamp=datetime.utcnow())
+            winnerEmbed.add_field(name=f"Congratulations {winner}, "
+                                       f"you're the proud owner of: {prize}", value=winner.mention)
             winnerEmbed.set_image(
                 url="https://i.imgur.com/ok4Xuw4.jpg")
             await myMsg.edit(embed=winnerEmbed)
