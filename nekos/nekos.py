@@ -8,6 +8,7 @@ noresponse = "Couldn't contact the API right now..."
 def eightball():
     r = http.get("/8ball")
     return dict.JsonDict({
+
         "text": r["response"],
         "image": r["url"]
     })

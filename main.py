@@ -46,14 +46,13 @@ client.remove_command("help")
 
 @client.event
 async def on_ready():
-    channel = client.get_channel(694725683242467398)
+    channel = client.get_channel(823195095057956904)
     print("Ready to cum...uwu")
     print("--------------")
     print(time.strftime("Time at start:\n" + "%H:%M:%S\n" +
                         "%m/%d/%Y\n"))
     # st = 'images/'
     e = discord.Embed(title="Online!", timestamp=datetime.utcnow())
-    e.set_image(url='https://i.imgur.com/eOI07Lj.jpg')
     e.color = discord.Color.magenta()
     await channel.send(embed=e)
 
@@ -156,8 +155,8 @@ async def destiny34(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('rule34destiny').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('rule34destiny').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -183,8 +182,8 @@ async def r34(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('rule34').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('rule34').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -210,8 +209,8 @@ async def gw(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('gonewild').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('gonewild').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -237,8 +236,8 @@ async def shefuckshim(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('shefuckshim').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('shefuckshim').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -264,8 +263,8 @@ async def rfem(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('FemBoys').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('FemBoys').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -292,8 +291,8 @@ async def cock(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('massivecock').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('massivecock').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -320,8 +319,8 @@ async def red(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('redheads').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('redheads').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -349,8 +348,8 @@ async def p15(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('porninfifteenseconds').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('porninfifteenseconds').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -376,8 +375,8 @@ async def cum_sluts(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('cumsluts').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('cumsluts').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -403,8 +402,8 @@ async def bdsm(ctx):
     except:
         print('exception unhandled')
     if ctx.channel.is_nsfw():
-        submissions = reddit.subreddit('bdsm').hot()
-        post_to_pick = random.randint(1, 20)
+        submissions = reddit.subreddit('bdsm').random()
+        post_to_pick = random.randint(1, 45)
         for i in range(0, post_to_pick):
             submission = next(x for x in submissions if not x.stickied)
 
@@ -1255,6 +1254,47 @@ async def tickle_error(ctx, error):
 
 @client.command()
 @commands.cooldown(1, 3, commands.BucketType.user)
+async def baka(ctx):
+    if not ctx.channel.is_nsfw():
+        author = ctx.message.author
+        await ctx.author.send("```not an nsfw channel```")
+        sys.stderr = object
+    if ctx.channel.is_nsfw():
+        embed = discord.Embed(
+            title='b-baka! :flushed:',
+            description='',
+            colour=discord.Colour.magenta()
+        )
+    baka = nekos.img("baka")
+
+    embed.set_image(url=baka)
+
+    await ctx.send(embed=embed)
+    await ctx.message.delete()
+
+
+@baka.error
+async def baka_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
+        await ctx.send(embed=em)
+
+
+@client.command(aliases=["dick", "penis"])
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def dong(ctx, *, user: discord.Member):
+    """Detects user's dong length"""
+    state = random.getstate()
+    random.seed(user.id)
+    dong = "8{}D".format("=" * random.randint(0, 30))
+    random.setstate(state)
+    em = discord.Embed(title="{}'s Dong Size".format(user), description="Size: " + dong,
+                       colour=discord.Colour.magenta())
+    await ctx.send(embed=em)
+
+
+@client.command()
+@commands.cooldown(1, 3, commands.BucketType.user)
 async def nsfw_avatar(ctx):
     if not ctx.channel.is_nsfw():
         author = ctx.message.author
@@ -1342,6 +1382,7 @@ async def femdom_error(ctx, error):
 
 imgur = ImgurClient(imgurC, ImgurL)
 '''Not sure if Tabbed correctly '''
+
 
 class MemberRoles(commands.MemberConverter):
     async def convert(self, ctx, argument):
@@ -1640,6 +1681,7 @@ async def eightball(ctx, *, question: commands.clean_content):
     """ Consult 8ball to receive an answer """
     answer = random.choice(lists.ballresponse)
     await ctx.send(f"🎱 **Question:** {question}\n**Answer:** {answer}")
+
 
 
 """--Pictures-------------------------------------------------------------"""
