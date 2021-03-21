@@ -1,13 +1,15 @@
 import asyncio
 import time
+from asyncio import sleep
 from datetime import datetime
 import random
 import random as r
 import sys
-
+from utilityFunction.timeConvert import convert
 import aiohttp
 import praw
 import requests
+from discord import Embed
 from imgurpython import ImgurClient
 from bs4 import BeautifulSoup
 from utilityFunction import lists
@@ -2049,6 +2051,88 @@ async def guess(ctx):
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     await ctx.send(random.choice(choices))
+
+
+@client.command(aliases=["gift", "giveaway", "gcreate", "gcr", "giftcr"])
+@commands.has_guild_permissions(manage_roles=True)
+async def create_giveaway(ctx):
+    embed = discord.Embed(title="Giveaway Time!!✨",
+                  description="Time for a new Giveaway. Answer the following questions in 25 seconds each for the Giveaway",
+                  color=discord.Color.magenta())
+    await ctx.send(embed=embed)
+    questions = ["What channel would you like to hows the giveaway?",
+                 "How long will the giveaway last?\nType a number followed by the time (s|m|h|d)\n"
+                 "`15m` = fifteen minutes",
+                 "What is the Prize?"]
+    answers = []
+
+    # Check Author
+    def check(m):
+        return m.author == ctx.author and m.channel == ctx.channel
+
+    for i, question in enumerate(questions):
+        embed = discord.Embed(title=f"Question {i}",
+                      description=question,
+                              color=discord.Color.magenta())
+        await ctx.send(embed=embed)
+        try:
+            message = await client.wait_for('message', timeout=25, check=check)
+        except TimeoutError:
+            await ctx.send("You didn't answer the questions in Time")
+            return
+        answers.append(message.content)
+    # Check if Channel Id is valid
+    try:
+        channel_id = int(answers[0][2:-1])
+    except:
+        await ctx.send(f"The Channel provided was wrong. The channel should be {ctx.channel.mention}")
+        return
+
+    channel = client.get_channel(channel_id)
+    time = convert(answers[1])
+    # Check if Time is valid
+    if time == -1:
+        await ctx.send("The Time format was wrong")
+        return
+    elif time == -2:
+        await ctx.send("The Time was not conventional number")
+        return
+    prize = answers[2]
+
+    await ctx.send(f"Your giveaway will be hosted in {channel.mention} and will last for {answers[1]}")
+    embed = Embed(title="Come one, come all!!!",
+                  description=f"Win a {prize} today",
+                  colour=discord.Color.magenta())
+    embed.add_field(name="Hosted By: ", value=ctx.author.mention)
+    embed.set_footer(text=f"Giveway ends in {answers[1]} from now")
+    newMsg = await channel.send(embed=embed)
+    await newMsg.add_reaction("<:thicc:775003570733842453>")
+    # Check if Giveaway Cancelled
+    client.cancelled = False
+    await sleep(time)
+    if not client.cancelled:
+        myMsg = await channel.fetch_message(newMsg.id)
+
+        users = await myMsg.reactions[0].users().flatten()
+        users.pop(users.index(client.user))
+        # Check if User list is not empty
+        if len(users) <= 0:
+            emptyEmbed = Embed(title="wait.... what?",
+                               description=f"Win a {prize} today", colour=discord.Colour.magenta())
+            emptyEmbed.add_field(name="Hosted By:", value=ctx.author.mention)
+            emptyEmbed.set_footer(text="No one won the Giveaway....")
+            await myMsg.edit(embed=emptyEmbed)
+            return
+        if len(users) > 0:
+            winner = random.choice(users)
+            winnerEmbed = Embed(title="Woooo hooo!",
+                                description=f"Win a {prize} today",
+                                colour=discord.Color.magenta())
+            winnerEmbed.add_field(name=f"Congratulations On Winning {prize}", value=winner.mention)
+            winnerEmbed.set_image(
+                url="https://i.imgur.com/ok4Xuw4.jpg")
+            await myMsg.edit(embed=winnerEmbed)
+            return
 
 
 '''---------'''
