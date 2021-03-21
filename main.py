@@ -132,10 +132,12 @@ async def on_message(message):
     elif message.content.startswith("fuck you fembot".lower()):
         await message.channel.send(f"fuck you {author.mention} give your balls a tug.\n"
                                    f"your life is so pathetic I get a charity tax break just by hanging around you.")
-    if message.content.startswith("cringe".lower()):
+    elif message.content.startswith("cringe".lower()):
         await message.channel.send(vid + f"\nKinda cringe, aren't ya {author.mention}?\n"
                                          f"I dunno how to describe you tbh. Cringe. Toxic.\n"
                                          f"Awkward?")
+    if message.content.startswith("cock".lower()):
+        await message.channel.send("yep. thas a cock")
     await client.process_commands(message)
 
 
