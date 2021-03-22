@@ -1,10 +1,18 @@
 import asyncio
+import json
+import os
 import time
+import urllib
 from asyncio import sleep
 from datetime import datetime
-import random
 import random as r
 import sys
+from urllib import parse
+
+from PIL import Image
+
+import config
+
 from utilityFunction.timeConvert import convert
 import aiohttp
 import praw
@@ -13,13 +21,12 @@ from discord import Embed
 from imgurpython import ImgurClient
 from bs4 import BeautifulSoup
 from utilityFunction import lists
-
 import nekos
 from config import *
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-from config import token
+from config import token, OWNERS, BLACKLIST
 from utilityFunction.CommandFunc import *
 
 """"-----------------------------------------------"""
@@ -48,15 +55,10 @@ client.remove_command("help")
 
 @client.event
 async def on_ready():
-    channel = client.get_channel(823195095057956904)
-    print("Ready to cum...uwu")
+    print("FemBot online")
     print("--------------")
     print(time.strftime("Time at start:\n" + "%H:%M:%S\n" +
                         "%m/%d/%Y\n"))
-    # st = 'images/'
-    e = discord.Embed(title="Online!", timestamp=datetime.utcnow())
-    e.color = discord.Color.magenta()
-    await channel.send(embed=e)
 
     while True:
         await client.change_presence(
@@ -1693,7 +1695,6 @@ async def eightball(ctx, *, question: commands.clean_content):
     await ctx.send(f"🎱 **Question:** {question}\n**Answer:** {answer}")
 
 
-
 """--Pictures-------------------------------------------------------------"""
 
 
@@ -1844,6 +1845,7 @@ async def daddy_error(ctx, error):
         await ctx.send(embed=em)
 
 
+
 '''-----End Fun Commands-----'''
 
 '''Bot Utility and Admin'''
@@ -1949,6 +1951,37 @@ async def kick(ctx, member: discord.Member, *, reason=None):
     timestamp = ctx.message.created_at.__format__('%A | %B %d, %I:%M %p UTC')
     embed = discord.Embed(
         color=0xff0000)
+
+
+@client.command(description='View online helpers in Discord Bots.', aliases=['helper'], hidden=True)
+async def helpers(ctx):
+    """View online helpers in the Discord Bots server."""
+    if ctx.guild.id != 694631281346084925:
+        return
+    online = []
+    offline = []
+    idle = []
+    dnd = []
+    helpers = [i for i in ctx.guild.members if not i.bot and
+               694709812528677008 in [r.id for r in i.roles]]
+    for i in helpers:
+        if i.status == discord.Status.online: online.append(
+            f'**{i.name[0:1]}\u200b{i.name[1:len(i.name)]}**#{i.discriminator}\n')
+        if i.status == discord.Status.offline: offline.append(
+            f'**{i.name[0:1]}\u200b{i.name[1:len(i.name)]}**#{i.discriminator}\n')
+        if i.status == discord.Status.idle: idle.append(
+            f'**{i.name[0:1]}\u200b{i.name[1:len(i.name)]}**#{i.discriminator}\n')
+        if i.status == discord.Status.dnd: dnd.append(
+            f'**{i.name[0:1]}\u200b{i.name[1:len(i.name)]}**#{i.discriminator}\n')
+
+    msg = f'''
+**Helpers in {ctx.guild}**:
+{['online']} **Online:** {' | '.join(online) if online != [] else 'None'}
+{['idle']} **Away:** {' | '.join(idle) if idle != [] else 'None'}
+{['dnd']} **DnD:** {' | '.join(dnd) if dnd != [] else 'None'}
+{['offline']} **Offline:** {' | '.join(offline) if offline != [] else 'None'}
+'''
+    await ctx.send(msg)
 
 
 '''End Bot Utility and Admin'''
@@ -2063,8 +2096,8 @@ async def choose(ctx, *choices: str):
 @commands.has_guild_permissions(manage_roles=True)
 async def create_giveaway(ctx):
     embed = discord.Embed(title="Giveaway! <:9154_PogU:712671828291747864>",
-                  description="Time for a new Giveaway. Answer the following questions in 25 seconds each for the Giveaway",
-                  color=discord.Color.magenta())
+                          description="Time for a new Giveaway. Answer the following questions in 25 seconds each for the Giveaway",
+                          color=discord.Color.magenta())
     await ctx.send(embed=embed)
     questions = ["What channel would you like to hows the giveaway?",
                  "How long will the giveaway last?\nType a number followed by the time\n `(s | m | h | d )`\n\n"
@@ -2078,7 +2111,7 @@ async def create_giveaway(ctx):
 
     for i, question in enumerate(questions):
         embed = discord.Embed(title=f"Question {i}",
-                      description=question,
+                              description=question,
                               color=discord.Color.magenta())
         await ctx.send(embed=embed)
         try:
@@ -2140,6 +2173,145 @@ async def create_giveaway(ctx):
                 url="https://i.imgur.com/ok4Xuw4.jpg")
             await myMsg.edit(embed=winnerEmbed)
             return
+
+
+@client.command(aliases=["poll", "vote"])
+async def create_poll(ctx, *args):
+    """
+        Create a poll where members can vote.
+        """
+    poll_title = " ".join(args)
+    embed = discord.Embed(
+        title="Uwu a poll for me to ~~dance~~ vote on...",
+        description=f"{poll_title}",
+        color=discord.Color.magenta()
+    )
+    embed.set_footer(
+        text=f"Poll created by: {ctx.message.author} • React to vote!"
+    )
+    embed_message = await ctx.send(embed=embed)
+    await embed_message.add_reaction("👍")
+    await embed_message.add_reaction("👎")
+
+
+@client.command()
+async def announce(ctx):
+    embed = discord.Embed(title="Announcment time! <:9154_PogU:712671828291747864>",
+                          description="Time for a new Announcment. You have 60 seconds.",
+                          color=discord.Color.magenta())
+    await ctx.send(embed=embed)
+    questions = ["What channel would you like to post the announcement? You have 60s",
+                 "What is your announcement? You have 60s. Write it now. "]
+    answers = []
+    # Check Author
+
+    def check(m):
+        return m.author == ctx.author and m.channel == ctx.channel
+    for i, question in enumerate(questions):
+        embed = discord.Embed(title=f"Question {i}",
+                              description=question,
+                              color=discord.Color.magenta())
+        await ctx.send(embed=embed)
+        try:
+            message = await client.wait_for('message', timeout=60, check=check)
+        except TimeoutError:
+            await ctx.send("You didn't answer the questions in Time")
+            return
+        answers.append(message.content)
+    # Check if Channel Id is valid
+    try:
+        channel_id = int(answers[0][2:-1])
+    except:
+        await ctx.send(f"The Channel provided was wrong. The channel should be {ctx.channel.mention}")
+        return
+    channel = client.get_channel(channel_id)
+    # Check if Time is valid
+    message = answers[1]
+    await ctx.send(f"Announcement will be in {channel.mention}")
+    embed = Embed(title=f"Your Femboy overlord has a message:",
+                  description=f"{message}",
+                  colour=discord.Color.magenta())
+    await channel.send(embed=embed)
+
+
+@client.command(aliases=["warn", "slap", "belt", "whip"])
+async def warn_create(ctx, member: discord.Member, *args):
+    """
+        Warns a user in his private messages.
+        """
+    if ctx.message.author.guild_permissions.administrator:
+        reason = " ".join(args)
+        embed = discord.Embed(
+            title="User Warned!",
+            description=f"**{member}** was warned by **{ctx.message.author}**!",
+            color=discord.Color.magenta()
+        )
+        embed.add_field(
+            name="Reason:",
+            value=reason
+        )
+        await ctx.send(embed=embed)
+        try:
+            await member.send(f"You were warned by **{ctx.message.author}**!\nReason: {reason}")
+        except:
+            pass
+    else:
+        embed = discord.Embed(
+            title="Error!",
+            description="You don't have the permission to use this command.",
+            color=discord.Color.magenta()
+        )
+        await ctx.send(embed=embed)
+    await ctx.message.delete()
+
+
+@client.command(aliases=['yt', 'vid', 'video'])
+async def youtube(ctx, query: str):
+    """Search for videos on YouTube"""
+    search = parse.quote(query)
+    async with aiohttp.ClientSession() as session:
+        response = await session.get(
+            f"https://www.youtube.com/results?search_query={search}")
+        result = BeautifulSoup(await response.text(), "html.parser")
+        await ctx.send("https://www.youtube.com{}".format(
+            result.find_all(attrs={'class': 'yt-uix-tile-link'})[0]
+                .get('href')))
+
+
+@client.command()
+async def weather(ctx, city: str = None):
+    URL = f"http://wttr.in/{city}_2tnp_transparency=1000_lang=en.png"
+    if not city:
+        await ctx.send("Please enter a valid city / town")
+    else:
+        with urllib.request.urlopen(URL) as url:
+            with open("temp.png", "wb") as f:
+                f.write(url.read())
+        img = Image.open('temp.png')
+        img2 = img.crop((0, 0, 467, 398)).save("img2.png")
+        file = discord.File("img2.png", filename="weather.png")
+        await ctx.trigger_typing()
+        await ctx.send(file=file)
+        os.remove('img2.png')
+        os.remove("temp.png")
+
+
+@client.command()
+async def moon(ctx):
+    URL = "http://wttr.in/moon.png"
+    with urllib.request.urlopen(URL) as url:
+        with open("temp8.png", "wb") as f:
+            f.write(url.read())
+
+    img = Image.open('temp8.png')
+
+    img2 = img.crop((0, 0, 326, 317)).save("img8.png")
+
+    file = discord.File("img8.png", filename="moon.png")
+    await ctx.trigger_typing()
+    await ctx.send(file=file)
+    os.remove('img8.png')
+    os.remove("temp8.png")
 
 
 '''---------'''
