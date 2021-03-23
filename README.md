@@ -4,7 +4,7 @@
 ### Features(Still in Beta):
 
 - Minor Admin
-- Easter egg message events
+- Easter egg self events
 - Various animals can be webscraped
 - Welcomes new members
 
