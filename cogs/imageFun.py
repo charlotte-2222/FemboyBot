@@ -1,9 +1,14 @@
 from datetime import datetime
-from random import random
+import random
 
 import discord
 import requests
 from discord.ext import commands
+from imgurpython import ImgurClient
+
+from config import *
+
+imgur = ImgurClient(imgurC, ImgurL)
 
 
 class ImageFunCog(commands.Cog):

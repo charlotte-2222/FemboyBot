@@ -79,7 +79,7 @@ class MisscCog(commands.Cog):
 
     @commands.command()
     async def report(self, ctx, user: discord.Member, *reason):
-        channel = self.get_channel(694637172271087749)  # since it's a cog u need self.bot
+        channel = self.bot(694637172271087749)  # since it's a cog u need self.bot
         author = ctx.message.author
         rearray = ' '.join(reason[:])  # converts reason argument array to string
         if not rearray:  # what to do if there is no reason specified

@@ -2,7 +2,7 @@ import os
 import urllib
 from asyncio import sleep
 from datetime import datetime
-from random import random
+import random
 
 import discord
 from PIL.Image import Image
@@ -49,7 +49,7 @@ class ServerCog(commands.Cog):
             await ctx.send(f"The Channel provided was wrong. The channel should be {ctx.channel.mention}")
             return
 
-        channel = self.get_channel(channel_id)
+        channel = self.bot(channel_id)
         time = convert(answers[1])
         # Check if Time is valid
         if time == -1:
@@ -135,7 +135,7 @@ class ServerCog(commands.Cog):
                                   color=discord.Color.magenta())
             await ctx.send(embed=embed)
             try:
-                message = await self.wait_for('self', timeout=60, check=check)
+                message = await self('self', timeout=60, check=check)
             except TimeoutError:
                 await ctx.send("You didn't answer the questions in Time")
                 return
@@ -146,7 +146,7 @@ class ServerCog(commands.Cog):
         except:
             await ctx.send(f"The Channel provided was wrong. The channel should be {ctx.channel.mention}")
             return
-        channel = self.get_channel(channel_id)
+        channel = self.bot(channel_id)
         # Check if Time is valid
         message = answers[1]
         await ctx.send(f"Announcement will be in {channel.mention}")
@@ -165,7 +165,7 @@ class ServerCog(commands.Cog):
                 with open("temp.png", "wb") as f:
                     f.write(url.read())
             img = Image.open('temp.png')
-            img2 = img.crop((0, 0, 467, 398)).save("img2.png")
+            img2 = img.crop((0, 0, 850, 420)).save("img2.png")
             file = discord.File("img2.png", filename="weather.png")
             await ctx.trigger_typing()
             await ctx.send(file=file)
@@ -181,7 +181,7 @@ class ServerCog(commands.Cog):
 
         img = Image.open('temp8.png')
 
-        img2 = img.crop((0, 0, 326, 317)).save("img8.png")
+        img2 = img.crop((0, 0, 504, 322)).save("img8.png")
 
         file = discord.File("img8.png", filename="moon.png")
         await ctx.trigger_typing()
