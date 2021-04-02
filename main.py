@@ -29,7 +29,7 @@ initial_extensions = ['cogs.admin',
 
 bot = commands.Bot(command_prefix=get_prefix,
                    description='Using Eviees cog rewrite',
-                   help_command=None)
+                   help_command=None, intents=discord.Intents.all())
 
 if __name__ == '__main__':
     for extension in initial_extensions:
@@ -56,7 +56,7 @@ async def on_member_join(member: discord.Member):
                                , timestamp=datetime.utcnow())
     welEmb.add_field(name="Your first step: ", value="Read our rules found at: <#694715714724167731>\n"
                                                          "Then get some roles from <#694715780583129108>\n"
-                                                         "*if you're a D2 player, it's very important to pick"
+                                                        "*if you're a D2 player, it's very important to pick"
                                                          "up the Destiny Role.*")
 
     welEmb.add_field(name='Finally....', value='Be sure to tag <@&694709812528677008>', inline=False)

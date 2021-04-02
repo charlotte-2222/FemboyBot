@@ -37,7 +37,7 @@ class ServerCog(commands.Cog):
                                   color=discord.Color.magenta())
             await ctx.send(embed=embed)
             try:
-                message = await self.wait_for('self', timeout=25, check=check)
+                message = await self.bot('self', timeout=25, check=check)
             except TimeoutError:
                 await ctx.send("You didn't answer the questions in Time")
                 return
@@ -75,7 +75,7 @@ class ServerCog(commands.Cog):
             myMsg = await channel.fetch_message(newMsg.id)
 
             users = await myMsg.reactions[0].users().flatten()
-            users.pop(users.index(self.user))
+            users.pop(users.index(self.bot))
             # Check if User list is not empty
             if len(users) <= 0:
                 emptyEmbed = discord.Embed(title="wait.... what?",
@@ -135,7 +135,7 @@ class ServerCog(commands.Cog):
                                   color=discord.Color.magenta())
             await ctx.send(embed=embed)
             try:
-                message = await self('self', timeout=60, check=check)
+                message = await self.bot('self', timeout=60, check=check)
             except TimeoutError:
                 await ctx.send("You didn't answer the questions in Time")
                 return
