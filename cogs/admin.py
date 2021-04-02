@@ -51,9 +51,9 @@ class AdminCog(commands.Cog):
         if ctx.message.author.guild_permissions.administrator:
             reason = " ".join(args)
             embed = discord.Embed(title="User Warned!",
-                description=f"**{member}** was warned by **{ctx.message.author}**!",
-                color=discord.Color.magenta())
-            embed.add_field(name="Reason:",value=reason)
+                                  description=f"**{member}** was warned by **{ctx.message.author}**!",
+                                  color=discord.Color.magenta())
+            embed.add_field(name="Reason:", value=reason)
 
         await ctx.send(embed=embed)
 
@@ -70,8 +70,6 @@ class AdminCog(commands.Cog):
             )
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
-
 
 
 def setup(bot):

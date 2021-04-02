@@ -19,7 +19,7 @@ class NekosCog(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def shaxx(ctx):
+    async def shaxx(self, ctx):
         try:
             author = ctx.message.author
             if not ctx.channel.is_nsfw():
