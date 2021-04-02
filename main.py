@@ -5,9 +5,9 @@ import discord
 from discord.ext import commands
 
 import time
-from config import token
+from utilityFunction.config import token
 
-
+"""Fixed mistakes"""
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
 
