@@ -7,12 +7,15 @@ This Bot is developed solely for the client, however all parties are welcome to 
 </h2>
 
 <h3>Features</h3>
+
 - Minor Admin and Server utility functions
 - Various animals can be webscraped
 - Welcomes new members
 - Collect usernames/ID's -> Write to .txt
 - Polling, Giveaways, Announcements - many other commands.
+
 <h3>APIs and Fun Stuff</h3>
+
 - Neko API
 - PRAW scrapping Reddit
 - Imgur
