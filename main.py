@@ -51,9 +51,18 @@ async def on_ready():
 
     while True:
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
-        await asyncio.sleep(20)
+        await asyncio.sleep(30)
         await bot.change_presence(status=discord.Status.online, activity=discord.Game('with The Fragment'))
-        await asyncio.sleep(20)
+        await asyncio.sleep(30)
+        await bot.change_presence(status=discord.Status.online, activity=discord.Game('with code'))
+        await asyncio.sleep(30)
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for bugs..."))
+        await asyncio.sleep(30)
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.streaming, name="Destiny 2"))
+        await asyncio.sleep(30)
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="twitch.tv/thefragmentd2"))
+        await asyncio.sleep(30)
+
 
 
 @bot.event
