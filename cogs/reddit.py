@@ -81,6 +81,22 @@ class RedditCog(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 30, commands.BucketType.user)
+    async def duck(self, ctx):
+        submissions = reddit.subreddit('duck').new()
+        post_to_pick = random.randint(1, 50)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in submissions if not x.stickied)
+
+        await ctx.send(submission.url)
+
+    @duck.error
+    async def duck_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            em = discord.Embed(title="screeeee- hold on", color=discord.Color.magenta())
+            await ctx.send(embed=em)
+
+    @commands.command()
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def yell_cat(self, ctx):
         submissions = reddit.subreddit('catswhoyell').hot()
         post_to_pick = random.randint(1, 20)

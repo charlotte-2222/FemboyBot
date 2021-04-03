@@ -81,7 +81,11 @@ class ImageFunCog(commands.Cog):
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def gm(self, ctx):
         r = requests.get(f"https://api.imgur.com/3/album/88Jc9ru/images?client_id={imgurC}").json()
-        em = discord.Embed(title="Good morning everyone ☕", timestamp=datetime.utcnow())
+        author = ctx.author
+        fU=str(author)
+        x=fU.index("#")
+        fU=fU[0:x]
+        em = discord.Embed(title=str(fU)+" said: Good morning everyone ☕", timestamp=datetime.utcnow())
         em.set_footer(text="Remind flop to pick the thicc...")
         indexmax = len(r['data']) - 1
         size = random.randrange(0, indexmax, 1)
@@ -105,8 +109,12 @@ class ImageFunCog(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def gn(self, ctx):
+        author = ctx.author
+        fU = str(author)
+        x = fU.index("#")
+        fU = fU[0:x]
         r = requests.get(f"https://api.imgur.com/3/album/3fy68kJ/images?client_id={imgurC}").json()
-        em = discord.Embed(title="Goodnight everyone🌙", timestamp=datetime.utcnow())
+        em = discord.Embed(title=str(fU)+" said: Goodnight everyone🌙", timestamp=datetime.utcnow())
         em.set_footer(text="You guys are the best and I love you all!")
         indexmax = len(r['data']) - 1
         size = random.randrange(0, indexmax, 1)
