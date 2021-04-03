@@ -36,6 +36,12 @@ class ImagesCog(commands.Cog):
                                      "I need some time to work up to it...",
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
+        elif isinstance(error, commands.MissingRequiredArgument):
+            embed2 = discord.Embed(
+                title="Error!",
+                description="Make sure your argument is `^magik 'a url'`",
+                color=discord.Color.magenta())
+            await ctx.send(embed=embed2)
 
     @commands.command()
     @commands.cooldown(1, 30, commands.BucketType.user)
@@ -63,6 +69,13 @@ class ImagesCog(commands.Cog):
                                      "I need some time to work up to it...",
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
+        elif isinstance(error, commands.MissingRequiredArgument):
+            embed2 = discord.Embed(
+                title="Error!",
+                description="Make sure your argument is `^deepfry 'a url'`",
+                color=discord.Color.magenta())
+            await ctx.send(embed=embed2)
+
 
 
 def setup(bot):

@@ -17,7 +17,6 @@ class FunCog(commands.Cog):
         self.bot = bot
 
     @commands.command(aliases=["dick", "penis"])
-    @commands.cooldown(1, 5, commands.BucketType.user)
     async def dong(self, ctx, *, user: discord.Member):
         """Detects user's dong length"""
         state = random.getstate()
@@ -25,8 +24,18 @@ class FunCog(commands.Cog):
         dong = "8{}D".format("=" * random.randint(0, 30))
         random.setstate(state)
         em = discord.Embed(title="{}'s Dong Size".format(user), description="Size: " + dong,
-                           colour=discord.Colour.magenta())
+                            colour=discord.Colour.magenta())
         await ctx.send(embed=em)
+
+    @dong.error
+    async def dong_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            embed2=discord.Embed(
+                           title="Error!",
+                           description="Make sure your argument is `^dong @user`",
+                           color=discord.Color.magenta())
+            await ctx.send(embed=embed2)
+
 
     @commands.command()
     async def roll(self, ctx, rolls: str):
@@ -96,6 +105,12 @@ class FunCog(commands.Cog):
         if isinstance(error, commands.CommandOnCooldown):
             em = discord.Embed(title="You literally can just go to imgur", color=discord.Color.magenta())
             await ctx.send(embed=em)
+        elif isinstance(error, commands.MissingRequiredArgument):
+            embed2 = discord.Embed(
+                title="Error!",
+                description="Make sure your argument is `^img_src 'a cool search term'`",
+                color=discord.Color.magenta())
+            await ctx.send(embed=embed2)
 
     @commands.command()
     @commands.cooldown(1, 4, commands.BucketType.user)
@@ -248,6 +263,14 @@ class FunCog(commands.Cog):
         """ Consult 8ball to receive an answer """
         answer = random.choice(lists.ballresponse)
         await ctx.send(f"🎱 **Question:** {question}\n**Answer:** {answer}")
+    @eightball.error
+    async def eightball_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            embed2 = discord.Embed(
+                title="Error!",
+                description="Make sure your argument is `^eightball 'question'`",
+                color=discord.Color.magenta())
+            await ctx.send(embed=embed2)
 
     @commands.command()
     async def guess(self, ctx):
