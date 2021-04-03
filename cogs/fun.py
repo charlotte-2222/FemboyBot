@@ -288,5 +288,7 @@ class FunCog(commands.Cog):
             await ctx.send(embed=em)
 
 
+
+
 def setup(bot):
     bot.add_cog(FunCog(bot))

@@ -14,6 +14,30 @@ class ServerCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command()
+    @commands.has_guild_permissions(manage_roles=True)
+    async def memList(self, ctx):
+        """Returns full list of server members + client ID's
+        useful for a number of functions - will likely consult client needs,
+        build more functions based on this"""
+        with open('text_dir/thiccFrag.txt', 'w')as f:
+            for member in ctx.guild.members:
+                try:
+                    print(f"{member}", "--", f'{member.id}', file=f)
+                except:
+                    print(f"Unable to write a name: {member.id}")
+                    continue
+
+            print("done")
+
+    @commands.command()
+    @commands.has_guild_permissions(manage_roles=True)
+    async def thicc(self,ctx):
+        """Allows server owner to pick the next thicc"""
+        thicc = open('text_dir/thiccFrag.txt').read().splitlines()
+        await ctx.send(random.choice(thicc))
+        await ctx.message.delete()
+
     @commands.command(aliases=["gift", "giveaway", "gcreate", "gcr", "giftcr"])
     @commands.has_guild_permissions(manage_roles=True)
     async def create_giveaway(self, ctx):
@@ -81,7 +105,10 @@ class ServerCog(commands.Cog):
                 emptyEmbed = discord.Embed(title="wait.... what?",
                                            description=f"You coulda won: {prize}", colour=discord.Colour.magenta())
                 emptyEmbed.add_field(name="Hosted By:", value=ctx.author.mention)
-                emptyEmbed.set_footer(text="No one won the Giveaway....")
+                emptyEmbed.set_footer(
+                    text="No one won the Giveaway...."
+
+                )
                 await myMsg.edit(embed=emptyEmbed)
                 return
             if len(users) > 0:
@@ -96,23 +123,37 @@ class ServerCog(commands.Cog):
                 await myMsg.edit(embed=winnerEmbed)
                 return
 
-    @commands.command(aliases=["poll", "vote"])
-    async def create_poll(self, ctx, *args):
-        """
-            Create a poll where members can vote.
-            """
-        poll_title = " ".join(args)
+    @commands.command()
+    async def poll(self, ctx, channel: discord.TextChannel, *, question):
+        sender = ctx.author
         embed = discord.Embed(
-            title="Uwu a poll for me to ~~dance~~ vote on...",
-            description=f"{poll_title}",
-            color=discord.Color.magenta()
+            color=discord.Color.magenta(),
+            title="A Poll for me to Dance on... 📊"
         )
-        embed.set_footer(
-            text=f"Poll created by: {ctx.message.author} • React to vote!"
-        )
-        embed_message = await ctx.send(embed=embed)
-        await embed_message.add_reaction("👍")
-        await embed_message.add_reaction("👎")
+        embed.add_field(name="Question:", inline=False, value=question)
+        embed.set_footer(text=f"— Poll from {sender}", icon_url=ctx.author.avatar_url)
+        await ctx.message.delete()
+
+        message = await channel.send(embed=embed)
+        await message.add_reaction("👍")
+        await message.add_reaction("👎")
+
+    @poll.error
+    async def poll_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            embed = discord.Embed(
+                color=discord.Color.magenta(),
+                title="Invalid Channel!",
+                description="• Please put in a channel! Example: `^poll #channel 'question...'`"
+            )
+            await ctx.send(embed=embed)
+        elif isinstance(error, commands.MissingRequiredArgument):
+            embed = discord.Embed(
+                color=discord.Color.magenta(),
+                title="Invalid Argument!",
+                description="• Please put in a valid option! Example: `^poll #channel 'question...'`"
+            )
+            await ctx.send(embed=embed)
 
     @commands.command()
     async def announce(self, ctx):
@@ -188,6 +229,55 @@ class ServerCog(commands.Cog):
         await ctx.send(file=file)
         os.remove('img8.png')
         os.remove("temp8.png")
+
+    @commands.command(aliases=['server'])
+    async def serverinfo(self, ctx):
+        guild = ctx.guild
+        embed = discord.Embed(
+            color=discord.Color.magenta(), timestamp=datetime.utcnow(),
+            title=f":face_with_monocle:  Server Info For {guild.name}",
+            description="\n— "
+                        "\n➤ Shows all information about a guild."
+                        "\n➤The information will be listed below!"
+                        "\n —"
+        )
+        regions = {
+            "us_west": ":flag_us: — USA West",
+            "us_east": ":flag_us: — USA East",
+            "us_central": ":flag_us: — USA Central",
+            "us_south": ":flag_us: — USA South",
+            "sydney": ":flag_au: — Sydney",
+            "eu_west": ":flag_eu: — Europe West",
+            "eu_east": ":flag_eu: — Europe East",
+            "eu_central": ":flag_eu: — Europe Central",
+            "singapore": ":flag_sg: — Singapore",
+            "russia": ":flag_ru: — Russia",
+            "southafrica": ":flag_za:  — South Africa",
+            "japan": ":flag_jp: — Japan",
+            "brazil": ":flag_br: — Brazil",
+            "india": ":flag_in: — India",
+            "hongkong": ":flag_hk: — Hong Kong",
+        }
+        verifications = {
+            "none": "<:white__circle:625695417782239234> — No Verification",
+            "low": "<:green_circle:625541294525251643> — Low Verification",
+            "medium": "<:yellow_circle:625540435820937225> — Medium Verification",
+            "high": "<:orange_circle:625542217100165135> — High Verification",
+            "extreme": "<:red__circle:625833379258040330> — Extreme Verification"
+        }
+        embed.set_thumbnail(url=guild.icon_url_as(size=1024, format=None, static_format="png"))
+        embed.add_field(name="• Guild name: ", value=str(guild.name))
+        embed.add_field(name="• Guild ID: ", value=str(guild.id))
+        embed.add_field(name="• Guild owner: ", value=guild.owner)
+        embed.add_field(name="• Guild owner ID: ", value=guild.owner_id)
+        embed.add_field(name="• Guild made in: ", value=guild.created_at.strftime("%A %d, %B %Y"))
+        embed.add_field(name="• Channels count: ", value=len(guild.channels))
+        embed.add_field(name="• Guild region: ", value=regions[guild.region.name])
+        embed.add_field(name="• Guild verification: ", value=verifications[guild.verification_level.name])
+        embed.add_field(name="• Member count: ", value=f"{guild.member_count}")
+        embed.add_field(name="• Nitro boosters: ", value=guild.premium_subscription_count or "No Nitro Boosters!")
+
+        await ctx.send(embed=embed)
 
 
 def setup(bot):

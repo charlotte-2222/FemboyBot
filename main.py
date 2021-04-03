@@ -8,6 +8,8 @@ import time
 from utilityFunction.config import token
 
 """Fixed mistakes"""
+
+
 def get_prefix(bot, message):
     """A callable Prefix for our bot. This could be edited to allow per server prefixes."""
 
@@ -25,7 +27,8 @@ initial_extensions = ['cogs.admin',
                       'cogs.owner',
                       'cogs.reddit',
                       'cogs.redditNSFW',
-                      'cogs.serverStuff'
+                      'cogs.serverStuff',
+                      'cogs.images'
                       ]
 
 bot = commands.Bot(command_prefix=get_prefix,
@@ -58,13 +61,13 @@ async def on_member_join(member: discord.Member):
     print("\n--------------\n")
     print(time.strftime("Joined at:\n" + "%H:%M:%S\n"))
     welEmb = discord.Embed(title='A new Homie just arrived!',
-                               description=f"Welcome to The Fragment, {member.mention} "
-                                           "We're happy to add you to this insanity."
-                               , timestamp=datetime.utcnow())
+                           description=f"Welcome to The Fragment, {member.mention} "
+                                       "We're happy to add you to this insanity."
+                           , timestamp=datetime.utcnow())
     welEmb.add_field(name="Your first step: ", value="Read our rules found at: <#694715714724167731>\n"
-                                                         "Then get some roles from <#694715780583129108>\n"
-                                                        "*if you're a D2 player, it's very important to pick"
-                                                         "up the Destiny Role.*")
+                                                     "Then get some roles from <#694715780583129108>\n"
+                                                     "*if you're a D2 player, it's very important to pick"
+                                                     "up the Destiny Role.*")
 
     welEmb.add_field(name='Finally....', value='Be sure to tag <@&694709812528677008>', inline=False)
     welEmb.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.png')
