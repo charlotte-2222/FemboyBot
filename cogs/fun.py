@@ -1,3 +1,5 @@
+import asyncio
+from urllib import parse
 import aiohttp
 import discord
 import requests
@@ -16,7 +18,9 @@ class FunCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=["dick", "penis"])
+    @commands.command(help="Measure your friend's dick",
+                      aliases=["dick", "penis"],
+                      pass_context=True)
     async def dong(self, ctx, *, user: discord.Member):
         """Detects user's dong length"""
         state = random.getstate()
@@ -24,20 +28,21 @@ class FunCog(commands.Cog):
         dong = "8{}D".format("=" * random.randint(0, 30))
         random.setstate(state)
         em = discord.Embed(title="{}'s Dong Size".format(user), description="Size: " + dong,
-                            colour=discord.Colour.magenta())
+                           colour=discord.Colour.magenta())
         await ctx.send(embed=em)
 
     @dong.error
     async def dong_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            embed2=discord.Embed(
-                           title="Error!",
-                           description="Make sure your argument is `^dong @user`",
-                           color=discord.Color.magenta())
+            embed2 = discord.Embed(
+                title="Error!",
+                description="Make sure your argument is `^dong @user`",
+                color=discord.Color.magenta())
             await ctx.send(embed=embed2)
 
-
-    @commands.command()
+    @commands.command(help="Roll a die",
+                      aliases=["r", "d"],
+                      pass_contex=True)
     async def roll(self, ctx, rolls: str):
         """rolls a die"""
         resultString, results, numDice = random.randint(rolls)
@@ -73,7 +78,8 @@ class FunCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, your dice will be there in a second", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Lyrics of the cumzone, selected randomly",
+                      aliases=["cs"])
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def cumscript(self, ctx):
         """transcript of cumzon"""
@@ -87,7 +93,10 @@ class FunCog(commands.Cog):
             em = discord.Embed(title="Really? Is this song that appealing to you?", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Search for an image from imgur",
+                      pass_context=True,
+                      aliases=["is", "isrc"]
+                      )
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def img_src(self, ctx, *text: str):
         """Allows the user to search for an image from imgur"""
@@ -112,7 +121,8 @@ class FunCog(commands.Cog):
                 color=discord.Color.magenta())
             await ctx.send(embed=embed2)
 
-    @commands.command()
+    @commands.command(help="Find a random cat",
+                      pass_context=True)
     @commands.cooldown(1, 4, commands.BucketType.user)
     async def cat(self, ctx):
         await ctx.send("Enjoy a random cat!")
@@ -133,7 +143,8 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Find a random dog"
+        , pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def dog(self, ctx):
         r = requests.get(f"https://api.imgur.com/3/gallery/vgW1p/images?client_id={imgurC}").json()
@@ -155,7 +166,9 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Find a random bird",
+                      aliases=["bird"],
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def birb(self, ctx):
         r = requests.get(f"https://api.imgur.com/3/gallery/QWmIV/images?client_id={imgurC}").json()
@@ -177,7 +190,8 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Find a random otter",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def otter(self, ctx):
         r = requests.get(f"https://api.imgur.com/3/gallery/BZA8d/images?client_id={imgurC}").json()
@@ -199,7 +213,12 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Find a random platapuss",
+                      aliases=["platapussy",
+                               "platty",
+                               "platt",
+                               "plt"],
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def plat(self, ctx):
         r = requests.get(f"https://api.imgur.com/3/album/kWZ6JNv/images?client_id={imgurC}").json()
@@ -221,7 +240,10 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Find some random buns",
+                      aliases=["rabbit",
+                               "bunny"],
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def bun(self, ctx):
         r = requests.get(f"https://api.imgur.com/3/gallery/FQsx8/images?client_id={imgurC}").json()
@@ -243,7 +265,8 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="generate a random insult",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def insult(self, ctx):
         """random insult"""
@@ -258,40 +281,23 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Ask the 8Ball a question",
+                      aliases=["8ball",
+                               "8b",
+                               "eb"],
+                      pass_context=True)
     async def eightball(self, ctx, *, question: commands.clean_content):
         """ Consult 8ball to receive an answer """
         answer = random.choice(lists.ballresponse)
         await ctx.send(f"🎱 **Question:** {question}\n**Answer:** {answer}")
-    @eightball.error
-    async def eightball_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            embed2 = discord.Embed(
-                title="Error!",
-                description="Make sure your argument is `^eightball 'question'`",
-                color=discord.Color.magenta())
-            await ctx.send(embed=embed2)
 
-    @commands.command()
-    async def guess(self, ctx):
-        num = random.randint(0, 100)
-        for i in range(0, 5):
-            await ctx.send('guess')
-            response = await self.wait_for('self')
-            guess = int(response.content)
-            if guess > num:
-                await ctx.send('bigger')
-            elif guess < num:
-                await ctx.send('smaller')
-            else:
-                await ctx.send('you got it!')
-
-    @commands.command()
+    @commands.command(help="choose between")
     async def choose(self, ctx, *choices: str):
         """Chooses between multiple choices."""
         await ctx.send(random.choice(choices))
 
-    @commands.command()
+    @commands.command(help="Get a random dad joke",
+                      aliases=["dad"])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def daddy(self, ctx):
         author = ctx.author
@@ -310,7 +316,45 @@ class FunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
+    @commands.command(help="Go run it :)",
+                      pass_context=True,
+                      aliases=["?flop"])
+    async def flop(self, ctx):
+        embed = discord.Embed(title="Ping Navy? well... alright....",
+                              description="commere bitch and take this ping like a good slut... <@181909185733066752>\n"
+                                          "I knew you liked it.\n"
+                                          "<:Dadsbelt:708018497489338479>")
 
+        await asyncio.sleep(5)
+        await ctx.send(embed=embed)
+
+    @commands.command(help="Get a random history fact",
+                      aliases=["hist", "rh", "randhist"],
+                      pass_context=True)
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    async def history(self, ctx):
+        await ctx.message.delete()
+        author = ctx.message.author
+        message = await ctx.send(f"Fetching History for {ctx.author.mention}!")
+        await message.delete(delay=6)
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get('http://numbersapi.com/random/date?json') as r:
+                res = await r.json()
+                embed = discord.Embed(
+                    color=discord.Color.magenta(),
+                    title="Random History! :books:",
+                    description=f":point_down:**Fact**:point_down:\n\n {res['text']}\n"
+                                f"\n:point_right: Year: {res['year']}"
+                )
+                await asyncio.sleep(1)
+                await ctx.send(embed=embed)
+
+    @history.error
+    async def history_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            em = discord.Embed(title="You're on cooldown!",
+                               color=discord.Color.magenta())
+            await ctx.send(embed=em)
 
 
 def setup(bot):

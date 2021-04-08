@@ -17,7 +17,7 @@ class NekosCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(help="Shaxx porn")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def shaxx(self, ctx):
         try:
@@ -46,7 +46,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Foot hentai")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def feet(self, ctx):
         try:
@@ -76,7 +76,7 @@ class NekosCog(commands.Cog):
             await ctx.send(embed=em)
 
     # YURI
-    @commands.command()
+    @commands.command(help="I don't actually know what a yuri is, but this is that")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def yuri(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -103,7 +103,7 @@ class NekosCog(commands.Cog):
             await ctx.send(embed=em)
 
     # traps
-    @commands.command()
+    @commands.command(help="Femboy porn")
     @commands.cooldown(1, 2, commands.BucketType.user)
     async def femboy(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -129,7 +129,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Futa porn")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def futanari(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -155,7 +155,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Gif of (supposedly) someone alone, likely masturbation - idk")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def solo_gif(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -181,7 +181,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Elmers")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def cum(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -207,7 +207,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Cat girl porn - in motion")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def nsfw_neko_gif(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -231,7 +231,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Masturbation i think")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def solo(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -257,7 +257,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="what what? In the butt - of course.")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def anal(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -283,7 +283,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="just hentai")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def hentai(self, ctx):
         global embed
@@ -310,7 +310,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="it's like feet, but more erotic")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def erofeet(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -336,7 +336,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="it's a cat or something")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def pussy(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -362,7 +362,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="isn't this a bird?")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def tits(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -388,7 +388,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="wish i were someone's waifu",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def waifu(self, ctx):
         embed = discord.Embed(
@@ -409,7 +410,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Self explanatory")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def boobs(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -435,7 +436,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Pat someone's head",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def pat(self, ctx, member: discord.Member, *, reason=""):
         embed = discord.Embed(
@@ -456,7 +458,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Kiss someone",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def kiss(self, ctx, member: discord.Member, *, reason=""):
         embed = discord.Embed(
@@ -477,7 +480,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Erotically spank your homie",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def spank(self, ctx, member: discord.Member, *, reason=""):
         if not ctx.channel.is_nsfw():
@@ -503,7 +507,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Cuddle your homie",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def cuddle(self, ctx, member: discord.Member, *, reason=""):
         embed = discord.Embed(
@@ -524,7 +529,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Hug your homie",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def hug(self, ctx, member: discord.Member, *, reason=""):
         embed = discord.Embed(
@@ -545,7 +551,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Furries are gross")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def fox_girl(self, ctx):
         embed = discord.Embed(
@@ -566,7 +572,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Furries are gross")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def neko(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -592,7 +598,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Tickle your homie",
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def tickle(self, ctx, member: discord.Member, *, reason=""):
         embed = discord.Embed(
@@ -613,7 +620,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="it's not like i wanted to do any of this... really")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def baka(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -639,7 +646,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="nsfw avatar creation")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def nsfw_avatar(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -665,7 +672,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="makes a wallpaper, I've seen non-NSFW")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def wallpaper(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -691,7 +698,7 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Get pegged 4 hed")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def femdom(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -715,48 +722,6 @@ class NekosCog(commands.Cog):
         if isinstance(error, commands.CommandOnCooldown):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
-
-    @commands.command()
-    async def nsfw_help(self, ctx):
-        try:
-            author = ctx.message.author
-
-            n = discord.Embed(title='*I live to be horny....*',
-                              description="**Just enter `^whateverHornyCommand` to complete it.\nSome commands require you to tag a user as well.**\n\n***Commands:***",
-                              timestamp=datetime.utcnow())
-            n.add_field(name='Yuri', value='returns a Yuri pic (NSFW)', inline=True)
-            n.add_field(name='futanari', value='returns an sexy futa (NSFW)', inline=True)
-            n.add_field(name='cum', value='returns some cum, in some fashion')
-            n.add_field(name='feet', value='feet basically')
-            n.add_field(name='shaxx', value='this goes out to heckeon')
-            n.add_field(name='solo_gif', value='i assume you watch an anime girl masturbate?')
-            n.add_field(name='nsfw_neko_gif', value='neko gifs, and you prob should not show the boss')
-            n.add_field(name='solo', value='more masturbation')
-            n.add_field(name='anal', value='cant get preggers this way i guess')
-            n.add_field(name='hentai', value='by all accounts this is the weirdest command')
-            n.add_field(name='erofeet', value='ew toes')
-            n.add_field(name='pussy', value='self explanatory')
-            n.add_field(name='tits', value='self explanatory')
-            n.add_field(name='waifu', value='waifu i guess')
-            n.add_field(name='boobs', value='self explanatory')
-            n.add_field(name='fox_girl', value='fucking furry.\nthis one goes out to dealer')
-            n.add_field(name='neko', value='neko i guess')
-            n.add_field(name='femboy', value='literally the only reason im alive right now. fuck.')
-            n.add_field(name='nsfw_avatar', value='heres your porn-avatar')
-            n.add_field(name='wallpaper', value='ive seen some non porn related wallpapers which is kinda pog')
-            n.add_field(name='femdom', value='basically my mountaintop.')
-            n.add_field(name='spank (user)', value="You literally get passionately spank a homie")
-            n.add_field(name="kiss(user)", value="Passionately make kissies with flop(or another homie)")
-            n.add_field(name="hug(user)", value="hug your homies")
-            n.add_field(name="cuddle(user)", value="homies need to be warm too")
-            n.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
-            n.color = discord.Color.magenta()
-            await ctx.author.send(embed=n)
-            await ctx.message.delete()
-            sys.stderr = object
-        except:
-            print("error sending nsfw_help message")
-
 
 def setup(bot):
     bot.add_cog(NekosCog(bot))

@@ -15,7 +15,8 @@ class ImageFunCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(help="Try it and see",
+                      pass_context=True)
     @commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
     async def tias(self, ctx):
         st = 'images/'
@@ -29,7 +30,8 @@ class ImageFunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Go ahead, fight me",
+                      pass_context=True)
     @commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
     async def fightme(self, ctx):
         st = 'images/'
@@ -43,7 +45,8 @@ class ImageFunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Damn bro",
+                      pass_context=True)
     @commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
     async def damn(self, ctx):
         st = 'images/'
@@ -57,7 +60,9 @@ class ImageFunCog(commands.Cog):
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Indeed",
+                      aliases=["z","vuvu","zaza"],
+                      pass_context=True)
     @commands.cooldown(1, 4, commands.BucketType.user)  # allows users to test the response of the bot from Discord
     async def blueman(self, ctx):
         varEmbed = discord.Embed(title='Zavala...')
@@ -77,7 +82,9 @@ class ImageFunCog(commands.Cog):
 
     """--Utility-------------------------------------------------------------"""
 
-    @commands.command()
+    @commands.command(help="Tell your homies goodmorning",
+                      aliases=["goodmorning"],
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def gm(self, ctx):
         r = requests.get(f"https://api.imgur.com/3/album/88Jc9ru/images?client_id={imgurC}").json()
@@ -106,7 +113,9 @@ class ImageFunCog(commands.Cog):
 
     # https://imgur.com/a/88Jc9ru
 
-    @commands.command()
+    @commands.command(help="Tell your homies goodnight",
+                      aliases=["goodnight"],
+                      pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def gn(self, ctx):
         author = ctx.author

@@ -9,23 +9,7 @@ class AdminCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def maintenance(self, ctx):
-        linkEmbed = discord.Embed(title='FemboyBot is going down... not in that way...',
-                                  timestamp=datetime.utcnow())
-        linkEmbed.set_image(url='https://i.imgur.com/7G5vvvt.png')
-        linkEmbed.add_field(name="What should I do while I'm waiting?",
-                            value="Play a game\nlookup futa & feet elsewhere\nmaybe self flop for status.")
-        linkEmbed.color = discord.Color.from_rgb(239, 124, 243)
-        await ctx.send(embed=linkEmbed)
-        await ctx.message.delete()
-
-    @commands.command()
-    @commands.is_owner()
-    async def stop(self, ctx):
-        await self.logout()
-
-    @commands.command()
+    @commands.command(help="Admin only - Deletes messages")
     @commands.has_guild_permissions(administrator=True)
     async def purge(self, ctx, limit: int):
         await ctx.channel.purge(limit=limit + 1)
@@ -38,7 +22,7 @@ class AdminCog(commands.Cog):
         if isinstance(error, commands.MissingPermissions):
             await ctx.send("Ha! You're not worthy!")
 
-    @commands.command()
+    @commands.command(help="Owner only - Kicks members at will", alias=["belt"], pass_context=True)
     @commands.is_owner()
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         await member.kick(reason=reason)
@@ -46,7 +30,8 @@ class AdminCog(commands.Cog):
         embed = discord.Embed(
             color=0xff0000)
 
-    @commands.command(aliases=["warn", "slap", "belt", "whip"])
+    @commands.command(help="Create warnings against members",
+                      aliases=["warn", "slap", "whip"], pass_context=True)
     async def warn_create(self, ctx, member: discord.Member, *args):
         if ctx.message.author.guild_permissions.administrator:
             reason = " ".join(args)
@@ -70,6 +55,7 @@ class AdminCog(commands.Cog):
             )
         await ctx.send(embed=embed)
         await ctx.message.delete()
+
 
 
 def setup(bot):

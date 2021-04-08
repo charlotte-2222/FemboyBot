@@ -17,35 +17,6 @@ class RedditNSFWCog(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def nsfw_help_2(self, ctx):
-        try:
-            author = ctx.message.author
-
-            n = discord.Embed(title='*I live to be horny....*',
-                              description="**Just enter `^whateverHornyCommand` to complete it.\n***Commands:***",
-                              timestamp=datetime.utcnow())
-            n.add_field(name="`^bdsm`", value="pulls a top/hot post from r/bdsm")
-            n.add_field(name="`^cum_sluts`", value="pulls a top/hot post from r/cumsluts")
-            n.add_field(name="`^p15`", value="pulls a top/hot post from r/porninfifteenseconds")
-            n.add_field(name="`^destiny34`", value="pulls a top/hot post from r/rule34destiny")
-            n.add_field(name="`^gw`", value="pulls a top/hot post from r/gonewild")
-            n.add_field(name="`^rfem`", value="pulls a top/hot post from r/femboys")
-            n.add_field(name="`^shefuckshim`", value="pulls a top/hot post from r/shefuckshim")
-            n.add_field(name="`^cock`", value="this is literally just a massive cock")
-            n.add_field(name="`^red`", value="pulls a top/hot post from r/redheads")
-            n.add_field(name="*CAUTION:*", value="Overuse of any reddit request can lead to the requests being cutoff "
-                                                 "entirely.")
-            n.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
-            n.set_footer(
-                text="Due to laziness, the Dev has opted to use Reddit cmds in a non-Async environment - errors may occur.")
-            n.color = discord.Color.magenta()
-            await ctx.author.send(embed=n)
-            await ctx.message.delete()
-            sys.stderr = object
-        except:
-            print("error sending nsfw_help message")
-
-    @commands.command()
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def destiny34(self, ctx):
         try:
@@ -63,6 +34,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for d34 porn")
 
     @destiny34.error
     async def destiny34_error(self, ctx, error):
@@ -88,6 +60,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for r34 porn")
 
     @r34.error
     async def r34_error(self, ctx, error):
@@ -113,6 +86,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for gw porn")
 
     @gw.error
     async def gw_error(self, ctx, error):
@@ -138,6 +112,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for shefuckshim porn")
 
     @shefuckshim.error
     async def shefuckshim_error(self, ctx, error):
@@ -163,6 +138,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for femboy porn")
 
     @rfem.error
     async def rfem_error(self, ctx, error):
@@ -189,6 +165,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for cock porn")
 
     @cock.error
     async def cock_error(self, ctx, error):
@@ -215,6 +192,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for redhead porn")
 
     @red.error
     async def red_error(self, ctx, error):
@@ -242,6 +220,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for porninfifteenseconds porn")
 
     @p15.error
     async def p15_error(self, ctx, error):
@@ -268,6 +247,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for cumslut porn")
 
     @cum_sluts.error
     async def cum_sluts_error(self, ctx, error):
@@ -293,6 +273,7 @@ class RedditNSFWCog(commands.Cog):
 
         await ctx.send(submission.url)
         await ctx.message.delete()
+        print(f"{ctx.author} is asking for bdsm porn")
 
     @bdsm.error
     async def bdsm_error(self, ctx, error):

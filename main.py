@@ -1,10 +1,6 @@
-import asyncio
-from datetime import datetime
-
 import discord
 from discord.ext import commands
 
-import time
 from utilityFunction.config import token
 
 """Fixed mistakes"""
@@ -28,61 +24,28 @@ initial_extensions = ['cogs.admin',
                       'cogs.reddit',
                       'cogs.redditNSFW',
                       'cogs.serverStuff',
-                      'cogs.images'
+                      'cogs.images',
+                      'cogs.events'
                       ]
 
 bot = commands.Bot(command_prefix=get_prefix,
-                   description='Using Eviees cog rewrite',
-                   help_command=None, intents=discord.Intents.all())
+                   description='Fragment Server Bot', intents=discord.Intents.all())
+
+
+class MyNewHelp(commands.MinimalHelpCommand):
+    async def send_pages(self):
+        destination = self.get_destination()
+        for page in self.paginator.pages:
+            emby = discord.Embed(description=page)
+            emby.color = discord.Color.magenta()
+            emby.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.png')
+            await destination.send(embed=emby)
+
+
+bot.help_command = MyNewHelp()
 
 if __name__ == '__main__':
     for extension in initial_extensions:
         bot.load_extension(extension)
-
-
-@bot.event
-async def on_ready():
-    print("FemBot online\n")
-    print(f"Logged in as {bot.user.name} - {bot.user.id}\n")
-    print("--------------")
-    print(time.strftime(f"Time at start:\n"
-                        "%H:%M:%S\n"
-                        "%m/%d/%Y\n"))
-
-    while True:
-        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For ^ | ^help"))
-        await asyncio.sleep(30)
-        await bot.change_presence(status=discord.Status.online, activity=discord.Game('with The Fragment'))
-        await asyncio.sleep(30)
-        await bot.change_presence(status=discord.Status.online, activity=discord.Game('with code'))
-        await asyncio.sleep(30)
-        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for bugs..."))
-        await asyncio.sleep(30)
-        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.streaming, name="Destiny 2"))
-        await asyncio.sleep(30)
-        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="twitch.tv/thefragmentd2"))
-        await asyncio.sleep(30)
-
-
-
-@bot.event
-async def on_member_join(member: discord.Member):
-    print("\n--------------\n")
-    print(time.strftime("Joined at:\n" + "%H:%M:%S\n"))
-    welEmb = discord.Embed(title='A new Homie just arrived!',
-                           description=f"Welcome to The Fragment, {member.mention} "
-                                       "We're happy to add you to this insanity."
-                           , timestamp=datetime.utcnow())
-    welEmb.add_field(name="Your first step: ", value="Read our rules found at: <#694715714724167731>\n"
-                                                     "Then get some roles from <#694715780583129108>\n"
-                                                     "*if you're a D2 player, it's very important to pick"
-                                                     "up the Destiny Role.*")
-
-    welEmb.add_field(name='Finally....', value='Be sure to tag <@&694709812528677008>', inline=False)
-    welEmb.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.png')
-    welEmb.color = discord.Color.from_rgb(239, 124, 243)
-    wel_cum = bot.get_channel(698670684154363904)
-    await wel_cum.send(embed=welEmb)
-
 
 bot.run(token, bot=True, reconnect=True)

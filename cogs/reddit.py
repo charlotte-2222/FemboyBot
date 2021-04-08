@@ -15,7 +15,8 @@ class RedditCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(help="Get a random meme from the hottest r/memes of the day",
+                      aliases=["memes"])
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def meme(self, ctx):
         submissions = reddit.subreddit('memes').hot()
@@ -31,7 +32,8 @@ class RedditCog(commands.Cog):
             em = discord.Embed(title="chill tf out with your shit memes", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Get a random post from r/gaming, sorted by hottest",
+                      aliases=["game"])
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def gaming(self, ctx):
         submissions = reddit.subreddit('gaming').hot()
@@ -47,7 +49,7 @@ class RedditCog(commands.Cog):
             em = discord.Embed(title="chill tf out", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Get a random hot post from r/halo")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def halo(self, ctx):
         submissions = reddit.subreddit('halo').hot()
@@ -63,7 +65,8 @@ class RedditCog(commands.Cog):
             em = discord.Embed(title="were you blinded by it's majesty? dumbstruck?", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Destiny memes, sorted by hotest",
+                      aliases=["destiny", "destiny memes", "destiny_memes"])
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def dmemes(self, ctx):
         submissions = reddit.subreddit('destinymemes').hot()
@@ -79,7 +82,7 @@ class RedditCog(commands.Cog):
             em = discord.Embed(title="shitty destiny memes can wait, dude", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Get a random duck")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def duck(self, ctx):
         submissions = reddit.subreddit('duck').new()
@@ -95,7 +98,8 @@ class RedditCog(commands.Cog):
             em = discord.Embed(title="screeeee- hold on", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(help="Get a random cat - that's yelling",
+                      aliases=["yc", "yelling"])
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def yell_cat(self, ctx):
         submissions = reddit.subreddit('catswhoyell').hot()
@@ -111,22 +115,6 @@ class RedditCog(commands.Cog):
             em = discord.Embed(title="screeeee- hold on", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command()
-    async def help_reddit(self, ctx):
-        h = discord.Embed(title='I live to be horny.',
-                          description="All commands use the up-carrot: `^` as a prefix\n", timestamp=datetime.utcnow())
-        h.add_field(name="dmemes", value="r/destinymemes")
-        h.add_field(name="meme", value="r/memes")
-        h.add_field(name="halo", value="r/halo")
-        h.add_field(name="gaming", value="r/gaming")
-        h.add_field(name="yell_cat", value="r/catswhoyell")
-        h.add_field(name="help", value="*Regular Help list*")
-        h.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
-        h.color = discord.Color.magenta()
-        h.set_footer(
-            text="Due to laziness, the Dev has opted to use Reddit cmds in a non-Async environment - errors may occur.")
-        await ctx.send(embed=h)
-        await ctx.message.delete()
 
 
 def setup(bot):

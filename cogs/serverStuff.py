@@ -1,8 +1,9 @@
 import os
-import urllib
+import urllib.request
 from asyncio import sleep
-from datetime import datetime
 import random
+from datetime import datetime
+from pytz import timezone
 
 import discord
 from PIL.Image import Image
@@ -32,13 +33,15 @@ class ServerCog(commands.Cog):
 
     @commands.command()
     @commands.has_guild_permissions(manage_roles=True)
-    async def thicc(self,ctx):
+    async def thicc(self, ctx):
         """Allows server owner to pick the next thicc"""
         thicc = open('text_dir/thiccFrag.txt').read().splitlines()
         await ctx.send(random.choice(thicc))
         await ctx.message.delete()
 
-    @commands.command(aliases=["gift", "giveaway", "gcreate", "gcr", "giftcr"])
+    @commands.command(help="Create an awesome giveaway",
+                      aliases=["gift", "giveaway", "gcreate", "gcr", "giftcr"],
+                      pass_context=True)
     @commands.has_guild_permissions(manage_roles=True)
     async def create_giveaway(self, ctx):
         embed = discord.Embed(title="Giveaway! <:9154_PogU:712671828291747864>",
@@ -124,38 +127,7 @@ class ServerCog(commands.Cog):
                 return
 
     @commands.command()
-    async def poll(self, ctx, channel: discord.TextChannel, *, question):
-        sender = ctx.author
-        embed = discord.Embed(
-            color=discord.Color.magenta(),
-            title="A Poll for me to Dance on... 📊"
-        )
-        embed.add_field(name="Question:", inline=False, value=question)
-        embed.set_footer(text=f"— Poll from {sender}", icon_url=ctx.author.avatar_url)
-        await ctx.message.delete()
-
-        message = await channel.send(embed=embed)
-        await message.add_reaction("👍")
-        await message.add_reaction("👎")
-
-    @poll.error
-    async def poll_error(self, ctx, error):
-        if isinstance(error, commands.BadArgument):
-            embed = discord.Embed(
-                color=discord.Color.magenta(),
-                title="Invalid Channel!",
-                description="• Please put in a channel! Example: `^poll #channel 'question...'`"
-            )
-            await ctx.send(embed=embed)
-        elif isinstance(error, commands.MissingRequiredArgument):
-            embed = discord.Embed(
-                color=discord.Color.magenta(),
-                title="Invalid Argument!",
-                description="• Please put in a valid option! Example: `^poll #channel 'question...'`"
-            )
-            await ctx.send(embed=embed)
-
-    @commands.command()
+    @commands.has_guild_permissions(manage_roles=True)
     async def announce(self, ctx):
         embed = discord.Embed(title="Announcment time! <:9154_PogU:712671828291747864>",
                               description="Time for a new Announcment. You have 60 seconds.",
@@ -196,33 +168,39 @@ class ServerCog(commands.Cog):
                               colour=discord.Color.magenta())
         await channel.send(embed=embed)
 
-    @commands.command()
+    @commands.command(help="Get the weather for a city `^weather [city]`",
+                      aliases=["wt"])
     async def weather(self, ctx, city: str = None):
         URL = f"http://wttr.in/{city}_2tnp_transparency=1000_lang=en.png"
+
         if not city:
             await ctx.send("Please enter a valid city / town")
         else:
             with urllib.request.urlopen(URL) as url:
                 with open("temp.png", "wb") as f:
                     f.write(url.read())
+
             img = Image.open('temp.png')
-            img2 = img.crop((0, 0, 850, 420)).save("img2.png")
+
+            img2 = img.crop((0, 0, 467, 398)).save("img2.png")
+
             file = discord.File("img2.png", filename="weather.png")
             await ctx.trigger_typing()
             await ctx.send(file=file)
             os.remove('img2.png')
             os.remove("temp.png")
 
-    @commands.command()
+    @commands.command(help="View a picture of the current lunar phase")
     async def moon(self, ctx):
         URL = "http://wttr.in/moon.png"
+
         with urllib.request.urlopen(URL) as url:
             with open("temp8.png", "wb") as f:
                 f.write(url.read())
 
         img = Image.open('temp8.png')
 
-        img2 = img.crop((0, 0, 504, 322)).save("img8.png")
+        img2 = img.crop((0, 0, 326, 317)).save("img8.png")
 
         file = discord.File("img8.png", filename="moon.png")
         await ctx.trigger_typing()
@@ -230,7 +208,7 @@ class ServerCog(commands.Cog):
         os.remove('img8.png')
         os.remove("temp8.png")
 
-    @commands.command(aliases=['server'])
+    @commands.command(help="Server information", aliases=['server'])
     async def serverinfo(self, ctx):
         guild = ctx.guild
         embed = discord.Embed(
@@ -278,6 +256,130 @@ class ServerCog(commands.Cog):
         embed.add_field(name="• Nitro boosters: ", value=guild.premium_subscription_count or "No Nitro Boosters!")
 
         await ctx.send(embed=embed)
+
+    @commands.command(help="Get the time now for places all over the world",
+                      aliases=["tn", "time"])
+    async def timeNow(self, ctx):  # formerly printCurrentTime
+        fmt = "%Y-%m-%d %H:%M:%S %Z%z"
+        # Current time in UTC
+        now_utc = datetime.now(timezone('UTC'))
+        await ctx.send(now_utc.strftime(fmt) + " (UTC) :united_nations:")
+
+        # Convert to Europe/London time zone
+        now_london = now_utc.astimezone(timezone('Europe/London'))
+        await ctx.send(now_london.strftime(fmt) + " (London) :flag_gb:")
+
+        # Convert to Europe/Berlin time zone
+        now_berlin = now_utc.astimezone(timezone('Europe/Berlin'))
+        await ctx.send(now_berlin.strftime(fmt) + " (Berlin) :flag_de:")
+
+        # Convert to CET time zone
+        now_cet = now_utc.astimezone(timezone('CET'))
+        await ctx.send(now_cet.strftime(fmt) + " (CET) :flag_eu:")
+
+        # Convert to AUS-S time zone
+        now_aus = now_utc.astimezone(timezone('Australia/Sydney'))
+        await ctx.send(now_aus.strftime(fmt) + " (Australia/Sydney):flag_au:")
+
+        # Convert to AUS-N time zone
+        now_aus = now_utc.astimezone(timezone('Australia/Darwin'))
+        await ctx.send(now_aus.strftime(fmt) + " (Northern Territory/Darwin):flag_au::regional_indicator_n:")
+
+        # Convert to Asia-Singapore
+        now_asia_sing = now_utc.astimezone(timezone('Asia/Singapore'))
+        await ctx.send(now_asia_sing.strftime(fmt) + " (Asia/Singapore):earth_asia:")
+
+        # Convert to Asia-Tokyo
+        now_asia_tok = now_utc.astimezone(timezone('Asia/Tokyo'))
+        await ctx.send(now_asia_tok.strftime(fmt) + " (Asia/Tokyo):flag_jp:")
+
+        # Convert to Asia-East-China
+        now_asia_shang = now_utc.astimezone(timezone('Asia/Shanghai'))
+        await ctx.send(now_asia_shang.strftime(fmt) + " (East China, several Locations) :flag_cn: ")
+
+        # Convert to Israel time zone
+        now_israel = now_utc.astimezone(timezone('Israel'))
+        await ctx.send(now_israel.strftime(fmt) + " (Israel) :flag_il:")
+
+        # Convert to Canada/Eastern time zone
+        now_canada_east = now_utc.astimezone(timezone('Canada/Eastern'))
+        await ctx.send(now_canada_east.strftime(fmt) + " (Canada/Eastern):flag_ca::regional_indicator_e: ")
+
+        # Convert to US/Central time zone
+        now_central = now_utc.astimezone(timezone('US/Central'))
+        await ctx.send(now_central.strftime(fmt) + " (US/Central):flag_us::regional_indicator_c: ")
+
+        # Convert to US/Pacific time zone
+        now_pacific = now_utc.astimezone(timezone('US/Pacific'))
+        await ctx.send(now_pacific.strftime(fmt) + " (US/Pacific):flag_us::regional_indicator_p: ")
+
+    @commands.command(help="Start a poll with up to 10 choices", pass_context=True)
+    async def poll(self, ctx, question: str, *options: str):
+        if len(options) <= 1:
+            await ctx.send('You need more than one option to make a poll!')
+            return
+        if len(options) > 10:
+            await ctx.send('You cannot make a poll for more than 10 things!')
+            return
+
+        if len(options) == 2 and options[0] == 'yes' and options[1] == 'no':
+            reactions = ['✅', '❌']
+        else:
+            reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟']
+
+        description = []
+        for x, option in enumerate(options):
+            description += '\n {} {}'.format(reactions[x], option)
+        embed = discord.Embed(title=''.join(question),
+                              description=''.join(description),
+                              colour=discord.Color.magenta())
+        react_message = await ctx.send(embed=embed)
+        for reaction in reactions[:len(options)]:
+            await react_message.add_reaction(reaction)
+        embed.set_footer(text='Poll ID: {}'.format(react_message.id))
+        await react_message.edit(embed=embed)
+
+    @poll.error
+    async def poll_error(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            embed = discord.Embed(
+                color=discord.Color.magenta(),
+                title="Invalid Channel!",
+                description='• Please put in a channel! Example: `^poll some question '
+                            '"resonse1" "resonse2" "resonse3", so on up to 10`'
+            )
+            await ctx.send(embed=embed)
+        elif isinstance(error, commands.MissingRequiredArgument):
+            embed = discord.Embed(
+                color=discord.Color.magenta(),
+                title="Invalid Argument!",
+                description='• Please put in a channel! Example: `^poll some question '
+                            '"resonse1" "resonse2" "resonse3", so on up to 10`'
+            )
+            await ctx.send(embed=embed)
+
+    @commands.command(help="Tallies up the poll results", pass_context=True)
+    async def tally(self, ctx, id=None):
+        poll_message = await ctx.channel.fetch_message(id)
+        embed = poll_message.embeds[0]
+        unformatted_options = [x.strip() for x in embed.description.split('\n')]
+        print(f'unformatted{unformatted_options}')
+        opt_dict = {x[:2]: x[3:] for x in unformatted_options} if unformatted_options[0][0] == '1' \
+            else {x[:1]: x[2:] for x in unformatted_options}
+        # check if we're using numbers for the poll, or x/checkmark, parse accordingly
+        voters = [self.bot.user.id]  # add the bot's ID to the list of voters to exclude it's votes
+
+        tally = {x: 0 for x in opt_dict.keys()}
+        for reaction in poll_message.reactions:
+            if reaction.emoji in opt_dict.keys():
+                reactors = await reaction.users().flatten()
+                for reactor in reactors:
+                    if reactor.id not in voters:
+                        tally[reaction.emoji] += 1
+                        voters.append(reactor.id)
+        output = f"Results of the poll for '{embed.title}':\n" + '\n'.join(
+            ['{}: {}'.format(opt_dict[key], tally[key]) for key in tally.keys()])
+        await ctx.send(output)
 
 
 def setup(bot):

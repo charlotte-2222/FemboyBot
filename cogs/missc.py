@@ -8,60 +8,8 @@ class MisscCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def rg(self, ctx):
-        """used to post info on roles, could be made better.
-            This is honestly very stupid but it will do.
-            Too bad.
-            """
-        r = discord.Embed(title='How to use role grab: ',
-                          description='You will want to pick these roles up (as desired) in order to interact with the clan')
-        r.add_field(name='Destiny related roles:',
-                    value='-Destiny 2 -> Opens up the entire sub-category\n-PvE, PvP, Raid -> Roles for LFGing in D2-category')
-        r.add_field(name='Server Roles:',
-                    value='-18+ -> Allows you to view NSFW content\n-Weeb -> Allows you to view our anime channel\n-Funny Memes -> Allows you to view our meme channels\n-Clan News -> Receive pings/Clan updates')
-        r.add_field(name='Dinner Games:',
-                    value='This is a category for other games that are not destiny related (Minecraft, Halo, CoD - etc.)')
-        r.add_field(name="Regions: ", value="Select your region, you can only have one.")
-        r.add_field(name="Bot Category: ", value="To view bot info, react to the specified role.\n\n"
-                                                 "You will see updates on YAG, Dyno, Fembot, and "
-                                                 "be allowed to spam commands in a safe environment.\n"
-                                                 "Additionally, should you have suggestions for FemBot, you can"
-                                                 " post them in a specified channel.")
-        r.color = discord.Color.magenta()
-        r.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.pnghttps://i.imgur.com/0MEtXDZ.png')
-        await ctx.send(embed=r)
-        await ctx.message.delete()
-
-    @commands.command()
-    async def help(self, ctx):
-        h = discord.Embed(title='<:6291_Anna_lewd:708017347201597501> Your favorite horny bot',
-                          description="All commands use the `up-carrot: ^` as a prefix\n", timestamp=datetime.utcnow())
-        h.add_field(name="Animal commands", value="`^Cat` scraps a cat\n"
-                                                  "`^Otter` scraps an otter\n"
-                                                  "`^Dog` scraps a dog\n"
-                                                  "`^Plat` scraps the best of agents\n"
-                                                  "`^birb` squak squak\n"
-                                                  "`^bun` the bunnies\n")
-        h.add_field(name="Fun commands", value="`^roll` Will roll a Die `^roll 1d20`\n"
-                                               "`^src` allows you to create a google search. `Format: '^i-cant-have-spaces`\n"
-                                               "`^cumscript` run it, see\n"
-                                               "`^insult` Insult a friend/fiend\n"
-                                               "`^daddy` dad jokes")
-        h.add_field(name="Image commands", value="`^tias` Try it and see\n"
-                                                 "`^fightme` let's fockin' GO\n"
-                                                 "`^blueman` the blue\n"
-                                                 "`^damn` damn bro\n")
-        h.add_field(name="nsfw_help", value="*Returns a list of NSFW related commands*")
-        h.add_field(name="nsfw_help_2", value="*This is a list of our Reddit NSFW commands*")
-        h.add_field(name="help_reddit", value="*List of our Reddit SFW commands*")
-        h.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
-        h.set_footer(text="try `^tags`....")
-        h.color = discord.Color.magenta()
-        await ctx.send(embed=h)
-        await ctx.message.delete()
-
-    @commands.command()
+    @commands.command(help="View tags to remind members of important info",
+                      aliases=["t"])
     async def tags(self, ctx):
         author = ctx.message.author
         t = discord.Embed(title='Tags for the dull.',
@@ -77,7 +25,7 @@ class MisscCog(commands.Cog):
         await ctx.author.send(embed=t)
         await ctx.message.delete()
 
-    @commands.command()
+    @commands.command(help="Report a fellow member for misconduct")
     async def report(self, ctx, user: discord.Member, *reason):
         channel = self.bot(694637172271087749)  # since it's a cog u need self.bot
         author = ctx.message.author
@@ -91,7 +39,7 @@ class MisscCog(commands.Cog):
             await ctx.author.send(f"You reported {user}\nReason for report for: {rearray}")
             await ctx.message.delete()
 
-    @commands.command(description='View online helpers in Discord Bots.', aliases=['helper'], hidden=True)
+    @commands.command(help='View online helpers in Discord Bots.', aliases=['helper'], hidden=False)
     async def helpers(self, ctx):
         """View online helpers in the Discord Bots server."""
         if ctx.guild.id != 694631281346084925:
@@ -121,7 +69,7 @@ class MisscCog(commands.Cog):
     '''
         await ctx.send(msg)
 
-    @commands.command()
+    @commands.command(help="Reddit Tag")
     async def tReddit(self, ctx):
         author = ctx.message.author
         t = discord.Embed(title='Reddit API.',
@@ -148,7 +96,7 @@ class MisscCog(commands.Cog):
         await ctx.send(embed=t)
         await ctx.message.delete()
 
-    @commands.command()
+    @commands.command(help="Clan Tag")
     async def tClan(self, ctx):
         author = ctx.message.author
         t = discord.Embed(title='ugh....',
@@ -159,7 +107,7 @@ class MisscCog(commands.Cog):
         await ctx.send(embed=t)
         await ctx.message.delete()
 
-    @commands.command()
+    @commands.command(help="Dev Tag")
     async def tdev(self, ctx):
         t = discord.Embed(title="Who made me?", description="Developer(s):",
                           timestamp=datetime.utcnow())
@@ -177,7 +125,7 @@ class MisscCog(commands.Cog):
         await ctx.send(embed=t)
         await ctx.message.delete()
 
-    @commands.command()
+    @commands.command(help="math Tag")
     @commands.is_owner()
     async def t45(self, ctx):
         await ctx.send(f"```"
@@ -199,6 +147,13 @@ class MisscCog(commands.Cog):
                        "Leaving you with:\n"
                        "0.75 °F = -17.361 °C\n"
                        "```")
+
+    @commands.command(aliases=["ping", "p"],
+                      help="Shows the bot latency from the discord websocket.")
+    async def pping(self, ctx):
+        e=discord.Embed(title="PP",
+            description=f"Your pp lasted `{self.bot.latency * 1000:.2f}ms`")
+        await ctx.send(embed=e)
 
 
 def setup(bot):

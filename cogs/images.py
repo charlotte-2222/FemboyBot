@@ -8,11 +8,13 @@ class ImagesCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(help="distorts an image, use with a URL to distort `^magik url`",
+                      aliases=["magic", "magikify","distort"], pass_context=True)
     @commands.cooldown(1, 30, commands.BucketType.user)
-    async def magik(self, ctx, image: str, intensity: int = 5):
+    async def magik(self, ctx, image:str, intensity: int = 2):
         """Actual working magik command - used an api, but is what it is"""
         emoji = "<:9154_PogU:712671828291747864>"
+
 
         await ctx.message.delete()
 
@@ -36,14 +38,9 @@ class ImagesCog(commands.Cog):
                                      "I need some time to work up to it...",
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
-        elif isinstance(error, commands.MissingRequiredArgument):
-            embed2 = discord.Embed(
-                title="Error!",
-                description="Make sure your argument is `^magik 'a url'`",
-                color=discord.Color.magenta())
-            await ctx.send(embed=embed2)
 
-    @commands.command()
+    @commands.command(help="deepfries an image, use with a URL to distort `^deepfry url`",
+                      aliases=["fry", "deep", "df"], pass_context=True)
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def deepfry(self, ctx, image: str, intensity: int = 5):
         """Deepfry - works alongside magik. """
@@ -69,13 +66,6 @@ class ImagesCog(commands.Cog):
                                      "I need some time to work up to it...",
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
-        elif isinstance(error, commands.MissingRequiredArgument):
-            embed2 = discord.Embed(
-                title="Error!",
-                description="Make sure your argument is `^deepfry 'a url'`",
-                color=discord.Color.magenta())
-            await ctx.send(embed=embed2)
-
 
 
 def setup(bot):
