@@ -25,11 +25,12 @@ initial_extensions = ['cogs.admin',
                       'cogs.redditNSFW',
                       'cogs.serverStuff',
                       'cogs.images',
-                      'cogs.events'
+                      'cogs.events',
+                      'cogs.omevent'
                       ]
 
 bot = commands.Bot(command_prefix=get_prefix,
-                   description='Fragment Server Bot', intents=discord.Intents.all())
+                   description="The Fragment's local femboy, Fembot!", intents=discord.Intents.all())
 
 
 class MyNewHelp(commands.MinimalHelpCommand):

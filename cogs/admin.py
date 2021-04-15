@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 
-class AdminCog(commands.Cog):
+class AdminCog(commands.Cog, command_attrs=dict(hidden=True)):
     def __init__(self, bot):
         self.bot = bot
 
@@ -55,7 +55,6 @@ class AdminCog(commands.Cog):
             )
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
 
 def setup(bot):

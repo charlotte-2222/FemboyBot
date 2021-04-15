@@ -1,12 +1,11 @@
 import asyncio
-from urllib import parse
 import aiohttp
 import discord
 import requests
 from bs4 import BeautifulSoup
 from discord.ext import commands
 from imgurpython import ImgurClient
-from config import *
+from utilityFunction.config import *
 from utilityFunction import lists
 from utilityFunction.CommandFunc import *
 from datetime import datetime
@@ -30,15 +29,6 @@ class FunCog(commands.Cog):
         em = discord.Embed(title="{}'s Dong Size".format(user), description="Size: " + dong,
                            colour=discord.Colour.magenta())
         await ctx.send(embed=em)
-
-    @dong.error
-    async def dong_error(self, ctx, error):
-        if isinstance(error, commands.MissingRequiredArgument):
-            embed2 = discord.Embed(
-                title="Error!",
-                description="Make sure your argument is `^dong @user`",
-                color=discord.Color.magenta())
-            await ctx.send(embed=embed2)
 
     @commands.command(help="Roll a die",
                       aliases=["r", "d"],
@@ -355,6 +345,26 @@ class FunCog(commands.Cog):
             em = discord.Embed(title="You're on cooldown!",
                                color=discord.Color.magenta())
             await ctx.send(embed=em)
+
+    @commands.command(help="Uwuify text. I can\'t uwuify text over 2000 characters.",
+                      aliases=["owoify", "uwu", "uwuize"],
+                      pass_context=True)
+    async def owo(self, ctx, *, text: str):
+        text += " uwu"
+        await ctx.send(text.replace("r", "w").replace("l", "w").replace("a", "aw"))
+        await ctx.message.delete()
+
+    @commands.command(help="say:clap: some :clap: words :clap:",
+                      pass_context=True)
+    async def clap(self, ctx, *, mm: str):
+        await ctx.send(mm.replace(" ", ":clap:"))
+        await ctx.message.delete()
+
+    @commands.command(hidden=True)
+    async def shire(self, ctx):
+        myfile = discord.File('images/Who._Cares..mp4')
+        await ctx.send(file=myfile)
+        await ctx.send(f'<@725944658806440007>')
 
 
 def setup(bot):

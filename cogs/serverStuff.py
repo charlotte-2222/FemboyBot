@@ -11,7 +11,7 @@ from discord.ext import commands
 from utilityFunction.timeConvert import convert
 
 
-class ServerCog(commands.Cog):
+class ServerCog(commands.Cog, command_attrs=dict(hidden=True)):
     def __init__(self, bot):
         self.bot = bot
 
@@ -29,6 +29,7 @@ class ServerCog(commands.Cog):
                     print(f"Unable to write a name: {member.id}")
                     continue
 
+            await ctx.send("Member list updated :thumbsup:")
             print("done")
 
     @commands.command()
@@ -36,8 +37,11 @@ class ServerCog(commands.Cog):
     async def thicc(self, ctx):
         """Allows server owner to pick the next thicc"""
         thicc = open('text_dir/thiccFrag.txt').read().splitlines()
-        await ctx.send(random.choice(thicc))
-        await ctx.message.delete()
+        thiccy = random.choice(thicc)
+        fU = str(thiccy)
+        x = fU.index("#")
+        fU = fU[0:x]
+        await ctx.message.reply(f"The new daily thicc will be: @{fU}", mention_author=True)
 
     @commands.command(help="Create an awesome giveaway",
                       aliases=["gift", "giveaway", "gcreate", "gcr", "giftcr"],
@@ -169,7 +173,7 @@ class ServerCog(commands.Cog):
         await channel.send(embed=embed)
 
     @commands.command(help="Get the weather for a city `^weather [city]`",
-                      aliases=["wt"])
+                      aliases=["wt"], hidden=False)
     async def weather(self, ctx, city: str = None):
         URL = f"http://wttr.in/{city}_2tnp_transparency=1000_lang=en.png"
 
@@ -190,7 +194,7 @@ class ServerCog(commands.Cog):
             os.remove('img2.png')
             os.remove("temp.png")
 
-    @commands.command(help="View a picture of the current lunar phase")
+    @commands.command(help="View a picture of the current lunar phase", hidden=False)
     async def moon(self, ctx):
         URL = "http://wttr.in/moon.png"
 
@@ -208,7 +212,7 @@ class ServerCog(commands.Cog):
         os.remove('img8.png')
         os.remove("temp8.png")
 
-    @commands.command(help="Server information", aliases=['server'])
+    @commands.command(help="Server information", aliases=['server'], hidden=False)
     async def serverinfo(self, ctx):
         guild = ctx.guild
         embed = discord.Embed(
@@ -258,7 +262,7 @@ class ServerCog(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(help="Get the time now for places all over the world",
-                      aliases=["tn", "time"])
+                      aliases=["tn", "time"], hidden=False)
     async def timeNow(self, ctx):  # formerly printCurrentTime
         fmt = "%Y-%m-%d %H:%M:%S %Z%z"
         # Current time in UTC

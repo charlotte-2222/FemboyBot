@@ -9,7 +9,7 @@ with open('../../PycharmProjects/FemboyBot/nekos/__init__.py') as f:
 
 
 requirements = []
-with open('requirements.txt') as f:
+with open('misc/requirements.txt') as f:
     requirements = f.read().splitlines()
 
 

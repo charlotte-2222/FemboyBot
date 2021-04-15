@@ -5,7 +5,7 @@ import random
 import discord
 from discord.ext import commands
 import praw
-from config import *
+from utilityFunction.config import *
 
 reddit = praw.Reddit(client_id=redditC,
                      client_secret=redditCS,

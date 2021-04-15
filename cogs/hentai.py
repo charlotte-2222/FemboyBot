@@ -2,7 +2,7 @@ from datetime import datetime
 from random import random
 from imgurpython import ImgurClient
 
-from config import *
+from utilityFunction.config import *
 import discord
 import requests
 from discord.ext import commands
@@ -37,6 +37,7 @@ class NekosCog(commands.Cog):
         try:
             await ctx.send(embed=em)
             await ctx.message.delete()
+            print(f"{ctx.author} is asking for shaxx porn")
         except:
             await ctx.send(str(r['data'][size]['link']))
 
@@ -129,7 +130,8 @@ class NekosCog(commands.Cog):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
 
-    @commands.command(help="Futa porn")
+    @commands.command(help="Futa porn",
+                      aliases=["futa"])
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def futanari(self, ctx):
         if not ctx.channel.is_nsfw():
@@ -722,6 +724,7 @@ class NekosCog(commands.Cog):
         if isinstance(error, commands.CommandOnCooldown):
             em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
             await ctx.send(embed=em)
+
 
 def setup(bot):
     bot.add_cog(NekosCog(bot))

@@ -6,7 +6,7 @@ import requests
 from discord.ext import commands
 from imgurpython import ImgurClient
 
-from config import *
+from utilityFunction.config import *
 
 imgur = ImgurClient(imgurC, ImgurL)
 
