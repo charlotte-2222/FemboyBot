@@ -29,15 +29,6 @@ class OnMessCog(commands.Cog):
             await message.reply(file=myfile)
             await message.reply("nErD. Get fucked dumbass.")
 
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        ff = discord.File('images/insane.mp4')
-        if message.author.bot:
-            return
-        content = message.content.casefold()
-        if "welcome to the fragment" in content:
-            await message.reply(file=ff)
-
 
 def setup(bot):
     bot.add_cog(OnMessCog(bot))
