@@ -9,6 +9,7 @@ from utilityFunction.config import *
 from utilityFunction import lists
 from utilityFunction.CommandFunc import *
 from datetime import datetime
+import googletrans
 
 imgur = ImgurClient(imgurC, ImgurL)
 
@@ -90,15 +91,16 @@ class FunCog(commands.Cog):
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def cat(self, ctx):
-        """Found that the original way Caleb and I wrote
-        this command was too slow - found Danny's command and 'procured' it"""
-        async with ctx.session.get('https://api.thecatapi.com/v1/images/search') as resp:
-            if resp.status != 200:
-                return await ctx.send("I can't find any kitties, give it another try")
-            js = await resp.json()
-            await ctx.send(embed=discord.Embed(title=':cat:',
-                                               colour=discord.Colour.magenta()
-                                               ).set_image(url=js[0]['url']))
+        response = requests.get('https://aws.random.cat/meow')
+        data = response.json()
+        embed = discord.Embed(
+            title='🐈',
+            description='a better fucking cat command mayhaps',
+            colour=discord.Colour.magenta()
+        )
+        embed.set_image(url=data['file'])
+        embed.set_footer(text="")
+        await ctx.send(embed=embed)
 
     @commands.command(help="Find a random dog"
         , pass_context=True)
@@ -276,6 +278,24 @@ class FunCog(commands.Cog):
         myfile = discord.File('images/Who._Cares..mp4')
         await ctx.send(file=myfile)
         await ctx.send(f'<@725944658806440007>')
+
+    @commands.command()
+    async def translate(self, ctx, *, message: commands.clean_content):
+        """Translates a message to English using Google translate."""
+
+        loop = self.bot.loop
+
+        try:
+            ret = await loop.run_in_executor(None, self.trans.translate, message)
+        except Exception as e:
+            return await ctx.send(f'An error occurred: {e.__class__.__name__}: {e}')
+
+        embed = discord.Embed(title='Translated', colour=0x4284F3)
+        src = googletrans.LANGUAGES.get(ret.src, '(auto-detected)').title()
+        dest = googletrans.LANGUAGES.get(ret.dest, 'Unknown').title()
+        embed.add_field(name=f'From {src}', value=ret.origin, inline=False)
+        embed.add_field(name=f'To {dest}', value=ret.text, inline=False)
+        await ctx.send(embed=embed)
 
 
 def setup(bot):
