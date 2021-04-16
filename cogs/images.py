@@ -31,14 +31,6 @@ class ImagesCog(commands.Cog):
                 embed.set_image(url=res["message"])
                 await ctx.send(embed=embed)
 
-    @magik.error
-    async def magik_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow down there! This command is hard to pull off! "
-                                     "I need some time to work up to it...",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="deepfries an image, use with a URL to distort `^deepfry url`",
                       aliases=["fry", "deep", "df"], pass_context=True)
     @commands.cooldown(1, 30, commands.BucketType.user)
@@ -58,15 +50,6 @@ class ImagesCog(commands.Cog):
                 )
                 embed.set_image(url=res["message"])
                 await ctx.send(embed=embed)
-
-    @deepfry.error
-    async def deepfry_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow down there! This command is hard to pull off! "
-                                     "I need some time to work up to it...",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
 
 def setup(bot):
     bot.add_cog(ImagesCog(bot))

@@ -76,79 +76,19 @@ class EventsCog(commands.Cog):
             bitch.color = discord.Color.magenta()
             await bitchChannel.send(embed=bitch)
 
-    # @commands.Cog.listener()
-    # async def on_command_error(self, ctx, error):
-    #     if isinstance(error, commands.CommandInvokeError):
-    #         em = discord.Embed(title="Invoke Error!",
-    #                            description="The command you attempted to invoke was either not found, "
-    #                                        "or does not exist."
-    #                            , colour=discord.Colour.magenta()
-    #                            )
-    #         em.set_footer(text="View ^help command for more info or DM @flop")
-    #         await ctx.send(embed=em)
-    #     # elif isinstance(error, commands.CommandError):
-    #     #     em = discord.Embed(title="Command Error!",
-    #     #                        description="There was an unknown error in your command! "
-    #     #                                    "It may have not been found, or it may be broken"
-    #     #                                    " Please refer to the help command for more command info."
-    #     #                        , colour=discord.Colour.magenta()
-    #     #                        )
-    #     #     em.set_footer(text="View ^help command for more info or DM @flop")
-    #     #     await ctx.send(embed=em)
-    #     elif isinstance(error, commands.CommandOnCooldown):
-    #         em = discord.Embed(title="You're on cooldown!",
-    #                            description="This command has a heavy payload and thus has cooldown.",
-    #                            colour=discord.Colour.magenta())
-    #         em.set_footer(text="Check out the ^help command for more commands")
-    #         await ctx.send(embed=em)
-    #     elif isinstance(error, commands.MissingRequiredArgument):
-    #         em = discord.Embed(title="Missing an argument!",
-    #                            description="This command requires another argument! "
-    #                                        "Refer to the help command"
-    #                            , colour=discord.Colour.magenta()
-    #                            )
-    #         em.set_footer(text="View ^help command for more info or DM @flop")
-    #         await ctx.send(embed=em)
-    #     elif isinstance(error, commands.MissingPermissions):
-    #         em = discord.Embed(title="Missing Required Permissions!",
-    #                            description="This command requires permissions "
-    #                                        "that you're simply not worthy enough to have."
-    #                            , colour=discord.Colour.magenta()
-    #                            )
-    #         em.set_footer(text="View ^help command for more command info or DM @flop")
-    #         await ctx.send(embed=em)
-    #     elif isinstance(error, commands.NotOwner):
-    #         em = discord.Embed(title="You're not the owner, bitch",
-    #                            description="This command requires permissions "
-    #                                        "that you're simply not worthy enough to have."
-    #                            , colour=discord.Colour.magenta()
-    #                            )
-    #         em.set_footer(text="View ^help command for more command info or DM @flop")
-    #         await ctx.send(embed=em)\
-    #
-    #     elif isinstance(error, commands.UserNotFound):
-    #         em = discord.Embed(title="User Not Found",
-    #                            description="Unable to find that user"
-    #                            ,colour=discord.Colour.magenta()
-    #                            )
-    #         em.set_footer(text="View ^help command for more command info or DM @flop")
-    #         await ctx.send(embed=em)
-    #
-    #     elif isinstance(error, commands.NSFWChannelRequired):
-    #         em = discord.Embed(title="NSFW ONLY!",
-    #                            description="Stop being horny in SFW chats!"
-    #                            , colour=discord.Colour.magenta()
-    #                            )
-    #         em.set_footer(text="View ^help command for more command info or DM @flop")
-    #         await ctx.send(embed=em)
-    #
-    #     elif isinstance(error, commands.CommandNotFound):
-    #         em = discord.Embed(title="Command Not Found",
-    #                            description="Sorry, I couldn't find that one... try again"
-    #                            , colour=discord.Colour.magenta()
-    #                            )
-    #         em.set_footer(text="View ^help command for more command info or DM @flop")
-    #         await ctx.send(embed=em)
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        errorEm = discord.Embed(title="uwu Uh oh!",
+                                description="OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The "
+                                            "code monkeys at our headquarters are working VEWY HAWD to fix this!",
+                                colour=discord.Colour.magenta())
+        errorEm.add_field(name="Error: ", value=error)
+        if isinstance(error, discord.ext.commands.MemberNotFound):
+            await ctx.send(embed=errorEm)
+        elif isinstance(error, commands.BadArgument):
+            await ctx.send(embed=errorEm)
+        else:
+            await ctx.send(embed=errorEm)
 
 
 def setup(bot):

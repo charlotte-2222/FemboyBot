@@ -1,3 +1,4 @@
+import asyncio
 import os
 import urllib.request
 from asyncio import sleep
@@ -6,9 +7,15 @@ from datetime import datetime
 from pytz import timezone
 
 import discord
+from discord import voice_client
 from PIL.Image import Image
 from discord.ext import commands
 from utilityFunction.timeConvert import convert
+
+
+def to_emoji(c):
+    base = 0x1f1e6
+    return chr(base + c)
 
 
 class ServerCog(commands.Cog, command_attrs=dict(hidden=True)):
@@ -24,9 +31,9 @@ class ServerCog(commands.Cog, command_attrs=dict(hidden=True)):
         with open('text_dir/thiccFrag.txt', 'w')as f:
             for member in ctx.guild.members:
                 try:
-                    print(f"{member}", "--", f'{member.id}', file=f)
+                    print(f'{member.id}', file=f)
                 except:
-                    print(f"Unable to write a name: {member.id}")
+                    print(f"Unable to write an ID... continuing")
                     continue
 
             await ctx.send("Member list updated :thumbsup:")
@@ -38,10 +45,7 @@ class ServerCog(commands.Cog, command_attrs=dict(hidden=True)):
         """Allows server owner to pick the next thicc"""
         thicc = open('text_dir/thiccFrag.txt').read().splitlines()
         thiccy = random.choice(thicc)
-        fU = str(thiccy)
-        x = fU.index("#")
-        fU = fU[0:x]
-        await ctx.message.reply(f"The new daily thicc will be: @{fU}", mention_author=True)
+        await ctx.message.reply(f"The new daily thicc will be: <@{thiccy}>", mention_author=True)
 
     @commands.command(help="Create an awesome giveaway",
                       aliases=["gift", "giveaway", "gcreate", "gcr", "giftcr"],
@@ -317,73 +321,48 @@ class ServerCog(commands.Cog, command_attrs=dict(hidden=True)):
         now_pacific = now_utc.astimezone(timezone('US/Pacific'))
         await ctx.send(now_pacific.strftime(fmt) + " (US/Pacific):flag_us::regional_indicator_p: ")
 
-    @commands.command(help="Start a poll with up to 10 choices", pass_context=True)
-    async def poll(self, ctx, question: str, *options: str):
-        if len(options) <= 1:
-            await ctx.send('You need more than one option to make a poll!')
-            return
-        if len(options) > 10:
-            await ctx.send('You cannot make a poll for more than 10 things!')
-            return
+    @commands.command()
+    @commands.guild_only()
+    async def poll(self, ctx, *, question):
+        """Interactively creates a poll with the following question.
+        To vote, use reactions!
+        """
 
-        if len(options) == 2 and options[0] == 'yes' and options[1] == 'no':
-            reactions = ['✅', '❌']
-        else:
-            reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟']
+        # a list of messages to delete when we're all done
+        messages = [ctx.message]
+        answers = []
 
-        description = []
-        for x, option in enumerate(options):
-            description += '\n {} {}'.format(reactions[x], option)
-        embed = discord.Embed(title=''.join(question),
-                              description=''.join(description),
-                              colour=discord.Color.magenta())
-        react_message = await ctx.send(embed=embed)
-        for reaction in reactions[:len(options)]:
-            await react_message.add_reaction(reaction)
-        embed.set_footer(text='Poll ID: {}'.format(react_message.id))
-        await react_message.edit(embed=embed)
+        def check(m):
+            return m.author == ctx.author and m.channel == ctx.channel and len(m.content) <= 100
 
-    @poll.error
-    async def poll_error(self, ctx, error):
-        if isinstance(error, commands.BadArgument):
-            embed = discord.Embed(
-                color=discord.Color.magenta(),
-                title="Invalid Channel!",
-                description='• Please put in a channel! Example: `^poll some question '
-                            '"resonse1" "resonse2" "resonse3", so on up to 10`'
-            )
-            await ctx.send(embed=embed)
-        elif isinstance(error, commands.MissingRequiredArgument):
-            embed = discord.Embed(
-                color=discord.Color.magenta(),
-                title="Invalid Argument!",
-                description='• Please put in a channel! Example: `^poll some question '
-                            '"resonse1" "resonse2" "resonse3", so on up to 10`'
-            )
-            await ctx.send(embed=embed)
+        for i in range(20):
+            messages.append(await ctx.send(f'Say poll option or {ctx.prefix}cancel to publish poll.'))
 
-    @commands.command(help="Tallies up the poll results", pass_context=True)
-    async def tally(self, ctx, id=None):
-        poll_message = await ctx.channel.fetch_message(id)
-        embed = poll_message.embeds[0]
-        unformatted_options = [x.strip() for x in embed.description.split('\n')]
-        print(f'unformatted{unformatted_options}')
-        opt_dict = {x[:2]: x[3:] for x in unformatted_options} if unformatted_options[0][0] == '1' \
-            else {x[:1]: x[2:] for x in unformatted_options}
-        # check if we're using numbers for the poll, or x/checkmark, parse accordingly
-        voters = [self.bot.user.id]  # add the bot's ID to the list of voters to exclude it's votes
+            try:
+                entry = await self.bot.wait_for('message', check=check, timeout=60.0)
+            except asyncio.TimeoutError:
+                break
 
-        tally = {x: 0 for x in opt_dict.keys()}
-        for reaction in poll_message.reactions:
-            if reaction.emoji in opt_dict.keys():
-                reactors = await reaction.users().flatten()
-                for reactor in reactors:
-                    if reactor.id not in voters:
-                        tally[reaction.emoji] += 1
-                        voters.append(reactor.id)
-        output = f"Results of the poll for '{embed.title}':\n" + '\n'.join(
-            ['{}: {}'.format(opt_dict[key], tally[key]) for key in tally.keys()])
-        await ctx.send(output)
+            messages.append(entry)
+
+            if entry.clean_content.startswith(f'{ctx.prefix}cancel'):
+                break
+
+            answers.append((to_emoji(i), entry.clean_content))
+
+        try:
+            await ctx.channel.delete_messages(messages)
+        except:
+            pass  # oh well
+
+        answer = '\n'.join(f'{keycap}: {content}' for keycap, content in answers)
+        actual_poll = await ctx.send(f'{ctx.author} asks: {question}\n\n{answer}')
+        for emoji, _ in answers:
+            await actual_poll.add_reaction(emoji)
+
+
+
+
 
 
 def setup(bot):

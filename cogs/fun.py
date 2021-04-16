@@ -61,13 +61,6 @@ class FunCog(commands.Cog):
             e2.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
             await ctx.send(embed=e2)
 
-    @roll.error
-    async def roll_error(self, ctx, error):
-        """on error for die"""
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, your dice will be there in a second", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="Lyrics of the cumzone, selected randomly",
                       aliases=["cs"])
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -76,12 +69,6 @@ class FunCog(commands.Cog):
         cum = open('text_dir/cumscript.txt').read().splitlines()
         await ctx.send(random.choice(cum))
         await ctx.message.delete()
-
-    @cumscript.error
-    async def cumscript_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Really? Is this song that appealing to you?", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Search for an image from imgur",
                       pass_context=True,
@@ -99,39 +86,19 @@ class FunCog(commands.Cog):
             await ctx.send(items[rand].link)
             await ctx.message.delete()
 
-    @img_src.error
-    async def img_src_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="You literally can just go to imgur", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-        elif isinstance(error, commands.MissingRequiredArgument):
-            embed2 = discord.Embed(
-                title="Error!",
-                description="Make sure your argument is `^img_src 'a cool search term'`",
-                color=discord.Color.magenta())
-            await ctx.send(embed=embed2)
-
     @commands.command(help="Find a random cat",
                       pass_context=True)
-    @commands.cooldown(1, 4, commands.BucketType.user)
+    @commands.cooldown(1, 3, commands.BucketType.user)
     async def cat(self, ctx):
-        await ctx.send("Enjoy a random cat!")
-        source = requests.get('http://theoldreader.com/kittens/600/400/js').text
-        soup = BeautifulSoup(source, 'html.parser')
-        img = soup.find('img')
-        rcurl = "http://theoldreader.com" + str(img['src'])
-        e = discord.Embed()
-        e.color = discord.Color.magenta()
-        e.set_image(url=rcurl)
-        await ctx.send(embed=e)
-        await ctx.message.delete()
-
-    @cat.error
-    async def cat_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
+        """Found that the original way Caleb and I wrote
+        this command was too slow - found Danny's command and 'procured' it"""
+        async with ctx.session.get('https://api.thecatapi.com/v1/images/search') as resp:
+            if resp.status != 200:
+                return await ctx.send("I can't find any kitties, give it another try")
+            js = await resp.json()
+            await ctx.send(embed=discord.Embed(title=':cat:',
+                                               colour=discord.Colour.magenta()
+                                               ).set_image(url=js[0]['url']))
 
     @commands.command(help="Find a random dog"
         , pass_context=True)
@@ -148,13 +115,6 @@ class FunCog(commands.Cog):
             await ctx.message.delete()
         except:
             await ctx.send(str(r['data'][size]['link']))
-
-    @dog.error
-    async def dog_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Find a random bird",
                       aliases=["bird"],
@@ -173,13 +133,6 @@ class FunCog(commands.Cog):
         except:
             await ctx.send(str(r['data'][size]['link']))
 
-    @birb.error
-    async def birb_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="Find a random otter",
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -195,13 +148,6 @@ class FunCog(commands.Cog):
             await ctx.message.delete()
         except:
             await ctx.send(str(r['data'][size]['link']))
-
-    @otter.error
-    async def otter_error(ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Find a random platapuss",
                       aliases=["platapussy",
@@ -223,13 +169,6 @@ class FunCog(commands.Cog):
         except:
             await ctx.send(str(r['data'][size]['link']))
 
-    @plat.error
-    async def plat_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="Find some random buns",
                       aliases=["rabbit",
                                "bunny"],
@@ -248,13 +187,6 @@ class FunCog(commands.Cog):
         except:
             await ctx.send(str(r['data'][size]['link']))
 
-    @bun.error
-    async def bun_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="generate a random insult",
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -263,13 +195,6 @@ class FunCog(commands.Cog):
         lines = open('text_dir/insults.txt').read().splitlines()
         await ctx.send(random.choice(lines))
         await ctx.message.delete()
-
-    @insult.error
-    async def insult_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="<:3463_pepeone:708017294097383484>  Error!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Ask the 8Ball a question",
                       aliases=["8ball",
@@ -298,13 +223,6 @@ class FunCog(commands.Cog):
                                   color=discord.Color.magenta()
                                   , timestamp=datetime.utcnow())
                 await ctx.send(embed=d)
-
-    @daddy.error
-    async def daddy_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Dad jokes are temporary, just like your actual dad",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Go run it :)",
                       pass_context=True,
@@ -338,13 +256,6 @@ class FunCog(commands.Cog):
                 )
                 await asyncio.sleep(1)
                 await ctx.send(embed=embed)
-
-    @history.error
-    async def history_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="You're on cooldown!",
-                               color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Uwuify text. I can\'t uwuify text over 2000 characters.",
                       aliases=["owoify", "uwu", "uwuize"],

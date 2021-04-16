@@ -16,12 +16,6 @@ class AdminCog(commands.Cog, command_attrs=dict(hidden=True)):
         await asyncio.sleep(2)
         await ctx.send('Cleared by this guy: {}'.format(ctx.author.mention))
 
-    ##^Just purges stuff pretty much
-    @purge.error  ##Simple error checking
-    async def purge_error(self, ctx, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send("Ha! You're not worthy!")
-
     @commands.command(help="Owner only - Kicks members at will", alias=["belt"], pass_context=True)
     @commands.is_owner()
     async def kick(self, ctx, member: discord.Member, *, reason=None):
@@ -55,6 +49,7 @@ class AdminCog(commands.Cog, command_attrs=dict(hidden=True)):
             )
         await ctx.send(embed=embed)
         await ctx.message.delete()
+
 
 
 def setup(bot):

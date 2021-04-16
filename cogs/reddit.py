@@ -26,12 +26,6 @@ class RedditCog(commands.Cog):
 
         await ctx.send(submission.url)
 
-    @meme.error
-    async def meme_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="chill tf out with your shit memes", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="Get a random post from r/gaming, sorted by hottest",
                       aliases=["game"])
     @commands.cooldown(1, 30, commands.BucketType.user)
@@ -43,12 +37,6 @@ class RedditCog(commands.Cog):
 
         await ctx.send(submission.url)
 
-    @gaming.error
-    async def gaming_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="chill tf out", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="Get a random hot post from r/halo")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def halo(self, ctx):
@@ -58,12 +46,6 @@ class RedditCog(commands.Cog):
             submission = next(x for x in submissions if not x.stickied)
 
         await ctx.send(submission.url)
-
-    @halo.error
-    async def halo_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="were you blinded by it's majesty? dumbstruck?", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Destiny memes, sorted by hotest",
                       aliases=["destiny", "destiny memes", "destiny_memes"])
@@ -76,12 +58,6 @@ class RedditCog(commands.Cog):
 
         await ctx.send(submission.url)
 
-    @dmemes.error
-    async def dmemes_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="shitty destiny memes can wait, dude", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="Get a random duck")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def duck(self, ctx):
@@ -91,12 +67,6 @@ class RedditCog(commands.Cog):
             submission = next(x for x in submissions if not x.stickied)
 
         await ctx.send(submission.url)
-
-    @duck.error
-    async def duck_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="screeeee- hold on", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Get a random cat - that's yelling",
                       aliases=["yc", "yelling"])
@@ -108,14 +78,6 @@ class RedditCog(commands.Cog):
             submission = next(x for x in submissions if not x.stickied)
 
         await ctx.send(submission.url)
-
-    @yell_cat.error
-    async def yell_cat_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="screeeee- hold on", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
-
 
 def setup(bot):
     bot.add_cog(RedditCog(bot))

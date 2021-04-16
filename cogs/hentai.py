@@ -41,11 +41,6 @@ class NekosCog(commands.Cog):
         except:
             await ctx.send(str(r['data'][size]['link']))
 
-    @shaxx.error
-    async def shaxx_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Foot hentai")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -70,12 +65,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @feet.error
-    async def feet_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     # YURI
     @commands.command(help="I don't actually know what a yuri is, but this is that")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -97,11 +86,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @yuri.error
-    async def yuri_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     # traps
     @commands.command(help="Femboy porn")
@@ -124,11 +108,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @femboy.error
-    async def femboy_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Futa porn",
                       aliases=["futa"])
@@ -151,11 +130,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @futanari.error
-    async def futanari_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Gif of (supposedly) someone alone, likely masturbation - idk")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -177,12 +151,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @solo_gif.error
-    async def solo_gif_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
-
     @commands.command(help="Elmers")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def cum(self, ctx):
@@ -203,11 +171,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @cum.error
-    async def cum_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Cat girl porn - in motion")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -227,11 +190,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @nsfw_neko_gif.error
-    async def nsfw_neko_gif(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Masturbation i think")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -253,11 +211,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @solo.error
-    async def solo_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="what what? In the butt - of course.")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -279,11 +232,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @anal.error
-    async def anal_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="just hentai")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -306,11 +254,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @hentai.error
-    async def hentai_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="it's like feet, but more erotic")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -332,11 +275,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @erofeet.error
-    async def erofeet_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="it's a cat or something")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -358,11 +296,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @pussy.error
-    async def pussy_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="isn't this a bird?")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -384,11 +317,7 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @tits.error
-    async def tits_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
+
 
     @commands.command(help="wish i were someone's waifu",
                       pass_context=True)
@@ -406,11 +335,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @waifu.error
-    async def waifu_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Self explanatory")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -432,11 +356,7 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @boobs.error
-    async def boobs_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
+
 
     @commands.command(help="Pat someone's head",
                       pass_context=True)
@@ -454,11 +374,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @pat.error
-    async def pat_error(ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Kiss someone",
                       pass_context=True)
@@ -476,11 +391,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @kiss.error
-    async def kiss_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Erotically spank your homie",
                       pass_context=True)
@@ -503,11 +413,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @spank.error
-    async def spank_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Cuddle your homie",
                       pass_context=True)
@@ -525,11 +430,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @cuddle.error
-    async def cuddle_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Hug your homie",
                       pass_context=True)
@@ -547,11 +447,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @hug.error
-    async def hug_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Furries are gross")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -568,11 +463,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @fox_girl.error
-    async def fox_girl_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Furries are gross")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -594,11 +484,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @neko.error
-    async def neko_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Tickle your homie",
                       pass_context=True)
@@ -616,11 +501,7 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @tickle.error
-    async def tickle_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
+
 
     @commands.command(help="it's not like i wanted to do any of this... really")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -642,11 +523,7 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @baka.error
-    async def baka_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
+
 
     @commands.command(help="nsfw avatar creation")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -668,11 +545,7 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @nsfw_avatar.error
-    async def nsfw_avatar_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
+
 
     @commands.command(help="makes a wallpaper, I've seen non-NSFW")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -694,11 +567,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @wallpaper.error
-    async def wallpaper_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
     @commands.command(help="Get pegged 4 hed")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -719,11 +587,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-    @femdom.error
-    async def femdom_error(self, ctx, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            em = discord.Embed(title="Slow tf down, captain horny", color=discord.Color.magenta())
-            await ctx.send(embed=em)
 
 
 def setup(bot):
