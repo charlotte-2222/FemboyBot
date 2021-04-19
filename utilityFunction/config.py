@@ -1,4 +1,4 @@
-token = "NjgwNTI5NDU0MjAzNjY2NDc5.XlBOcQ.dsHF42HAeiaY6rnoZSHSZyd1pQ0"
+token = ""
 imgurC = "94ecee09fffc2a0"
 ImgurL = "dbac397e0b59bbbfb00061272b3153069ca96941"
 redditC="GRb11xHgsNfBRA"
