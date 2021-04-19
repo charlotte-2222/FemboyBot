@@ -47,6 +47,8 @@ class OnMessCog(commands.Cog):
         if "beans" in content:
             await message.reply(file=beaners)
 
+"""got dem beans"""
+
 
 def setup(bot):
     bot.add_cog(OnMessCog(bot))
