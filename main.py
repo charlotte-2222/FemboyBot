@@ -26,10 +26,13 @@ initial_extensions = ['cogs.admin',
                       ]
 
 bot = commands.Bot(command_prefix=get_prefix,
-                   description="The Fragment's local femboy, Fembot!", intents=discord.Intents.all())
+                   description="The Fragment's local femboy, Fembot!",
+                   intents=discord.Intents.all()
+                  )
 
 
 class MyNewHelp(commands.MinimalHelpCommand):
+
     async def send_pages(self):
         destination = self.get_destination()
         for page in self.paginator.pages:

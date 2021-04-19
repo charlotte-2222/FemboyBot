@@ -1,4 +1,6 @@
 import asyncio
+from typing import Union
+
 import aiohttp
 import discord
 import requests
@@ -31,36 +33,52 @@ class FunCog(commands.Cog):
                            colour=discord.Colour.magenta())
         await ctx.send(embed=em)
 
-    @commands.command(help="Roll a die",
-                      aliases=["r", "d"],
-                      pass_contex=True)
-    async def roll(self, ctx, rolls: str):
-        """rolls a die"""
-        resultString, results, numDice = random.randint(rolls)
-        e1 = discord.Embed(title=roll_str(rolls) + f" for %s" % ctx.message.author.name,
-                           color=discord.Color.dark_teal())
-        await ctx.send(embed=e1)
-        if resultString == '20':
-            e3 = discord.Embed(title=f":tada:" % + ctx.message.author.mention + f":tada:\n"
-                                                                                f"***Critical Success!***\n"
-                                                                                f"" + resultString)
-            await ctx.send(embed=e3)
-        elif resultString == '1':
-            e4 = discord.Embed(title=f":roll_of_paper:" % + ctx.message.author.mention + f":roll_of_paper:\n"
-                                                                                         f"***Critical Failure!***\n"
-                                                                                         f"" + resultString)
-            await ctx.send(embed=e4)
-        elif numDice == '1':
-            await ctx.send(ctx.author.mention + "  :game_die:\n**Result:** " + resultString)
+    @commands.command(name="roll", aliases=["dice", "die"])
+    async def roll_die(self, ctx: commands.Context, dice_options: Union[str, int] = 6):
+        max_dices = 20
+        max_sides = 120
+
+        try:
+            dice_options = dice_options.split("d")
+
+            # User gave only sides
+            if len(dice_options) == 1:
+                sides = int(dice_options[0])
+                rolls = 1
+            # User gave either RPG dice notation or invalid format
+            elif len(dice_options) == 2:
+                sides = int(dice_options[1])
+                rolls = int(dice_options[0])
+            else:
+                raise IndexError()
+        except AttributeError:
+            sides = dice_options
+            rolls = 1
+        except (ValueError, IndexError):
+            await ctx.send("Die info was given in invalid format.")
+            return
+
+        if sides > 120:
+            await ctx.send(f"The die can only have maximum of {max_sides} sides.")
+            return
+        elif rolls > max_dices:
+            await ctx.send(f"You can throw at most {max_dices} dice at once.")
+            return
+        elif sides < 1:
+            await ctx.send("The die must have at least 1 sides.")
+            return
+        elif rolls < 1:
+            await ctx.send("The die must be thrown at least once.")
+            return
+
+        roll_results = [random.randint(1, sides) for _ in range(rolls)]
+        if rolls > 1:
+            results = ", ".join(str(_int) for _int in roll_results)
+            msg = f"{sides}-sided die roll results: `{results}`\n\n:game_die: Total sum: {sum(roll_results)}"
         else:
-            e2 = discord.Embed(title=":game_die: Results!",
-                               timestamp=datetime.utcnow(),
-                               color=discord.Color.magenta(), description=f"Here " + ctx.author.mention +
-                                                                          "\n__***All them dice***___\n\n**Result:** "
-                                                                          + resultString + "\n**Total:** " + str(
-                    results))
-            e2.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
-            await ctx.send(embed=e2)
+            msg = roll_results[0]
+
+        await  ctx.send(msg)
 
     @commands.command(help="Lyrics of the cumzone, selected randomly",
                       aliases=["cs"])
@@ -70,22 +88,6 @@ class FunCog(commands.Cog):
         cum = open('text_dir/cumscript.txt').read().splitlines()
         await ctx.send(random.choice(cum))
         await ctx.message.delete()
-
-    @commands.command(help="Search for an image from imgur",
-                      pass_context=True,
-                      aliases=["is", "isrc"]
-                      )
-    @commands.cooldown(1, 3, commands.BucketType.user)
-    async def img_src(self, ctx, *text: str):
-        """Allows the user to search for an image from imgur"""
-        rand = random.randint(0, 29)
-        if text == ():
-            await ctx.send('**Please enter a search term**')
-        elif text[0] != ():
-            items = imgur.gallery_search(" ".join(text[0:len(text)]), advanced=None, sort='rising', window='all',
-                                         page=0)
-            await ctx.send(items[rand].link)
-            await ctx.message.delete()
 
     @commands.command(help="Find a random cat",
                       pass_context=True)
@@ -208,11 +210,6 @@ class FunCog(commands.Cog):
         answer = random.choice(lists.ballresponse)
         await ctx.send(f"🎱 **Question:** {question}\n**Answer:** {answer}")
 
-    @commands.command(help="choose between")
-    async def choose(self, ctx, *choices: str):
-        """Chooses between multiple choices."""
-        await ctx.send(random.choice(choices))
-
     @commands.command(help="Get a random dad joke",
                       aliases=["dad"])
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -225,18 +222,6 @@ class FunCog(commands.Cog):
                                   color=discord.Color.magenta()
                                   , timestamp=datetime.utcnow())
                 await ctx.send(embed=d)
-
-    @commands.command(help="Go run it :)",
-                      pass_context=True,
-                      aliases=["?flop"])
-    async def flop(self, ctx):
-        embed = discord.Embed(title="Ping Navy? well... alright....",
-                              description="commere bitch and take this ping like a good slut... <@181909185733066752>\n"
-                                          "I knew you liked it.\n"
-                                          "<:Dadsbelt:708018497489338479>")
-
-        await asyncio.sleep(5)
-        await ctx.send(embed=embed)
 
     @commands.command(help="Get a random history fact",
                       aliases=["hist", "rh", "randhist"],
@@ -273,29 +258,7 @@ class FunCog(commands.Cog):
         await ctx.send(mm.replace(" ", ":clap:"))
         await ctx.message.delete()
 
-    @commands.command(hidden=True)
-    async def shire(self, ctx):
-        myfile = discord.File('images/Who._Cares..mp4')
-        await ctx.send(file=myfile)
-        await ctx.send(f'<@725944658806440007>')
 
-    @commands.command()
-    async def translate(self, ctx, *, message: commands.clean_content):
-        """Translates a message to English using Google translate."""
-
-        loop = self.bot.loop
-
-        try:
-            ret = await loop.run_in_executor(None, self.trans.translate, message)
-        except Exception as e:
-            return await ctx.send(f'An error occurred: {e.__class__.__name__}: {e}')
-
-        embed = discord.Embed(title='Translated', colour=0x4284F3)
-        src = googletrans.LANGUAGES.get(ret.src, '(auto-detected)').title()
-        dest = googletrans.LANGUAGES.get(ret.dest, 'Unknown').title()
-        embed.add_field(name=f'From {src}', value=ret.origin, inline=False)
-        embed.add_field(name=f'To {dest}', value=ret.text, inline=False)
-        await ctx.send(embed=embed)
 
 
 def setup(bot):

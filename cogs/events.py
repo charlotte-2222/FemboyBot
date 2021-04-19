@@ -82,7 +82,9 @@ class EventsCog(commands.Cog):
                                 description="OOPSIE WOOPSIE!! Uwu We make a fucky wucky!! A wittle fucko boingo! The "
                                             "code monkeys at our headquarters are working VEWY HAWD to fix this!",
                                 colour=discord.Colour.magenta())
+        errorEm.set_thumbnail(url="https://i.imgur.com/fYonsqN.jpg")
         errorEm.add_field(name="Error: ", value=error)
+        errorEm.set_footer(text="uwu use tha hwelp cummand")
         if isinstance(error, discord.ext.commands.MemberNotFound):
             await ctx.send(embed=errorEm)
         elif isinstance(error, commands.BadArgument):

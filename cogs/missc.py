@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 
 import discord
 from discord.ext import commands
@@ -154,6 +155,35 @@ class MisscCog(commands.Cog):
         e=discord.Embed(title="PP",
             description=f"Your pp lasted `{self.bot.latency * 1000:.2f}ms`")
         await ctx.send(embed=e)
+
+    @commands.command(help="Chooses between multiple choices.To denote multiple choices,you should use double quotes.",
+                      pass_context=True)
+    async def choose(self, ctx, *choices: commands.clean_content):
+        if len(choices) < 2:
+            return await ctx.send('Not enough choices to pick from.')
+
+        await ctx.send(random.choice(choices))
+
+    @commands.command(help="Go run it :)",
+                      pass_context=True,
+                      aliases=["?flop"])
+    async def flop(self, ctx):
+        embed = discord.Embed(title="Ping Navy? well... alright....",
+                              description="commere bitch and take this ping like a good slut... <@181909185733066752>\n"
+                                          "I knew you liked it.\n"
+                                          "<:Dadsbelt:708018497489338479>",
+                              colour=discord.Colour.magenta())
+
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
+
+    @commands.command(hidden=True)
+    async def shire(self, ctx):
+        myfile = discord.File('images/Who._Cares..mp4')
+        await ctx.send(file=myfile)
+        await ctx.send(f'<@725944658806440007>')
+
+
 
 
 def setup(bot):

@@ -41,7 +41,6 @@ class NekosCog(commands.Cog):
         except:
             await ctx.send(str(r['data'][size]['link']))
 
-
     @commands.command(help="Foot hentai")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def feet(self, ctx):
@@ -86,7 +85,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     # traps
     @commands.command(help="Femboy porn")
     @commands.cooldown(1, 2, commands.BucketType.user)
@@ -108,7 +106,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="Futa porn",
                       aliases=["futa"])
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -129,7 +126,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="Gif of (supposedly) someone alone, likely masturbation - idk")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -171,7 +167,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="Cat girl porn - in motion")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def nsfw_neko_gif(self, ctx):
@@ -189,7 +184,6 @@ class NekosCog(commands.Cog):
         embed.set_image(url=nsfw_neko_gif)
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="Masturbation i think")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -211,7 +205,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="what what? In the butt - of course.")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def anal(self, ctx):
@@ -231,7 +224,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="just hentai")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -254,7 +246,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="it's like feet, but more erotic")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def erofeet(self, ctx):
@@ -274,7 +265,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="it's a cat or something")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -296,7 +286,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="isn't this a bird?")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def tits(self, ctx):
@@ -317,8 +306,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
-
     @commands.command(help="wish i were someone's waifu",
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -334,7 +321,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="Self explanatory")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -356,8 +342,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
-
     @commands.command(help="Pat someone's head",
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -374,7 +358,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="Kiss someone",
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -390,7 +373,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="Erotically spank your homie",
                       pass_context=True)
@@ -413,7 +395,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="Cuddle your homie",
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -429,7 +410,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="Hug your homie",
                       pass_context=True)
@@ -447,7 +427,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="Furries are gross")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def fox_girl(self, ctx):
@@ -462,7 +441,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="Furries are gross")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -484,7 +462,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
     @commands.command(help="Tickle your homie",
                       pass_context=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -500,8 +477,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
-
 
     @commands.command(help="it's not like i wanted to do any of this... really")
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -523,8 +498,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
-
     @commands.command(help="nsfw avatar creation")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def nsfw_avatar(self, ctx):
@@ -545,8 +518,6 @@ class NekosCog(commands.Cog):
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
-
-
     @commands.command(help="makes a wallpaper, I've seen non-NSFW")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def wallpaper(self, ctx):
@@ -566,7 +537,6 @@ class NekosCog(commands.Cog):
 
         await ctx.send(embed=embed)
         await ctx.message.delete()
-
 
     @commands.command(help="Get pegged 4 hed")
     @commands.cooldown(1, 3, commands.BucketType.user)
