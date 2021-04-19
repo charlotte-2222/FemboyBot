@@ -28,7 +28,7 @@ initial_extensions = ['cogs.admin',
 bot = commands.Bot(command_prefix=get_prefix,
                    description="The Fragment's local femboy, Fembot!",
                    intents=discord.Intents.all()
-                  )
+                   )
 
 
 class MyNewHelp(commands.MinimalHelpCommand):
@@ -38,7 +38,7 @@ class MyNewHelp(commands.MinimalHelpCommand):
         for page in self.paginator.pages:
             emby = discord.Embed(description=page)
             emby.color = discord.Color.magenta()
-            emby.set_thumbnail(url='https://i.imgur.com/0MEtXDZ.png')
+            emby.set_thumbnail(url='https://i.imgur.com/fYonsqN.jpg')
             await destination.send(embed=emby)
 
 
