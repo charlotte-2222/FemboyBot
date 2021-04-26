@@ -1,7 +1,7 @@
 <h1 align="center">FemBot</h1>
 
 <div align="center">
-  <img src=https://user-images.githubusercontent.com/67248738/116163922-b5470d00-a6c6-11eb-877d-f06b9c70e16c.png>
+  <img src=https://imgur.com/a/9WWrsMl>
 </div>
 
 <h2 align="center">Discord.py Server bot written by Client request
