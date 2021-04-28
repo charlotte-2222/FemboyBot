@@ -25,3 +25,4 @@ This Bot is developed solely for the client, however all parties are welcome to 
 - PRAW scrapping Reddit
 - Imgur
 - Weather API
+- *NEW* - Added music player voice_client support!
